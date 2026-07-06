@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>websites through the years — a personal museum of the early web</title>
+<meta name="description" content="Three websites I built between 2000 and 2006, recovered from the Wayback Machine and restored.">
+<style>
+  :root {
+    --bg: #101418;
+    --panel: #1a2129;
+    --ink: #e8e6e1;
+    --muted: #9aa4ae;
+    --amber: #ffb454;
+    --green: #7dd97d;
+    --line: #2c3640;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.6 Georgia, 'Times New Roman', serif;
+    padding: 0 1rem;
+  }
+  header {
+    max-width: 62rem; margin: 0 auto; padding: 4rem 0 2.5rem;
+    border-bottom: 1px solid #2c3640;
+  }
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: normal; letter-spacing: .02em;
+  }
+  h1 .at { color: var(--amber); }
+  .tagline { color: var(--muted); margin-top: .75rem; font-style: italic; }
+  .tagline b { color: var(--green); font-style: normal; font-weight: normal; }
+  main { max-width: 62rem; margin: 0 auto; }
+  .era {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    padding: 3rem 0; border-bottom: 1px solid #2c3640;
+    align-items: center;
+  }
+  .era:nth-child(even) .shot { order: 2; }
+  @media (max-width: 720px) {
+    .era { grid-template-columns: 1fr; }
+    .era:nth-child(even) .shot { order: 0; }
+  }
+  .shot { position: relative; }
+  .browser {
+    background: #d4d0c8; border-radius: 6px 6px 0 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,.5);
+    overflow: hidden; border: 1px solid #555;
+  }
+  .browser .bar {
+    display: flex; align-items: center; gap: .4rem;
+    background: linear-gradient(#0a246a, #a6caf0);
+    padding: .3rem .5rem;
+    font: bold 11px Tahoma, Verdana, sans-serif; color: #fff;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .browser .bar .btns { margin-left: auto; letter-spacing: 2px; font-family: 'Courier New', monospace; }
+  .browser img { display: block; width: 100%; height: auto; }
+  .meta { padding: 0 .25rem; }
+  .year {
+    font: bold 13px 'Courier New', monospace;
+    color: var(--bg); background: var(--amber);
+    display: inline-block; padding: .1rem .6rem; border-radius: 2px;
+  }
+  h2 { font-size: 1.5rem; font-weight: normal; margin: .75rem 0 .5rem; }
+  h2 a { color: var(--ink); text-decoration: none; border-bottom: 1px dotted var(--muted); }
+  h2 a:hover { color: var(--amber); border-color: var(--amber); }
+  .meta p { color: var(--muted); margin-bottom: .75rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+  .chip {
+    font: 12px 'Courier New', monospace; color: var(--green);
+    border: 1px solid #355035; border-radius: 3px; padding: .1rem .5rem;
+  }
+  .quirk { font-size: .88rem; color: var(--muted); font-style: italic; margin-bottom: 1rem; }
+  .quirk::before { content: "✦ "; color: var(--amber); font-style: normal; }
+  .go {
+    display: inline-block; font: bold 14px Verdana, sans-serif;
+    color: var(--bg); background: var(--green);
+    padding: .5rem 1rem; border-radius: 3px; text-decoration: none;
+    margin-right: .75rem;
+  }
+  .go:hover { background: var(--amber); }
+  .wb {
+    font: 13px Verdana, sans-serif; color: var(--muted); text-decoration: none;
+    border-bottom: 1px dotted var(--muted);
+  }
+  .wb:hover { color: var(--amber); border-color: var(--amber); }
+  footer {
+    max-width: 62rem; margin: 0 auto; padding: 2.5rem 0 4rem;
+    color: var(--muted); font-size: .9rem;
+  }
+  footer a { color: var(--green); }
+  .blink { animation: blink 1.2s steps(1) infinite; color: var(--green); }
+  @keyframes blink { 50% { opacity: 0; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>websites through the years<span class="blink">▌</span></h1>
+  <p class="tagline">Three websites I built between <b>2000</b> and <b>2006</b> — lost when their
+  hosts died, recovered from the <b>Wayback Machine</b>, and restored to working order.
+  A personal museum of the early web: <b>&lt;font&gt;</b> tags, hit counters, image maps and all.</p>
+</header>
+
+<main>
+
+  <section class="era">
+    <div class="shot">
+      <div class="browser">
+        <div class="bar"><span>welcome to @t@kee's homepage! - Microsoft Internet Explorer</span><span class="btns">_ □ ✕</span></div>
+        <a href="atakee-fortunecity-2004/index.htm"><img src="assets/fortunecity.png" alt="Screenshot of @t@kee's homepage, rainbow letters on black background" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="year">2000 – 2004</span>
+      <h2><a href="atakee-fortunecity-2004/index.htm"><span class="at">@t@kee</span>'s homepage</a></h2>
+      <p>My personal homepage on FortuneCity: rainbow lettering, a picture gallery,
+      travel pages, jokes and a guestbook. The hit counter and the news headlines
+      box work again — rebuilt after their services died two decades ago.</p>
+      <div class="chips">
+        <span class="chip">FrontPage Express 2.0</span>
+        <span class="chip">members.fortunecity.com</span>
+        <span class="chip">ICQ era</span>
+      </div>
+      <p class="quirk">One photo has pointed at C:\My&nbsp;Documents\ since the day it was uploaded.</p>
+      <a class="go" href="atakee-fortunecity-2004/index.htm">Enter site →</a>
+      <a class="wb" href="https://web.archive.org/web/20040130074500/http://members.fortunecity.com/atakee1/">Wayback original</a>
+    </div>
+  </section>
+
+  <section class="era">
+    <div class="shot">
+      <div class="browser">
+        <div class="bar"><span>AB GENEL MÜDÜRLÜĞÜ ANA SAYFA - Microsoft Internet Explorer</span><span class="btns">_ □ ✕</span></div>
+        <a href="dtm-ab-2002/AB.htm"><img src="assets/dtm.png" alt="Screenshot of the Türkiye–EU relations site with a map of Europe, Turkey highlighted in yellow" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="year">2001 – 2002</span>
+      <h2><a href="dtm-ab-2002/AB.htm">Türkiye–EU Relations · Undersecretariat of Foreign Trade</a></h2>
+      <p>The EU affairs section of dtm.gov.tr, which I built and ran as its webmaster:
+      legal texts of Türkiye–EU relations, free trade agreements, the customs union
+      and trade statistics — 128 pages of it.</p>
+      <div class="chips">
+        <span class="chip">FrontPage 4.0</span>
+        <span class="chip">windows-1254</span>
+        <span class="chip">www.dtm.gov.tr/AB</span>
+      </div>
+      <p class="quirk">Somewhere on the map of Europe, one tiny spot is a secret link. Try Üsküdar.</p>
+      <a class="go" href="dtm-ab-2002/AB.htm">Enter site →</a>
+      <a class="wb" href="https://web.archive.org/web/20020212141252/http://www.dtm.gov.tr/AB/AB.htm">Wayback original</a>
+    </div>
+  </section>
+
+  <section class="era">
+    <div class="shot">
+      <div class="browser">
+        <div class="bar"><span>türkiye - ab karma parlamento komisyonu - Microsoft Internet Explorer</span><span class="btns">_ □ ✕</span></div>
+        <a href="tbmm-kpk-2006/index.htm"><img src="assets/tbmm.png" alt="Screenshot of the Turkey–EU Joint Parliamentary Committee site" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="meta">
+      <span class="year">2004 – 2006</span>
+      <h2><a href="tbmm-kpk-2006/index.htm">Turkey–EU Joint Parliamentary Committee · TBMM</a></h2>
+      <p>The Joint Parliamentary Committee's site at the Turkish Grand National
+      Assembly, in four languages, with an archive of the committee's joint
+      declarations and press releases from the accession-talks years.</p>
+      <div class="chips">
+        <span class="chip">FrontPage 3.0</span>
+        <span class="chip">iso-8859-9</span>
+        <span class="chip">tr · en · de · fr</span>
+      </div>
+      <p class="quirk">“En iyi, Microsoft Internet Explorer ile görüntülenir.”</p>
+      <a class="go" href="tbmm-kpk-2006/index.htm">Enter site →</a>
+      <a class="wb" href="https://web.archive.org/web/20061227002006/http://www.tbmm.gov.tr/ul_kom/kpk/index.htm">Wayback original</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Every page here is served exactly as it was written, give or take the ad scripts
+  its free hosts injected. The recovery process — crawling the Wayback Machine,
+  stripping dead third-party code, reviving the hit counter and news widget — is
+  documented in the <a href="https://github.com/atakee72/websites-through-the-years">repository</a>.</p>
+</footer>
+
+</body>
+</html>
