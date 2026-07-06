@@ -71,6 +71,13 @@ press releases and meeting programmes of the committee.
   no missing files. The only touch-up was retrying one PDF the archive served
   truncated on first attempt.
 
+## Hosting note
+
+The HTML was transcoded from its original encodings (iso-8859-1,
+windows-1254, iso-8859-9) to UTF-8, because GitHub Pages serves all HTML
+with a `charset=utf-8` header that overrides in-page meta tags. The
+original bytes are preserved in git history.
+
 ## Planned
 
 - A landing page tying the eras together
