@@ -54,7 +54,23 @@ relations, free trade agreements, customs union, trade statistics.
 - Permanently lost: `AB Sayfasi/euro1.htm` (never archived). Period-authentic
   quirk preserved: `akctweb/ihracat.htm` references an image at `file:/H:/`.
 
+### 3. Türkiye–EU Joint Parliamentary Committee, TBMM (~2004–2006)
+
+`tbmm-kpk-2006/` — the Turkey–EU Joint Parliamentary Committee (Karma
+Parlamento Komisyonu) site on `www.tbmm.gov.tr/ul_kom/kpk/`, built with
+Microsoft FrontPage 3.0 (Turkish, iso-8859-9), with English, German and French
+pages. Includes an archive of 33 Word documents and a PDF: joint declarations,
+press releases and meeting programmes of the committee.
+[Archived capture](https://web.archive.org/web/20061227002006/http://www.tbmm.gov.tr/ul_kom/kpk/index.htm)
+
+**Provenance / restoration notes**
+
+- 50 files crawled from the Wayback Machine, anchored to the 27 Dec 2006
+  capture; each file from its nearest-dated snapshot.
+- Nothing was cleaned or repaired — no injected code, no broken references,
+  no missing files. The only touch-up was retrying one PDF the archive served
+  truncated on first attempt.
+
 ## Planned
 
-- possibly 1 more recovered site
 - A landing page tying the eras together
