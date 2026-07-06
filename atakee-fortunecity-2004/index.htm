@@ -291,6 +291,44 @@ guestbook</a></p>
 
 <p>&nbsp;</p>
 <a name="news"></a>
+<div id="newsbox"></div>
+<script language="Javascript">
+<!-- hide
+// revival of the original Moreover.com headlines widget (service died mid-2000s);
+// same look, now fed by Wikipedia's "In the news" feed (free, no key, CORS-open)
+(function () {
+  var box = document.getElementById('newsbox');
+  function fail() {
+    box.innerHTML = '<center><font size=-1 face="Verdana, Arial,Helvetica, sans-serif" color="#ffffff">' +
+      'Please reload this page to view the headlines</font></center>';
+  }
+  var d = new Date();
+  var url = 'https://en.wikipedia.org/api/rest_v1/feed/featured/' + d.getFullYear() +
+    '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2);
+  fetch(url).then(function (r) { return r.json(); }).then(function (data) {
+    var items = (data.news || []).slice(0, 10);
+    if (!items.length) return fail();
+    var html = '<CENTER><TABLE BORDER=0 BGCOLOR="#000000" WIDTH="400" CELLPADDING=2 CELLSPACING=0>' +
+      '<TR><TD><CENTER><TABLE BGCOLOR="#000000" CELLPADDING=1 CELLSPACING=0 WIDTH="100%">' +
+      '<TR BGCOLOR="#000000"><TD><FONT SIZE=-1 FACE="Verdana, Arial,Helvetica, sans-serif" COLOR="#ff0000">' +
+      '<B>Top stories</B></FONT></TD></TR>';
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      var headline = it.story.replace(/<a [^>]*href="\.\/([^"]+)"[^>]*>/g,
+        '<A HREF="https://en.wikipedia.org/wiki/$1" TARGET="_blank" style="color:#ff0000">').replace(/<\/a>/g, '</A>');
+      html += '<TR BGCOLOR="#000000"><TD>' +
+        '<FONT SIZE=-1 FACE="Verdana, Arial,Helvetica, sans-serif" COLOR="#ff0000">' + headline + '</FONT><br>' +
+        '<A HREF="https://en.wikipedia.org/wiki/Portal:Current_events" TARGET="_blank">' +
+        '<FONT FACE="Verdana, Arial,Helvetica, sans-serif" SIZE=-2 COLOR="#ffffff">Wikipedia: In the news</FONT></A>&nbsp;&nbsp;' +
+        '<FONT FACE="Verdana, Arial,Helvetica, sans-serif" SIZE=-2 COLOR="#ffffff">' + d.toString() + '</FONT>' +
+        '</TD></TR><TR BGCOLOR="#000000"><TD HEIGHT=5></TD></TR>';
+    }
+    html += '</TABLE></CENTER></TD></TR></TABLE></CENTER>';
+    box.innerHTML = html;
+  }).catch(fail);
+})();
+// -->
+</script>
 
 </body>
 </html>
