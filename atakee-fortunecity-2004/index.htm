@@ -305,6 +305,32 @@ guestbook</a></p>
   var d = new Date();
   var url = 'https://en.wikipedia.org/api/rest_v1/feed/featured/' + d.getFullYear() +
     '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2);
+  // feed HTML never touches innerHTML: only its text and wiki-link targets are
+  // copied into DOM nodes we create ourselves
+  function sanitizedStory(storyHtml) {
+    var src = new DOMParser().parseFromString(storyHtml, 'text/html').body;
+    var frag = document.createDocumentFragment();
+    (function walk(node, out) {
+      for (var c = node.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 3) {
+          out.appendChild(document.createTextNode(c.nodeValue));
+        } else if (c.nodeType === 1 && c.tagName === 'A' &&
+                   /^\.\/[^\/]/.test(c.getAttribute('href') || '')) {
+          var a = document.createElement('a');
+          a.href = 'https://en.wikipedia.org/wiki/' +
+            encodeURIComponent(c.getAttribute('href').slice(2)).replace(/%2F/g, '/');
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.style.color = '#ff0000';
+          walk(c, a);
+          out.appendChild(a);
+        } else if (c.nodeType === 1) {
+          walk(c, out); // unknown element: keep its text, drop the markup
+        }
+      }
+    })(src, frag);
+    return frag;
+  }
   fetch(url).then(function (r) { return r.json(); }).then(function (data) {
     var items = (data.news || []).slice(0, 10);
     if (!items.length) return fail();
@@ -313,18 +339,18 @@ guestbook</a></p>
       '<TR BGCOLOR="#000000"><TD><FONT SIZE=-1 FACE="Verdana, Arial,Helvetica, sans-serif" COLOR="#ff0000">' +
       '<B>Top stories</B></FONT></TD></TR>';
     for (var i = 0; i < items.length; i++) {
-      var it = items[i];
-      var headline = it.story.replace(/<a [^>]*href="\.\/([^"]+)"[^>]*>/g,
-        '<A HREF="https://en.wikipedia.org/wiki/$1" TARGET="_blank" style="color:#ff0000">').replace(/<\/a>/g, '</A>');
       html += '<TR BGCOLOR="#000000"><TD>' +
-        '<FONT SIZE=-1 FACE="Verdana, Arial,Helvetica, sans-serif" COLOR="#ff0000">' + headline + '</FONT><br>' +
+        '<FONT SIZE=-1 FACE="Verdana, Arial,Helvetica, sans-serif" COLOR="#ff0000" id="newsstory' + i + '"></FONT><br>' +
         '<A HREF="https://en.wikipedia.org/wiki/Portal:Current_events" TARGET="_blank">' +
         '<FONT FACE="Verdana, Arial,Helvetica, sans-serif" SIZE=-2 COLOR="#ffffff">Wikipedia: In the news</FONT></A>&nbsp;&nbsp;' +
         '<FONT FACE="Verdana, Arial,Helvetica, sans-serif" SIZE=-2 COLOR="#ffffff">' + d.toString() + '</FONT>' +
         '</TD></TR><TR BGCOLOR="#000000"><TD HEIGHT=5></TD></TR>';
     }
     html += '</TABLE></CENTER></TD></TR></TABLE></CENTER>';
-    box.innerHTML = html;
+    box.innerHTML = html; // static markup only; stories are inserted below
+    for (var j = 0; j < items.length; j++) {
+      document.getElementById('newsstory' + j).appendChild(sanitizedStory(items[j].story));
+    }
   }).catch(fail);
 })();
 // -->
