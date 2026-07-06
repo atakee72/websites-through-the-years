@@ -78,6 +78,7 @@ windows-1254, iso-8859-9) to UTF-8, because GitHub Pages serves all HTML
 with a `charset=utf-8` header that overrides in-page meta tags. The
 original bytes are preserved in git history.
 
-## Planned
+## Live
 
-- A landing page tying the eras together
+The whole museum is served with GitHub Pages:
+https://atakee72.github.io/websites-through-the-years/
