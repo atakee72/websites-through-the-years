@@ -33,7 +33,28 @@ python3 -m http.server 8765
 # → http://localhost:8765/atakee-fortunecity-2004/index.htm
 ```
 
+### 2. Türkiye–EU Relations, Undersecretariat of Foreign Trade (~2001–2002)
+
+`dtm-ab-2002/` — the EU affairs section of `www.dtm.gov.tr/AB/`, built with
+Microsoft FrontPage 4.0 (Turkish, windows-1254). Legal texts of Türkiye–EU
+relations, free trade agreements, customs union, trade statistics.
+[Archived capture](https://web.archive.org/web/20020212141252/http://www.dtm.gov.tr/AB/AB.htm)
+
+**Provenance / restoration notes**
+
+- 161 files crawled from the Wayback Machine, anchored to the 12 Feb 2002
+  capture; each file comes from its nearest-dated snapshot (mostly 2001–2002).
+- No cleanup was needed — the government server injected nothing.
+- Small repairs: six shared template graphics (`baslik.gif`, `vertical.jpg`,
+  `logo_anasayfa.gif`…) were never archived under `/AB/` and were recovered
+  from identical copies in sibling sections (`/ead/ADRES/`, `/Dts/ABTeknik/`,
+  `/GIF/`); `çektartav.htm` was renamed to `cektartav.htm` (ASCII-safe);
+  `AB.htm`'s FrontPage `dynAnimation()` onload is wrapped in try/catch (it
+  requires IE4-era `document.all`).
+- Permanently lost: `AB Sayfasi/euro1.htm` (never archived). Period-authentic
+  quirk preserved: `akctweb/ihracat.htm` references an image at `file:/H:/`.
+
 ## Planned
 
-- 1–2 more recovered sites
+- possibly 1 more recovered site
 - A landing page tying the eras together
