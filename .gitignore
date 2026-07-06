@@ -1,0 +1,15 @@
+# secrets
+.env
+.env.*
+
+# build output
+dist/
+.vercel/
+.netlify/
+
+# playwright workspace
+.playwright/
+.playwright-cli/
+
+# session notes
+.remember/
