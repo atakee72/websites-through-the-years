@@ -79,6 +79,32 @@ press releases and meeting programmes of the committee.
   no missing files. The only touch-up was retrying one PDF the archive served
   truncated on first attempt.
 
+### 4. Thoughtful thoughts (Blogger, ~2010–2011)
+
+`thoughtful-thoughts-2011/` — the blog that continued the *thoughtful thoughts*
+section of the 1999 homepage: essays in Turkish, English and German on
+`atakee.blogspot.com`. [Live original](https://atakee.blogspot.com/)
+
+### 5. @t@kee's blog (Blogger, ~2008–2013)
+
+`atakees-blog-2013/` — the personal notebook of the blog years, six posts on
+`tbb-wissenschaftsforum.blogspot.com` (an address named for a forum that never
+came to be). [Live original](https://tbb-wissenschaftsforum.blogspot.com/)
+
+**Provenance / rescue notes (both blogs)**
+
+- Unlike sites 1–3 these were rescued *alive*: crawled directly from Blogger
+  (not the Wayback Machine), so every post is captured at full fidelity.
+- Made self-contained: all images and template assets were downloaded from
+  Google's CDNs (`blogger.googleusercontent.com`, `themes.googleusercontent.com`)
+  into local `blog-assets/` folders and the pages rewritten to use them; Blogger's
+  JS-injected chrome (navbar, cookie banner, dynamic widgets) was stripped;
+  `srcset` attributes removed (they would silently keep loading from Google).
+  Zero live Google dependencies remain.
+- Some embedded images had already been lost by Blogger's own image proxy while
+  the blogs were live (the proxy returns 404 even on the originals); those
+  references are left as-is — authentically broken.
+
 ## Landing page
 
 `index.html` — a hand-written, dependency-free page (inline CSS, no build step)
