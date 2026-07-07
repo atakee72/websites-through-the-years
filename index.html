@@ -88,6 +88,25 @@
     border-bottom: 1px dotted var(--muted);
   }
   .wb:hover { color: var(--amber); border-color: var(--amber); }
+  .note {
+    max-width: 62rem; margin: 3rem auto 0;
+    background: var(--panel); border: 1px solid var(--line);
+    border-left: 4px solid var(--amber);
+    border-radius: 4px; padding: 1.75rem 2rem;
+  }
+  .note h3 {
+    font-weight: normal; font-size: 1.2rem; margin-bottom: .75rem;
+    color: var(--amber);
+  }
+  .note p { color: var(--muted); margin-bottom: .75rem; }
+  .note b { color: var(--ink); font-weight: normal; }
+  .note ul { margin: 0 0 .75rem 1.2rem; }
+  .note li { color: var(--muted); margin-bottom: .6rem; }
+  .note code {
+    font: 13px 'Courier New', monospace; color: var(--green);
+    background: #10161c; padding: 0 .3rem; border-radius: 2px;
+  }
+  .note a { color: var(--green); }
   footer {
     max-width: 62rem; margin: 0 auto; padding: 2.5rem 0 4rem;
     color: var(--muted); font-size: .9rem;
@@ -181,6 +200,37 @@
   </section>
 
 </main>
+
+<section class="note" id="curators-note">
+  <h3>Curator's note — what you will encounter inside</h3>
+  <p>These sites are <b>deliberately left as they were built</b>, imperfections included.
+  Restoring them any further would mean destroying what they are: honest documents
+  of how the web looked and worked twenty-some years ago. So, before you go in:</p>
+  <ul>
+    <li><b>Nothing is responsive.</b> These pages were laid out in fixed-width tables
+    for 800×600 CRT monitors, a decade before smartphones. On a phone they render
+    zoomed-out and small — pinch and zoom to read. That is not a bug; that is 2002.</li>
+    <li><b>Some images are broken forever.</b> A photo on the <i>me&nbsp;&amp;&nbsp;javier</i> page
+    was never captured by the Wayback Machine and no other copy exists. One page of the
+    DTM site (<i>euro1.htm</i>) is lost the same way.</li>
+    <li><b>Some things were broken on day one.</b> The <i>mummy&nbsp;&amp;&nbsp;daddy</i> photo
+    has pointed at <code>C:\My Documents\</code> since 2002 — FrontPage kept my local disk
+    path when publishing. A page on the DTM site does the same with drive <code>H:</code>.
+    Preserved with affection.</li>
+    <li><b>Most outbound links are dead.</b> The guestbook service, the counters, the
+    partner sites of 2001–2006 — nearly all gone. The links stay, pointing at ghosts;
+    paste them into <a href="https://web.archive.org">web.archive.org</a> if you're curious.</li>
+    <li><b>Internet Explorer assumptions.</b> One site politely informs you it is
+    “best viewed in Microsoft Internet Explorer,” and FrontPage hover animations
+    silently do nothing in your modern browser.</li>
+  </ul>
+  <p>What <i>was</i> repaired, sparingly: the free hosts' injected ad scripts were removed,
+  the text was transcoded to UTF-8 so Turkish renders on modern hosting, and the dead
+  hit counter and news-headline widget were rebuilt to work again. Every intervention is
+  documented, commit by commit, in the
+  <a href="https://github.com/atakee72/websites-through-the-years">repository</a> —
+  the untouched originals live in its history.</p>
+</section>
 
 <footer>
   <p>Every page here is served exactly as it was written, give or take the ad scripts
