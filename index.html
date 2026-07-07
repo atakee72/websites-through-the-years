@@ -44,6 +44,7 @@
     .era { grid-template-columns: 1fr; }
     .era:nth-child(even) .shot { order: 0; }
   }
+  .shot, .meta { min-width: 0; }
   .shot { position: relative; }
   .browser {
     background: #d4d0c8; border-radius: 6px 6px 0 0;
@@ -57,7 +58,8 @@
     font: bold 11px Tahoma, Verdana, sans-serif; color: #fff;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-  .browser .bar .btns { margin-left: auto; letter-spacing: 2px; font-family: 'Courier New', monospace; }
+  .browser .bar span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .browser .bar .btns { margin-left: auto; letter-spacing: 2px; font-family: 'Courier New', monospace; flex-shrink: 0; }
   .browser img { display: block; width: 100%; height: auto; }
   .meta { padding: 0 .25rem; }
   .year {
