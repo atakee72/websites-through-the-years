@@ -1,12 +1,12 @@
 # websites through the years
 
-My personal websites from the early web era, recovered from the
+My personal websites from the early web era (1999–2006), recovered from the
 [Wayback Machine](https://web.archive.org) and preserved as they were built —
 `<font>` tags, hit counter, guestbook link and all.
 
 ## Sites
 
-### 1. @t@kee's homepage (FortuneCity, ~2000–2004)
+### 1. @t@kee's homepage (FortuneCity, ~1999–2004)
 
 `atakee-fortunecity-2004/` — my personal homepage hosted on
 `members.fortunecity.com/atakee1/`, built with Microsoft FrontPage Express 2.0.

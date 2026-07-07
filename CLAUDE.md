@@ -1,6 +1,6 @@
 # websites-through-the-years (eski-web-sayfalarim)
 
-A digital museum: three websites the user built between 2000 and 2006,
+A digital museum: three websites the user built between 1999 and 2006,
 recovered from the Wayback Machine and served on GitHub Pages.
 Live: https://atakee72.github.io/websites-through-the-years/
 Repo: github.com/atakee72/websites-through-the-years (public)
