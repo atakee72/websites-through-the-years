@@ -22,6 +22,9 @@ and baklava. [Archived capture](https://web.archive.org/web/20040130074500/http:
   exact diff. The authored content is untouched.
 - The original stepzilla.com hit counter died with its service (~2005); it was
   rebuilt as a localStorage replica in the same spot, seeded near the 2004 figure.
+- The Moreover.com news-headlines widget (also long dead) was revived in its
+  original look, now fed by Wikipedia's "In the news" feed; the feed content is
+  sanitized before insertion (text and wiki links only).
 - Two period-authentic quirks are preserved: `mummy&daddy.htm` references an
   image at `C:\My Documents\…` (broken since day one — FrontPage kept my local
   path), and `me&javier.jpg` was never captured by the archive.
@@ -53,6 +56,11 @@ relations, free trade agreements, customs union, trade statistics.
   requires IE4-era `document.all`).
 - Permanently lost: `AB Sayfasi/euro1.htm` (never archived). Period-authentic
   quirk preserved: `akctweb/ihracat.htm` references an image at `file:/H:/`.
+- Author's restorations on `AB.htm` (the capture post-dates my leave, so a few
+  things were put back the way I had them): my original webmaster contact info,
+  the gray `#DEDEDE` page background, the full-width main table, and the hidden
+  easter-egg link over Üsküdar on the EU map — which now points to my
+  resurrected FortuneCity homepage.
 
 ### 3. Türkiye–EU Joint Parliamentary Committee, TBMM (~2004–2006)
 
@@ -70,6 +78,16 @@ press releases and meeting programmes of the committee.
 - Nothing was cleaned or repaired — no injected code, no broken references,
   no missing files. The only touch-up was retrying one PDF the archive served
   truncated on first attempt.
+
+## Landing page
+
+`index.html` — a hand-written, dependency-free page (inline CSS, no build step)
+presenting the three sites in IE-window frames with era screenshots
+(`assets/`). It includes a **curator's note** explaining what visitors will
+encounter: fixed-width non-responsive layouts, permanently lost images, dead
+outbound links, IE-era assumptions — all deliberately preserved. The archived
+pages themselves have no viewport meta, so phones render them zoomed-out
+(pinch-to-zoom), which is both authentic and the best available behaviour.
 
 ## Hosting note
 
