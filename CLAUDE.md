@@ -1,19 +1,30 @@
 # websites-through-the-years (eski-web-sayfalarim)
 
-A digital museum: three websites the user built between 1999 and 2006,
-recovered from the Wayback Machine and served on GitHub Pages.
+A digital museum: five websites the user built between 1999 and 2013 —
+three recovered from the Wayback Machine, two Blogger blogs rescued alive —
+served on GitHub Pages.
 Live: https://atakee72.github.io/websites-through-the-years/
 Repo: github.com/atakee72/websites-through-the-years (public)
 
 ## Prime directive: authenticity
 
 The archived sites (`atakee-fortunecity-2004/`, `dtm-ab-2002/`,
-`tbmm-kpk-2006/`) are historical artifacts. Do NOT modernize, reformat,
-lint, or "fix" them unless the user explicitly asks. Broken images, dead
-links, `<font>` tags, IE-era markup are features, not bugs — the landing
-page's curator's note explains this to visitors. The only modern, freely
-editable file is `index.html` (landing page, hand-written, no build step)
-plus `assets/`.
+`tbmm-kpk-2006/`, `thoughtful-thoughts-2011/`, `atakees-blog-2013/`) are
+historical artifacts. Do NOT modernize, reformat, lint, or "fix" them
+unless the user explicitly asks. Broken images, dead links, `<font>` tags,
+IE-era markup are features, not bugs — the landing page's curator's note
+explains this to visitors. The only modern, freely editable file is
+`index.html` (landing page, hand-written, no build step) plus `assets/`.
+
+## Blog exhibits: hermetic seal
+
+The two blog folders must make ZERO external requests and contain ZERO
+live external links. Fonts, theme images and all assets live in their
+`blog-assets/`; dead Blogger-proxy images point at an intentionally absent
+local path (authentic broken look, no Google round-trips); all outbound
+links are `href="#"` with the original URL in `data-original`. If pages
+are ever re-crawled, re-verify with: no `http` in src/href, and
+`performance.getEntriesByType('resource')` shows only same-host requests.
 
 ## Rules
 

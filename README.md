@@ -94,16 +94,23 @@ came to be). [Live original](https://tbb-wissenschaftsforum.blogspot.com/)
 **Provenance / rescue notes (both blogs)**
 
 - Unlike sites 1–3 these were rescued *alive*: crawled directly from Blogger
-  (not the Wayback Machine), so every post is captured at full fidelity.
-- Made self-contained: all images and template assets were downloaded from
-  Google's CDNs (`blogger.googleusercontent.com`, `themes.googleusercontent.com`)
-  into local `blog-assets/` folders and the pages rewritten to use them; Blogger's
-  JS-injected chrome (navbar, cookie banner, dynamic widgets) was stripped;
-  `srcset` attributes removed (they would silently keep loading from Google).
-  Zero live Google dependencies remain.
-- Some embedded images had already been lost by Blogger's own image proxy while
-  the blogs were live (the proxy returns 404 even on the originals); those
-  references are left as-is — authentically broken.
+  (not the Wayback Machine), so every post is captured at full fidelity —
+  including the complete archive structure (year/month pages, all label/tag
+  pages, and the "older posts" pagination chains, saved under `paged/`).
+- Made hermetically self-contained — **zero external requests, zero external
+  links**: all images, template assets, theme backgrounds and web fonts
+  (Damion, Roboto) were downloaded from Google's CDNs into local
+  `blog-assets/` folders and every reference rewritten (including `srcset`,
+  CSS `url()` — some backslash-escaped or protocol-relative — `og:url`/canonical
+  metas and the favicon). Blogger's JS-injected chrome was stripped; its
+  share/edit/email/comment links and all outbound content links are disabled
+  (`href="#"`), with every original URL preserved in a `data-original`
+  attribute.
+- Some embedded images had already been lost by Blogger's own image proxy
+  while the blogs were live (the proxy 404s even on the originals). Their
+  references now point at an intentionally absent local path — still shown as
+  broken (authentic), but without the dozens of slow round-trips to Google
+  that made pages crawl.
 
 ## Landing page
 
