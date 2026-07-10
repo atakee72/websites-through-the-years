@@ -116,6 +116,13 @@ came to be). [Live original](https://tbb-wissenschaftsforum.blogspot.com/)
   broken (authentic), but without the dozens of slow round-trips to Google
   that made pages crawl.
 
+## Backups
+
+`backups/` — Google Takeout exports of both blogs (Atom post feeds, themes,
+settings): the lossless canonical source alongside the crawled copies.
+Account-level personal data was excluded and two secrets (the mail-to-Blogger
+posting address and the admin email) redacted before publishing.
+
 ## Landing page
 
 `index.html` — a hand-written, dependency-free page (inline CSS, no build step)
