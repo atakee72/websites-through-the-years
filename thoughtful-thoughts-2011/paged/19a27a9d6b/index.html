@@ -4192,5 +4192,29 @@ Report Abuse
 </div>
 </aside>
 <!--Es liegt in deiner Verantwortung, deine Besucher \xfcber die in deinem Blog verwendeten Cookies und die dort erfassten Daten zu informieren. Blogger stellt daf\xfcr eine Standardbenachrichtigung zur Verf\xfcgung, die du \xfcbernehmen, anpassen oder durch deine eigene Mitteilung ersetzen kannst. Weitere Informationen findest du unter http://www.blogger.com/go/cookiechoices.-->
+<script>
+// revival of the theme's sidebar drawer (its original JS was stripped in the rescue)
+(function () {
+  var sb = document.querySelector('.sidebar-container');
+  var ham = document.querySelector('.hamburger-menu');
+  if (!sb || !ham) return;
+  // sections open by default, as the original rendered them; the show-more
+  // pills belonged to the stripped JS and are hidden via injected style
+  sb.querySelectorAll('details').forEach(function (d) { d.open = true; });
+  var st = document.createElement('style');
+  st.textContent = '.extendable .show-more,.extendable .show-less{display:none}';
+  document.head.appendChild(st);
+  function close() { sb.classList.add('sidebar-invisible'); }
+  ham.addEventListener('click', function (e) {
+    e.preventDefault(); e.stopPropagation();
+    sb.classList.remove('sidebar-invisible');
+  });
+  var back = sb.querySelector('.sidebar-back');
+  if (back) back.addEventListener('click', function (e) { e.preventDefault(); close(); });
+  document.addEventListener('click', function (e) {
+    if (!sb.classList.contains('sidebar-invisible') && !sb.contains(e.target)) close();
+  });
+})();
+</script>
 </body>
 </html>

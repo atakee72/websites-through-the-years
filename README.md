@@ -106,6 +106,10 @@ came to be). [Live original](https://tbb-wissenschaftsforum.blogspot.com/)
   share/edit/email/comment links and all outbound content links are disabled
   (`href="#"`), with every original URL preserved in a `data-original`
   attribute.
+- The theme's sidebar drawer on *Thoughtful thoughts* (hamburger menu:
+  archive tree, labels, report-abuse) was re-wired with a small local script —
+  its original Blogger JS was stripped with the rest. Sections render fully
+  expanded; the now-purposeless "show more" pills are hidden.
 - Some embedded images had already been lost by Blogger's own image proxy
   while the blogs were live (the proxy 404s even on the originals). Their
   references now point at an intentionally absent local path — still shown as
