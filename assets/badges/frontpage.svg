@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" role="img" aria-label="Made with FrontPage — restored by hand">
   <rect width="88" height="31" fill="#000"/>
   <rect x="0.5" y="0.5" width="87" height="30" fill="none" stroke="#9aa4ae"/>
-  <text x="44" y="12" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#9aa4ae">MADE WITH FRONTPAGE</text>
-  <line x1="8" y1="9.5" x2="80" y2="9.5" stroke="#d77" stroke-width="1"/>
-  <text x="44" y="24" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" font-weight="bold" fill="#ffb454">restored by hand</text>
+  <text x="44" y="12" text-anchor="middle" font-family="'Courier New',monospace" font-size="7" fill="#9aa4ae">MADE WITH FRONTPAGE</text>
+  <line x1="6" y1="9.5" x2="82" y2="9.5" stroke="#d77" stroke-width="1"/>
+  <text x="44" y="24" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" font-weight="bold" fill="#ffb454">restored by hand</text>
 </svg>
