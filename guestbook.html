@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The guestbook · websites through the years</title>
+<meta name="description" content="Sign the museum's guestbook like it's 1999 — entries appear after the webmaster reviews them.">
+<link rel="stylesheet" href="assets/museum.css">
+</head>
+<body>
+
+<div id="dialup" hidden>
+  <div class="term">
+    <p>ATDT 0-800-GUESTBOOK<br>CONNECTING TO GUESTBOOK.EXE — 56,000 bps…</p>
+    <div class="bar"><i></i></div>
+    <p class="skip">click anywhere (or press Esc) to skip the nostalgia</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+<nav class="crumbs"><a href="index.html">← back to the museum</a></nav>
+
+<header class="plaquehead">
+  <span class="year">since 1999 · reopened 2026</span>
+  <h1>The guestbook</h1>
+  <p class="host">sign like it's 1999 · moderated by the webmaster</p>
+</header>
+
+<section>
+  <h2>Sign it</h2>
+  <p>The 1999 homepage had a guestbook; its service died with the free-host
+  era. This one works the way guestbooks really worked: you sign, the
+  webmaster reads it, and your entry appears on this page — reviewed, dated
+  and permanent.</p>
+  <div class="gb-sign">
+    <a class="enter" href="https://github.com/atakee72/websites-through-the-years/issues/new?template=guestbook.yml">Sign via GitHub →</a>
+    <a class="enter" href="#" id="gb-mail">Sign by email →</a>
+  </div>
+  <p class="gb-note">Entries appear after the webmaster reviews them — as was
+  always the way.</p>
+</section>
+
+<section>
+  <h2>The entries</h2>
+  <!-- Baking an entry: copy the block below, increment the №, fill in
+       name/location/date, and HTML-escape the visitor's message text
+       (& < > ") — visitor text is the only untrusted input in this museum. -->
+  <article class="gb-entry">
+    <div class="gb-head">№ 001 · Ercan (@t@kee) <span class="gb-loc">· the webmaster · 12 July 2026</span></div>
+    <p>Twenty-seven years after the first entry landed in my FortuneCity
+    guestbook, the book is open again. Sign it — it's good to have visitors.</p>
+  </article>
+</section>
+
+<p class="doorway"><a class="enter" href="index.html">Back to the museum →</a></p>
+
+<footer><a href="index.html">websites through the years</a> — a personal museum of the early web</footer>
+
+</div>
+
+<script>
+(function () {
+  // dial-up gag: once per visitor, skippable, honors reduced motion
+  var ov = document.getElementById('dialup');
+  var done = true;
+  try { done = localStorage.getItem('gb-dialup-done') === '1'; } catch (e) {}
+  var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function finish() {
+    if (ov.hidden) return;
+    ov.hidden = true;
+    try { localStorage.setItem('gb-dialup-done', '1'); } catch (e) {}
+  }
+  if (!done && !reduced) {
+    ov.hidden = false;
+    setTimeout(finish, 4200);
+    ov.addEventListener('click', finish);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') finish(); });
+  }
+  // mail link assembled on click so the address never sits in the page source
+  var mail = document.getElementById('gb-mail');
+  if (mail) mail.addEventListener('click', function (e) {
+    e.preventDefault();
+    location.href = 'mailto:' + 'atakee' + '@' + 'gmail.com'
+      + '?subject=' + encodeURIComponent('Guestbook entry')
+      + '&body=' + encodeURIComponent('Name:\nLocation (optional):\nMessage:\n');
+  });
+})();
+</script>
+
+</body>
+</html>
