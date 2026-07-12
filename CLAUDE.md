@@ -15,8 +15,9 @@ unless the user explicitly asks. Broken images, dead links, `<font>` tags,
 IE-era markup are features, not bugs — the landing page's curator's note
 explains this to visitors. The modern, freely editable museum shell is:
 `index.html` (landing page), `plaques/` (curator plaques),
-`restoration-lab.html`, and `assets/`
-(screenshots + `museum.css`) — all hand-written, no build step. Shell pages
+`restoration-lab.html`, `guestbook.html`, `.github/` (issue templates),
+and `assets/` (screenshots, badges, `museum.css`) — all hand-written, no
+build step. Shell pages
 make zero external requests; external `<a href>` links are allowed. Code
 specimens in `restoration-lab.html` must stay HTML-escaped (never live markup).
 

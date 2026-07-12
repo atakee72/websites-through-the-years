@@ -134,6 +134,21 @@ posting address and the admin email) redacted before publishing.
   commits. All historical code on this page is HTML-escaped display text.
 - A timeline on the landing page connects the exhibits (1998–2026).
 
+## Guestbook
+
+`guestbook.html` — a 1999-style guestbook, moderated like it's 1999:
+entries are static HTML baked in by the webmaster. Visitors sign via a
+GitHub issue form (`.github/ISSUE_TEMPLATE/guestbook.yml`, label
+`guestbook`) or an email link (assembled by JS on click, so the address
+can't be harvested from the source). Baking an entry: copy
+name/location/message into a new `.gb-entry` block — **HTML-escape the
+message text** (`&`, `<`, `>`, `"`); visitor text is the only untrusted
+input in this museum — commit, close the issue with a thank-you. First-time
+visitors get a fake 56k handshake (once ever, skippable, absent under
+reduced motion). The landing footer's visitor counter is a localStorage
+replica seeded at 18 735 — continuing where the 1999 homepage's counter
+left off.
+
 ## Landing page
 
 `index.html` — a hand-written, dependency-free page (inline CSS, no build step)
