@@ -81,3 +81,37 @@ pre code { background: none; padding: 0; color: inherit; }
   font: bold 12px 'Courier New', monospace; color: #d77;
   letter-spacing: .1em; text-transform: uppercase; margin-bottom: .4rem;
 }
+
+/* guestbook */
+.gb-entry {
+  border: 1px solid var(--line); border-left: 4px solid var(--green);
+  border-radius: 4px; background: var(--panel);
+  padding: 1rem 1.25rem; margin-bottom: 1rem;
+}
+.gb-entry .gb-head {
+  font: bold 13px 'Courier New', monospace;
+  color: var(--amber); margin-bottom: .4rem;
+}
+.gb-entry .gb-head .gb-loc { color: var(--muted); font-weight: normal; }
+.gb-entry p { margin: 0; }
+.gb-sign { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1rem 0; }
+.gb-sign .enter { font-size: 14px; }
+.gb-note { color: var(--muted); font-style: italic; font-size: .9rem; }
+
+/* dial-up overlay (guestbook first visit) */
+#dialup {
+  position: fixed; inset: 0; z-index: 99;
+  background: #000; color: #7dff7d;
+  font: 15px/1.8 'Courier New', monospace;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+#dialup[hidden] { display: none; }
+#dialup .term { width: min(34rem, 90vw); }
+#dialup .bar { height: 14px; border: 1px solid #7dff7d; margin: .75rem 0; }
+#dialup .bar i {
+  display: block; height: 100%; width: 0; background: #7dff7d;
+  animation: gb-conn 3.6s steps(24) forwards;
+}
+@keyframes gb-conn { to { width: 100%; } }
+#dialup .skip { color: #4a7; font-size: 12px; }
