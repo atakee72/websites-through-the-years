@@ -138,7 +138,8 @@ posting address and the admin email) redacted before publishing.
 
 `index.html` — a hand-written, dependency-free page (inline CSS, no build step)
 presenting the five sites in IE-window frames with era screenshots
-(`assets/`), a timeline connecting the eras, and links to each exhibit's curator plaque. It includes a **curator's note** explaining what visitors will
+(`assets/`), a timeline connecting the eras, and links to each exhibit's curator
+plaque. It includes a **curator's note** explaining what visitors will
 encounter: fixed-width non-responsive layouts, permanently lost images, dead
 outbound links, IE-era assumptions — all deliberately preserved. The archived
 pages themselves have no viewport meta, so phones render them zoomed-out
