@@ -160,7 +160,9 @@
   footer a { color: var(--green); }
   .foot-extra {
     display: flex; flex-wrap: wrap; align-items: center;
-    gap: 1rem; margin-top: 1.25rem;
+    justify-content: space-between;
+    gap: 1rem; margin-top: 1.5rem;
+    border-top: 1px solid var(--line); padding-top: 1.25rem;
   }
   .counter {
     display: inline-flex; align-items: center; gap: .5rem;
@@ -171,8 +173,15 @@
     color: #7dff7d; background: #000;
     border: 1px solid #444; border-radius: 2px; padding: .1rem .4rem;
   }
-  .badges { display: inline-flex; flex-wrap: wrap; gap: .5rem; }
+  .badges { display: inline-flex; flex-wrap: wrap; gap: .75rem; }
   .badges img { width: 88px; height: 31px; display: block; }
+  .gb-call { margin-top: 1.25rem; font: bold 13px Verdana, sans-serif; }
+  .gb-call .new {
+    color: var(--bg); background: var(--green);
+    padding: .1rem .5rem; border-radius: 2px; margin-right: .5rem;
+    animation: blink 1.2s steps(1) infinite;
+  }
+  .gb-call a { color: var(--amber); }
   .blink { animation: blink 1.2s steps(1) infinite; color: var(--green); }
   @keyframes blink { 50% { opacity: 0; } }
 </style>
@@ -186,6 +195,7 @@
   while still alive. A personal museum of the early web: <b>&lt;font&gt;</b> tags, hit counters,
   image maps and all — imperfections deliberately included; the
   <a href="#curators-note">curator's note</a> below tells you what to expect inside.</p>
+  <p class="gb-call"><span class="new">NEW!</span> <a href="guestbook.html">Sign the guestbook by clicking here!</a></p>
 </header>
 
 <main>
