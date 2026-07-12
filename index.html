@@ -129,6 +129,29 @@
     background: #10161c; padding: 0 .3rem; border-radius: 2px;
   }
   .note a { color: var(--green); }
+  .timeline {
+    max-width: 62rem; margin: 0 auto; padding: 3rem 0 0;
+  }
+  .timeline ol {
+    list-style: none; margin: 1.5rem 0 0 .5rem;
+    border-left: 2px solid var(--line); padding: 0;
+  }
+  .timeline li { position: relative; padding: 0 0 1.4rem 1.5rem; }
+  .timeline li::before {
+    content: ""; position: absolute; left: -7px; top: .45rem;
+    width: 12px; height: 12px; border-radius: 50%; background: var(--amber);
+  }
+  .timeline li.flavor { color: var(--muted); font-size: .9rem; }
+  .timeline li.flavor::before {
+    width: 8px; height: 8px; left: -5px; top: .55rem; background: var(--line);
+  }
+  .timeline .y {
+    font: bold 13px 'Courier New', monospace;
+    color: var(--amber); margin-right: .6rem;
+  }
+  .timeline li.flavor .y { color: var(--muted); }
+  .timeline a { color: var(--ink); }
+  .timeline a:hover { color: var(--amber); }
   footer {
     max-width: 62rem; margin: 0 auto; padding: 2.5rem 0 4rem;
     color: var(--muted); font-size: .9rem;
@@ -157,12 +180,12 @@
     <div class="shot">
       <div class="browser">
         <div class="bar"><span>welcome to @t@kee's homepage! - Microsoft Internet Explorer</span><span class="btns">_ □ ✕</span></div>
-        <a href="atakee-fortunecity-2004/index.htm"><img src="assets/fortunecity.png" alt="Screenshot of @t@kee's homepage, rainbow letters on black background" loading="lazy"></a>
+        <a href="plaques/fortunecity.html"><img src="assets/fortunecity.png" alt="Screenshot of @t@kee's homepage, rainbow letters on black background" loading="lazy"></a>
       </div>
     </div>
     <div class="meta">
       <span class="year">1999 – 2004</span>
-      <h2><a href="atakee-fortunecity-2004/index.htm"><span class="at">@t@kee</span>'s homepage</a></h2>
+      <h2><a href="plaques/fortunecity.html"><span class="at">@t@kee</span>'s homepage</a></h2>
       <p>My personal homepage on FortuneCity: rainbow lettering, a picture gallery,
       travel pages, jokes and a guestbook. The hit counter and the news headlines
       box work again — rebuilt after their services died two decades ago.</p>
@@ -172,7 +195,7 @@
         <span class="chip">ICQ era</span>
       </div>
       <p class="quirk">One photo has pointed at C:\My&nbsp;Documents\ since the day it was uploaded.</p>
-      <a class="go" href="atakee-fortunecity-2004/index.htm">Enter site →</a>
+      <a class="go" href="plaques/fortunecity.html">Read the plaque →</a>
       <a class="wb" href="https://web.archive.org/web/20040130074500/http://members.fortunecity.com/atakee1/">Wayback original</a>
     </div>
   </section>
@@ -181,12 +204,12 @@
     <div class="shot">
       <div class="browser">
         <div class="bar"><span>AB GENEL MÜDÜRLÜĞÜ ANA SAYFA - Microsoft Internet Explorer</span><span class="btns">_ □ ✕</span></div>
-        <a href="dtm-ab-2002/AB.htm"><img src="assets/dtm.png" alt="Screenshot of the Türkiye–EU relations site with a map of Europe, Turkey highlighted in yellow" loading="lazy"></a>
+        <a href="plaques/dtm.html"><img src="assets/dtm.png" alt="Screenshot of the Türkiye–EU relations site with a map of Europe, Turkey highlighted in yellow" loading="lazy"></a>
       </div>
     </div>
     <div class="meta">
       <span class="year">2001 – 2002</span>
-      <h2><a href="dtm-ab-2002/AB.htm">Türkiye–EU Relations · Undersecretariat of Foreign Trade</a></h2>
+      <h2><a href="plaques/dtm.html">Türkiye–EU Relations · Undersecretariat of Foreign Trade</a></h2>
       <p>The EU affairs section of dtm.gov.tr, which I built and ran as its webmaster:
       legal texts of Türkiye–EU relations, free trade agreements, the customs union
       and trade statistics — 128 pages of it.</p>
@@ -196,7 +219,7 @@
         <span class="chip">www.dtm.gov.tr/AB</span>
       </div>
       <p class="quirk">Somewhere on the map of Europe, one tiny spot is a secret link. Try Üsküdar.</p>
-      <a class="go" href="dtm-ab-2002/AB.htm">Enter site →</a>
+      <a class="go" href="plaques/dtm.html">Read the plaque →</a>
       <a class="wb" href="https://web.archive.org/web/20020212141252/http://www.dtm.gov.tr/AB/AB.htm">Wayback original</a>
     </div>
   </section>
@@ -205,12 +228,12 @@
     <div class="shot">
       <div class="browser">
         <div class="bar"><span>türkiye - ab karma parlamento komisyonu - Microsoft Internet Explorer</span><span class="btns">_ □ ✕</span></div>
-        <a href="tbmm-kpk-2006/index.htm"><img src="assets/tbmm.png" alt="Screenshot of the Turkey–EU Joint Parliamentary Committee site" loading="lazy"></a>
+        <a href="plaques/tbmm.html"><img src="assets/tbmm.png" alt="Screenshot of the Turkey–EU Joint Parliamentary Committee site" loading="lazy"></a>
       </div>
     </div>
     <div class="meta">
       <span class="year">2004 – 2006</span>
-      <h2><a href="tbmm-kpk-2006/index.htm">Turkey–EU Joint Parliamentary Committee · TBMM</a></h2>
+      <h2><a href="plaques/tbmm.html">Turkey–EU Joint Parliamentary Committee · TBMM</a></h2>
       <p>The Joint Parliamentary Committee's site at the Turkish Grand National
       Assembly, in four languages, with an archive of the committee's joint
       declarations and press releases from the accession-talks years.</p>
@@ -220,7 +243,7 @@
         <span class="chip">tr · en · de · fr</span>
       </div>
       <p class="quirk">“En iyi, Microsoft Internet Explorer ile görüntülenir.”</p>
-      <a class="go" href="tbmm-kpk-2006/index.htm">Enter site →</a>
+      <a class="go" href="plaques/tbmm.html">Read the plaque →</a>
       <a class="wb" href="https://web.archive.org/web/20061227002006/http://www.tbmm.gov.tr/ul_kom/kpk/index.htm">Wayback original</a>
     </div>
   </section>
@@ -231,12 +254,12 @@
     <div class="shot">
       <div class="browser">
         <div class="bar"><span>Thoughtful thoughts - Mozilla Firefox</span><span class="btns">_ □ ✕</span></div>
-        <a href="thoughtful-thoughts-2011/index.html"><img src="assets/thoughtful.png" alt="Screenshot of the Thoughtful thoughts blog, teal Blogger theme" loading="lazy"></a>
+        <a href="plaques/thoughtful-thoughts.html"><img src="assets/thoughtful.png" alt="Screenshot of the Thoughtful thoughts blog, teal Blogger theme" loading="lazy"></a>
       </div>
     </div>
     <div class="meta">
       <span class="year">2010 – 2011</span>
-      <h2><a href="thoughtful-thoughts-2011/index.html">Thoughtful thoughts</a></h2>
+      <h2><a href="plaques/thoughtful-thoughts.html">Thoughtful thoughts</a></h2>
       <p>When the hand-coding stopped, the writing moved to Blogger: essays on politics,
       integration, travel — in Turkish, English and German. Its name is no accident:
       the 1999 homepage had a section called <i>thoughtful thoughts</i>; eleven years
@@ -247,7 +270,7 @@
         <span class="chip">tr · en · de</span>
       </div>
       <p class="quirk">Rescued from Google's hands while still breathing — every image now lives here.</p>
-      <a class="go" href="thoughtful-thoughts-2011/index.html">Enter site →</a>
+      <a class="go" href="plaques/thoughtful-thoughts.html">Read the plaque →</a>
       <a class="wb" href="https://atakee.blogspot.com/">Live original</a>
     </div>
   </section>
@@ -256,12 +279,12 @@
     <div class="shot">
       <div class="browser">
         <div class="bar"><span>@t@kee's - Mozilla Firefox</span><span class="btns">_ □ ✕</span></div>
-        <a href="atakees-blog-2013/index.html"><img src="assets/atakees.png" alt="Screenshot of the @t@kee's blog, gold Blogger theme" loading="lazy"></a>
+        <a href="plaques/atakees-blog.html"><img src="assets/atakees.png" alt="Screenshot of the @t@kee's blog, gold Blogger theme" loading="lazy"></a>
       </div>
     </div>
     <div class="meta">
       <span class="year">2008 – 2013</span>
-      <h2><a href="atakees-blog-2013/index.html">@t@kee's blog</a></h2>
+      <h2><a href="plaques/atakees-blog.html">@t@kee's blog</a></h2>
       <p>The personal notebook of the blog years: naval-archive detective work,
       Turkcell rants, philosophical takes on institutions — six posts across five
       years, ending where blogging itself faded out.</p>
@@ -270,9 +293,26 @@
         <span class="chip">tbb-wissenschaftsforum.blogspot.com</span>
       </div>
       <p class="quirk">Lives at an address named after a forum that never came to be — never bothered to rename it.</p>
-      <a class="go" href="atakees-blog-2013/index.html">Enter site →</a>
+      <a class="go" href="plaques/atakees-blog.html">Read the plaque →</a>
       <a class="wb" href="https://tbb-wissenschaftsforum.blogspot.com/">Live original</a>
     </div>
+  </section>
+
+  <section class="timeline">
+    <h2 class="eralabel">The timeline · 1998 – 2026</h2>
+    <ol>
+      <li class="flavor"><span class="y">1998</span>Google is founded.</li>
+      <li><span class="y">1999</span><a href="plaques/fortunecity.html">@t@kee's homepage</a> opens on FortuneCity — rainbow letters, hit counter, guestbook.</li>
+      <li class="flavor"><span class="y">2001</span>The Wayback Machine opens to the public — quietly photographing everything below.</li>
+      <li><span class="y">2001</span><a href="plaques/dtm.html">The Türkiye–EU site</a> goes up at the Undersecretariat of Foreign Trade, easter egg included.</li>
+      <li><span class="y">2004</span><a href="plaques/tbmm.html">The Joint Parliamentary Committee site</a> launches at the Grand National Assembly.</li>
+      <li><span class="y">2008</span><a href="plaques/atakees-blog.html">@t@kee's blog</a> begins on Blogger, at an address named for a forum that never came to be.</li>
+      <li class="flavor"><span class="y">2009</span>GeoCities is shut down — the free-host era starts to end.</li>
+      <li><span class="y">2010</span><a href="plaques/thoughtful-thoughts.html">Thoughtful thoughts</a> begins — the 1999 homepage section reborn as a blog.</li>
+      <li class="flavor"><span class="y">2012</span>FortuneCity goes dark; the 1999 homepage vanishes with it.</li>
+      <li><span class="y">2013</span>The last blog post. Blogging itself fades into social media.</li>
+      <li><span class="y">2026</span>The museum opens — the recovery is documented in <a href="restoration-lab.html">the restoration lab</a>.</li>
+    </ol>
   </section>
 
 </main>
@@ -309,14 +349,16 @@
   hit counter and news-headline widget were rebuilt to work again. Every intervention is
   documented, commit by commit, in the
   <a href="https://github.com/atakee72/websites-through-the-years">repository</a> —
-  the untouched originals live in its history.</p>
+  the untouched originals live in its history, and the whole recovery is narrated in
+  <a href="restoration-lab.html">the restoration lab</a>.</p>
 </section>
 
 <footer>
   <p>Every page here is served exactly as it was written, give or take the ad scripts
   its free hosts injected. The recovery process — crawling the Wayback Machine,
-  stripping dead third-party code, reviving the hit counter and news widget — is
-  documented in the <a href="https://github.com/atakee72/websites-through-the-years">repository</a>.</p>
+  stripping dead third-party code, sealing the blogs, reviving the widgets — is
+  narrated in <a href="restoration-lab.html">the restoration lab</a> and documented
+  in the <a href="https://github.com/atakee72/websites-through-the-years">repository</a>.</p>
 </footer>
 
 </body>
