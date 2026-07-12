@@ -123,11 +123,22 @@ settings): the lossless canonical source alongside the crawled copies.
 Account-level personal data was excluded and two secrets (the mail-to-Blogger
 posting address and the admin email) redacted before publishing.
 
+## Curation layer
+
+- `plaques/` — a curator's plaque per exhibit (story, era context, what was
+  restored, sources). Landing cards lead to the plaque; the plaque's
+  "Enter the exhibit" button is the door to the site itself.
+- `restoration-lab.html` — the recovery narrated: Wayback archaeology, the
+  stripped host-injected junk shown as an inert specimen, the UTF-8
+  transcoding, the live Blogger rescue, and permalinks to the load-bearing
+  commits. All historical code on this page is HTML-escaped display text.
+- A timeline on the landing page connects the exhibits (1998–2026).
+
 ## Landing page
 
 `index.html` — a hand-written, dependency-free page (inline CSS, no build step)
-presenting the three sites in IE-window frames with era screenshots
-(`assets/`). It includes a **curator's note** explaining what visitors will
+presenting the five sites in IE-window frames with era screenshots
+(`assets/`), a timeline connecting the eras, and links to each exhibit's curator plaque. It includes a **curator's note** explaining what visitors will
 encounter: fixed-width non-responsive layouts, permanently lost images, dead
 outbound links, IE-era assumptions — all deliberately preserved. The archived
 pages themselves have no viewport meta, so phones render them zoomed-out
