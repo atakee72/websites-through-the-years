@@ -133,6 +133,8 @@ posting address and the admin email) redacted before publishing.
   transcoding, the live Blogger rescue, and permalinks to the load-bearing
   commits. All historical code on this page is HTML-escaped display text.
 - A timeline on the landing page connects the exhibits (1998–2026).
+- The recovery crawlers are published as
+  [website-rescue-kit](https://github.com/atakee72/website-rescue-kit).
 
 ## Guestbook
 
