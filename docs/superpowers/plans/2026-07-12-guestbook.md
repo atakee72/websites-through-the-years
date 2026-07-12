@@ -142,7 +142,7 @@ git commit -m "Add guestbook and dial-up styles to museum stylesheet"
 
 Run: `python3 -c "import glob; fs=sorted(glob.glob('assets/badges/*.svg')); assert len(fs)==4, fs; [(lambda s: [s.strip().startswith('<svg '), s.strip().endswith('</svg>'), 'DOCTYPE' not in s, s.count('width=\"88\"')>=1])(open(f).read()) for f in fs]; print('4 ok')"`
 Expected: `4 ok`
-Run: `grep -o 'http[^\" ]*' assets/badges/*.svg | grep -v 'www.w3.org/2000/svg' || echo "no external refs"`
+Run: `grep -o 'http[^" ]*' assets/badges/*.svg | grep -v 'www.w3.org/2000/svg' || echo "no external refs"`
 Expected: `no external refs` (the `xmlns` namespace URI is an identifier, not a request; nothing else may reference http).
 
 - [ ] **Step 6: Commit**
@@ -273,18 +273,20 @@ playwright-cli eval "localStorage.removeItem('gb-dialup-done')"
 playwright-cli reload
 playwright-cli snapshot
 ```
-Expected: with the flag cleared, the dial-up overlay is visible first ("CONNECTING TO GUESTBOOK.EXE") — the browser profile may persist between sessions, so the explicit remove+reload is the deterministic first-visit path. Then:
+Expected: with the flag cleared, the dial-up overlay is visible first ("CONNECTING TO GUESTBOOK.EXE") — the browser profile may persist between sessions, so the explicit remove+reload is the deterministic first-visit path. Then test the click-skip (deterministic; the ~4.2 s auto-finish is confirmed visually in the snapshot flow, and Escape-skip is covered in Task 6):
 
 ```bash
-playwright-cli eval "new Promise(r => setTimeout(() => r(document.getElementById('dialup').hidden), 4500))"
+playwright-cli eval "document.getElementById('dialup').click(); document.getElementById('dialup').hidden"
 ```
-Expected: `true` (auto-finished after ~4.2 s).
+Expected: `true` (click skipped it and set the flag).
 
 ```bash
 playwright-cli reload
 playwright-cli eval "document.getElementById('dialup').hidden"
 ```
 Expected: `true` immediately (localStorage flag set — plays once, ever).
+
+Note: the `prefers-reduced-motion` guard cannot be emulated through this playwright-cli — verify it by reading the code (the `matchMedia('(prefers-reduced-motion: reduce)')` condition must gate the overlay), not by browser test.
 
 - [ ] **Step 3: Verify the mail link and the harvesting guard**
 
@@ -293,8 +295,8 @@ playwright-cli eval "document.getElementById('gb-mail') !== null && document.que
 ```
 Expected: `true`
 
-Run: `grep -c "atakee@gmail" guestbook.html || echo 0`
-Expected: `0` (address never appears assembled).
+Run: `! grep -q "atakee@gmail" guestbook.html && echo clean`
+Expected: `clean` (address never appears assembled).
 
 - [ ] **Step 4: Verify zero external requests, then close**
 
@@ -608,5 +610,8 @@ Leave the local server running and report to the user: the guestbook (incl.
 seed entry № 001 written in their voice), the dial-up gag, the counter and
 the badges are ready for review at `http://localhost:8765/` and
 `http://localhost:8765/guestbook.html`. Push to `main` only after explicit
-user approval. (The issue-form link 404s on GitHub until this branch is
-pushed — expected; verify it live after push.)
+user approval. Post-push checklist (controller, after user approval):
+`gh label create guestbook --description "Guestbook entries awaiting baking" --color 7dd97d`
+(GitHub silently drops template labels that don't exist in the repo), then
+open the live issue-form URL once to confirm the template renders. The
+issue-form link 404s on GitHub until pushed — expected.
