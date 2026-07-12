@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" role="img" aria-label="Best viewed with any browser">
+  <rect width="88" height="31" fill="#000"/>
+  <rect x="0.5" y="0.5" width="87" height="30" fill="none" stroke="#7dff7d"/>
+  <text x="44" y="13" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" font-weight="bold" fill="#7dff7d">BEST VIEWED</text>
+  <text x="44" y="24" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#fff">with ANY browser</text>
+</svg>

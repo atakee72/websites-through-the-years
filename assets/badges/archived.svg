@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" role="img" aria-label="Archived forever">
+  <rect width="88" height="31" fill="#000"/>
+  <rect x="0.5" y="0.5" width="87" height="30" fill="none" stroke="#ffb454"/>
+  <text x="44" y="14" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" font-weight="bold" fill="#ffb454">ARCHIVED</text>
+  <text x="44" y="25" text-anchor="middle" font-family="'Courier New',monospace" font-size="10" font-weight="bold" fill="#fff">4-EVER</text>
+</svg>

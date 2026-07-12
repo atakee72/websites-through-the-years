@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" role="img" aria-label="UTF-8 inside">
+  <rect width="88" height="31" fill="#101418"/>
+  <rect x="0.5" y="0.5" width="87" height="30" fill="none" stroke="#7dd97d"/>
+  <text x="44" y="16" text-anchor="middle" font-family="'Courier New',monospace" font-size="13" font-weight="bold" fill="#fff">UTF-8</text>
+  <text x="44" y="26" text-anchor="middle" font-family="Georgia,serif" font-size="9" font-style="italic" fill="#7dd97d">inside</text>
+</svg>
