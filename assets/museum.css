@@ -1,0 +1,83 @@
+/* museum.css — shared stylesheet for the plaque pages and the restoration lab.
+   Palette mirrors index.html's inline styles (kept in sync by hand). */
+:root {
+  --bg: #101418;
+  --panel: #1a2129;
+  --ink: #e8e6e1;
+  --muted: #9aa4ae;
+  --amber: #ffb454;
+  --green: #7dd97d;
+  --line: #2c3640;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 16px/1.6 Georgia, 'Times New Roman', serif;
+  padding: 0 1rem;
+}
+.wrap { max-width: 46rem; margin: 0 auto; }
+nav.crumbs { padding: 2rem 0 0; }
+nav.crumbs a {
+  color: var(--green); text-decoration: none;
+  border-bottom: 1px dotted var(--green); font: 13px Verdana, sans-serif;
+}
+nav.crumbs a:hover { color: var(--amber); border-color: var(--amber); }
+header.plaquehead { padding: 2.5rem 0 1.5rem; border-bottom: 1px solid var(--line); }
+.year {
+  font: bold 13px 'Courier New', monospace;
+  color: var(--bg); background: var(--amber);
+  display: inline-block; padding: .1rem .6rem; border-radius: 2px;
+}
+h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: normal; margin: .6rem 0 .4rem; }
+h1 .at { color: var(--amber); }
+.host { font: 13px 'Courier New', monospace; color: var(--green); }
+figure.shot { margin: 2rem 0 0; }
+figure.shot img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid #555; border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+figure.shot figcaption { font-size: .85rem; color: var(--muted); font-style: italic; margin-top: .5rem; }
+section { padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+section h2 {
+  font: bold 14px 'Courier New', monospace; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: .75rem;
+}
+section p { margin-bottom: .75rem; }
+section .aside { color: var(--muted); font-style: italic; }
+section a { color: var(--green); }
+section ul { margin: 0 0 .75rem 1.2rem; }
+section li { color: var(--muted); margin-bottom: .5rem; }
+.doorway { padding: 2.5rem 0; text-align: center; }
+.enter {
+  display: inline-block; font: bold 15px Verdana, sans-serif;
+  color: var(--bg); background: var(--green);
+  padding: .7rem 1.4rem; border-radius: 3px; text-decoration: none;
+}
+.enter:hover { background: var(--amber); }
+footer { padding: 1rem 0 3rem; color: var(--muted); font-size: .9rem; }
+footer a {
+  color: var(--green); text-decoration: none;
+  border-bottom: 1px dotted var(--green);
+}
+footer a:hover { color: var(--amber); border-color: var(--amber); }
+
+/* restoration lab */
+.lab section h2 { font-size: 15px; }
+pre {
+  background: #0b0f13; border: 1px solid var(--line); border-radius: 4px;
+  padding: 1rem; overflow-x: auto;
+  font: 13px/1.5 'Courier New', monospace; color: var(--muted);
+  margin: 0 0 .75rem;
+}
+code {
+  font: 13px 'Courier New', monospace; color: var(--green);
+  background: #10161c; padding: 0 .3rem; border-radius: 2px;
+}
+pre code { background: none; padding: 0; color: inherit; }
+.specimen { border-left: 4px solid #a33; }
+.specimen-label {
+  font: bold 12px 'Courier New', monospace; color: #d77;
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: .4rem;
+}
