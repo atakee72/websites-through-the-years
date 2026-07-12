@@ -23,6 +23,8 @@
 - Scripts: Python 3 stdlib only; ~1 request/second politeness with retry/backoff; resumable.
 - Commit messages: simple one-liners, NO Claude signature, NO Co-Authored-By footer.
 - Museum's archived exhibit folders are never touched.
+- Tasks 2 and 3 commit into the same fresh repo: run them sequentially, or if
+  parallelized, each committer retries after 2 s on an index.lock failure.
 
 ---
 
@@ -578,7 +580,14 @@ commit-permalink list in section "5 · Verify it yourself", insert:
 
 - [ ] **Step 2: Add one line to the museum README's "Curation layer" section**
 
-Append to the section's bullet list:
+Insert a new bullet immediately after this existing line (the section's last
+bullet):
+
+```markdown
+- A timeline on the landing page connects the exhibits (1998–2026).
+```
+
+New bullet:
 
 ```markdown
 - The recovery crawlers are published as
