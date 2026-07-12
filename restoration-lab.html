@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The restoration lab · websites through the years</title>
+<meta name="description" content="How the museum's exhibits were recovered: Wayback Machine archaeology, the junk that was stripped, the charset surgery, and the live Blogger rescue.">
+<link rel="stylesheet" href="assets/museum.css">
+</head>
+<body>
+<div class="wrap lab">
+
+<nav class="crumbs"><a href="index.html">← back to the museum</a></nav>
+
+<header class="plaquehead">
+  <span class="year">2026</span>
+  <h1>The restoration lab</h1>
+  <p class="host">how the exhibits got here</p>
+</header>
+
+<section>
+  <h2>1 · Digging in the Wayback Machine</h2>
+  <p>The three hand-coded sites died with their hosts; the
+  <a href="https://web.archive.org">Internet Archive's Wayback Machine</a> had
+  been quietly photographing them for years. Recovery starts with the CDX API —
+  a catalogue of every capture the archive holds under a URL prefix:</p>
+  <pre><code>https://web.archive.org/cdx/search/cdx?url=members.fortunecity.com/atakee1*
+    &amp;collapse=urlkey&amp;fl=original,timestamp,statuscode&amp;filter=statuscode:200</code></pre>
+  <p>Files are then fetched <i>raw</i> with the archive's <code>id_</code> flag,
+  which turns off the Wayback toolbar and link-rewriting and returns the
+  original bytes:</p>
+  <pre><code>https://web.archive.org/web/20040130074500id_/http://members.fortunecity.com/atakee1/index.htm</code></pre>
+  <p>A small crawler starts from one anchor capture and follows internal links;
+  for each page the archive serves the capture nearest in time to the anchor,
+  which keeps a whole site era-coherent instead of mixing 2001 pages with 2009
+  ones. It fetches politely — about one request per second, with backoff,
+  because archive.org drops connections when hammered — and it's resumable.</p>
+  <p class="aside">Field notes: a Turkish "ç" in one filename crashed the crawler
+  and had to be percent-encoded as windows-1254; six template graphics were
+  never archived under the site's own path and were recovered from identical
+  copies in sibling directories of the same server; one page (euro1.htm) was
+  simply never captured, and is gone.</p>
+</section>
+
+<section>
+  <h2>2 · The junk gallery</h2>
+  <p>Free hosting was never free. FortuneCity paid for the disk space by
+  injecting trackers, banner frames and pop-up machinery into every page it
+  served. This — <b>displayed here as inert text, museum-glass style</b> — is
+  what surrounded my homepage in the raw capture, and what was stripped in the
+  restoration (the exhibit keeps every byte I actually wrote):</p>
+  <p class="specimen-label">Specimen · injected by the host, removed 2026</p>
+  <pre class="specimen"><code>&lt;script language="Javascript"&gt;
+&lt;!-- hide
+document.write('&lt;font size=-3&gt;&lt;img src="http://www.fortunecity.com/banners/track1.gif"
+  height=1 width=1% border="0" name="FCimg11bnr" hspace=0 vspace=0&gt;');
+// --&gt;
+&lt;/script&gt;
+
+&lt;script language="Javascript" src="http://www.fortunecity.com/js/adscript.global.new.js"&gt;
+&lt;/script&gt;
+
+var GiveMePopups = 1;
+DisplayFCAdBanner();
+
+&lt;table id="fcnavbartable2" style="visibility:hidden" ...&gt;
+&lt;tr&gt;&lt;td&gt;&lt;iframe id="fcpopular" src="http://www.fortunecity.com/banners/popular.html"
+  width="100%" height="15" ...&gt;&lt;/iframe&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code></pre>
+  <p class="aside">A 1×1 tracking pixel, a global ad script, <code>var
+  GiveMePopups = 1</code> — a variable name with the honesty of its age — and a
+  hidden iframe of "popular" links. Later captures added Google Analytics and
+  ZEDO ad tags on top. All of it is preserved in the repository's first commit,
+  behind glass.</p>
+</section>
+
+<section>
+  <h2>3 · The charset surgery</h2>
+  <p>The one modernization every archived page had to accept: GitHub Pages
+  serves all HTML with a <code>Content-Type: text/html; charset=utf-8</code>
+  header, and an HTTP header outranks whatever a page's
+  <code>&lt;meta&gt;</code> tag says. The exhibits were written in iso-8859-1,
+  windows-1254 and iso-8859-9 — so every Turkish "ğşıçöü" arrived as mojibake.</p>
+  <p>The fix: transcode each file to UTF-8, exactly once. Each file's real
+  encoding is detected first (a strict UTF-8 decode as the test — six files
+  turned out to be UTF-8 already, and transcoding them twice would have
+  destroyed them), and only <code>.htm/.html</code> files are touched, never
+  binaries. The original bytes live untouched in git history.</p>
+</section>
+
+<section>
+  <h2>4 · Rescuing the living</h2>
+  <p>The two blogs posed the opposite problem: not digging up the dead, but
+  making the living independent of their landlord. They were crawled directly
+  from Blogger — posts, year and month archives, label pages, the "older
+  posts" pagination chains — then <b>hermetically sealed</b>: fonts, theme
+  graphics and images pulled out of Google's CDNs into local folders, every
+  reference rewritten (including <code>srcset</code> attributes, CSS
+  <code>url()</code> values — some backslash-escaped, some protocol-relative —
+  Open Graph metas and the favicon), every outbound link disarmed to
+  <code>href="#"</code> with the original URL kept in a
+  <code>data-original</code> attribute.</p>
+  <p>Some post images had already been lost by Blogger's own image proxy while
+  the blogs were live. Their references now point at an intentionally absent
+  local path: still broken — that's authentic — but without dozens of slow,
+  doomed round-trips to Google. Sealing cut the home page's load time roughly
+  tenfold.</p>
+  <p>The seal is verifiable in your browser console on any blog page:</p>
+  <pre><code>performance.getEntriesByType('resource')
+  .filter(r =&gt; !r.name.startsWith(location.origin))   // → []</code></pre>
+</section>
+
+<section>
+  <h2>5 · Verify it yourself</h2>
+  <p>Every intervention is a commit; the untouched originals are always one
+  <code>git checkout</code> away. The load-bearing ones:</p>
+  <ul>
+    <li><a href="https://github.com/atakee72/websites-through-the-years/commit/cb12b36dae427df2fa6ccc1201617a671681c736">cb12b36</a> — the raw Wayback archive of the FortuneCity site, junk and all</li>
+    <li><a href="https://github.com/atakee72/websites-through-the-years/commit/790722d3962576c5efb2b9548bb8d3185a6d7b36">790722d</a> — the junk stripped; hit counter rebuilt as a local replica</li>
+    <li><a href="https://github.com/atakee72/websites-through-the-years/commit/a209cb1ca25c1a6e0b50eb632972204a228545eb">a209cb1</a> — the dead news-headlines widget revived on Wikipedia's feed</li>
+    <li><a href="https://github.com/atakee72/websites-through-the-years/commit/63647b27f2c6996f8a777b9504d42d7c28cc9ef7">63647b2</a> — the Üsküdar easter egg re-armed</li>
+    <li><a href="https://github.com/atakee72/websites-through-the-years/commit/d50d975eac81ac9e1b7d430b5bfb1e5c124c888b">d50d975</a> — the charset surgery, all three legacy encodings → UTF-8</li>
+    <li><a href="https://github.com/atakee72/websites-through-the-years/commit/dc7be62b576cabe6cfc30678c2dcdcb57ef997a3">dc7be62</a> — both blogs rescued alive as static copies</li>
+    <li><a href="https://github.com/atakee72/websites-through-the-years/commit/d4685f938c9888d19638eb97f19c325332ebb15f">d4685f9</a> — the hermetic seal: fonts local, dead proxies cut, external links disarmed</li>
+    <li><a href="https://github.com/atakee72/websites-through-the-years/commit/b0ebf2dc0dfd575ede309159931ae12f28cb0ad4">b0ebf2d</a> — the blog sidebar drawer brought back to life</li>
+  </ul>
+</section>
+
+<p class="doorway"><a class="enter" href="index.html">Back to the museum →</a></p>
+
+<footer><a href="index.html">websites through the years</a> — a personal museum of the early web</footer>
+
+</div>
+</body>
+</html>
