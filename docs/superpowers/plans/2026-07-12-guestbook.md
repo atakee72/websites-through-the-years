@@ -13,7 +13,7 @@
 - Repo root: `/home/atakee/projects/eski-web-sayfalarim`. Paths below are repo-relative.
 - Do NOT modify anything under `atakee-fortunecity-2004/`, `dtm-ab-2002/`, `tbmm-kpk-2006/`, `thoughtful-thoughts-2011/`, `atakees-blog-2013/`, `backups/`, `plaques/`, or `restoration-lab.html`.
 - Shell pages make **zero external requests**. External `<a href>` links are allowed.
-- The string `atakee@gmail.com` must NEVER appear assembled in any committed file of this plan — the mailto is built at click time from parts (`'atakee' + '@' + 'gmail.com'`).
+- The museum email address must NEVER appear assembled in any committed file of this plan — the mailto is built at click time from parts (`'atakee' + '@' + 'gmail.com'`).
 - Typographic characters in snippets (— · № → …) must be preserved exactly.
 - Commit messages: simple one-liners, **no** Claude signature, **no** Co-Authored-By footer.
 - Do NOT push in any task. Push happens only after the user reviews the guestbook page (review gate, end of plan).
