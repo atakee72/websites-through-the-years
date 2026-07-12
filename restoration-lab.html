@@ -35,7 +35,7 @@
   which keeps a whole site era-coherent instead of mixing 2001 pages with 2009
   ones. It fetches politely — about one request per second, with backoff,
   because archive.org drops connections when hammered — and it's resumable.</p>
-  <p class="aside">Field notes: a Turkish "ç" in one filename crashed the crawler
+  <p class="aside">Field notes: a Turkish “ç” in one filename crashed the crawler
   and had to be percent-encoded as windows-1254; six template graphics were
   never archived under the site's own path and were recovered from identical
   copies in sibling directories of the same server; one page (euro1.htm) was
@@ -68,7 +68,7 @@ DisplayFCAdBanner();
   width="100%" height="15" ...&gt;&lt;/iframe&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code></pre>
   <p class="aside">A 1×1 tracking pixel, a global ad script, <code>var
   GiveMePopups = 1</code> — a variable name with the honesty of its age — and a
-  hidden iframe of "popular" links. Later captures added Google Analytics and
+  hidden iframe of “popular” links. Later captures added Google Analytics and
   ZEDO ad tags on top. All of it is preserved in the repository's first commit,
   behind glass.</p>
 </section>
@@ -79,7 +79,7 @@ DisplayFCAdBanner();
   serves all HTML with a <code>Content-Type: text/html; charset=utf-8</code>
   header, and an HTTP header outranks whatever a page's
   <code>&lt;meta&gt;</code> tag says. The exhibits were written in iso-8859-1,
-  windows-1254 and iso-8859-9 — so every Turkish "ğşıçöü" arrived as mojibake.</p>
+  windows-1254 and iso-8859-9 — so every Turkish “ğşıçöü” arrived as mojibake.</p>
   <p>The fix: transcode each file to UTF-8, exactly once. Each file's real
   encoding is detected first (a strict UTF-8 decode as the test — six files
   turned out to be UTF-8 already, and transcoding them twice would have
@@ -91,8 +91,8 @@ DisplayFCAdBanner();
   <h2>4 · Rescuing the living</h2>
   <p>The two blogs posed the opposite problem: not digging up the dead, but
   making the living independent of their landlord. They were crawled directly
-  from Blogger — posts, year and month archives, label pages, the "older
-  posts" pagination chains — then <b>hermetically sealed</b>: fonts, theme
+  from Blogger — posts, year and month archives, label pages, the “older
+  posts” pagination chains — then <b>hermetically sealed</b>: fonts, theme
   graphics and images pulled out of Google's CDNs into local folders, every
   reference rewritten (including <code>srcset</code> attributes, CSS
   <code>url()</code> values — some backslash-escaped, some protocol-relative —
