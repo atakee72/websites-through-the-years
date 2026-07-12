@@ -158,6 +158,21 @@
     color: var(--muted); font-size: .9rem;
   }
   footer a { color: var(--green); }
+  .foot-extra {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: 1rem; margin-top: 1.25rem;
+  }
+  .counter {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font: 13px Verdana, sans-serif; color: var(--muted);
+  }
+  .counter .digits {
+    font: bold 16px 'Courier New', monospace; letter-spacing: 2px;
+    color: #7dff7d; background: #000;
+    border: 1px solid #444; border-radius: 2px; padding: .1rem .4rem;
+  }
+  .badges { display: inline-flex; flex-wrap: wrap; gap: .5rem; }
+  .badges img { width: 88px; height: 31px; display: block; }
   .blink { animation: blink 1.2s steps(1) infinite; color: var(--green); }
   @keyframes blink { 50% { opacity: 0; } }
 </style>
@@ -312,7 +327,7 @@
       <li><span class="y">2010</span><a href="plaques/thoughtful-thoughts.html">Thoughtful thoughts</a> begins — the 1999 homepage section reborn as a blog.</li>
       <li class="flavor"><span class="y">2012</span>FortuneCity goes dark; the 1999 homepage vanishes with it.</li>
       <li><span class="y">2013</span>The last blog post. Blogging itself fades into social media.</li>
-      <li><span class="y">2026</span>The museum opens — the recovery is documented in <a href="restoration-lab.html">the restoration lab</a>.</li>
+      <li><span class="y">2026</span>The museum opens — the recovery is documented in <a href="restoration-lab.html">the restoration lab</a> — and <a href="guestbook.html">the guestbook</a> reopens.</li>
     </ol>
   </section>
 
@@ -360,6 +375,28 @@
   stripping dead third-party code, sealing the blogs, reviving the widgets — is
   narrated in <a href="restoration-lab.html">the restoration lab</a> and documented
   in the <a href="https://github.com/atakee72/websites-through-the-years">repository</a>.</p>
+  <div class="foot-extra">
+    <span class="counter" title="localStorage replica — the original counter service died in 2005">You are visitor № <span class="digits" id="mcount">018735</span></span>
+    <a href="guestbook.html">Sign the guestbook →</a>
+    <span class="badges">
+      <img src="assets/badges/any-browser.svg" alt="Best viewed with any browser" width="88" height="31">
+      <img src="assets/badges/frontpage.svg" alt="Made with FrontPage — restored by hand" width="88" height="31">
+      <img src="assets/badges/utf8.svg" alt="UTF-8 inside" width="88" height="31">
+      <img src="assets/badges/archived.svg" alt="Archived forever" width="88" height="31">
+    </span>
+  </div>
+  <script>
+  (function () {
+    // visitor counter replica — continues where the 1999 homepage's counter
+    // left off (the exhibit's replica is seeded 18734)
+    var n = 18735;
+    try {
+      n = parseInt(localStorage.getItem('museum-hits') || '18734', 10) + 1;
+      localStorage.setItem('museum-hits', String(n));
+    } catch (e) {}
+    document.getElementById('mcount').textContent = String(n).padStart(6, '0');
+  })();
+  </script>
 </footer>
 
 </body>
