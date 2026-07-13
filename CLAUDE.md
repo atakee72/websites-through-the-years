@@ -2,15 +2,15 @@
 
 A digital museum: five websites the user built between 1999 and 2013 —
 three recovered from the Wayback Machine, two Blogger blogs rescued alive —
-served on GitHub Pages.
+plus a one-page GeoCities found object, served on GitHub Pages.
 Live: https://atakee72.github.io/websites-through-the-years/
 Repo: github.com/atakee72/websites-through-the-years (public)
 
 ## Prime directive: authenticity
 
 The archived sites (`atakee-fortunecity-2004/`, `dtm-ab-2002/`,
-`tbmm-kpk-2006/`, `thoughtful-thoughts-2011/`, `atakees-blog-2013/`) are
-historical artifacts. Do NOT modernize, reformat, lint, or "fix" them
+`tbmm-kpk-2006/`, `thoughtful-thoughts-2011/`, `atakees-blog-2013/`,
+`geocities-cindy-2002/`) are historical artifacts. Do NOT modernize, reformat, lint, or "fix" them
 unless the user explicitly asks. Broken images, dead links, `<font>` tags,
 IE-era markup are features, not bugs — the landing page's curator's note
 explains this to visitors. The modern, freely editable museum shell is:

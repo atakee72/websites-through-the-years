@@ -116,6 +116,31 @@ came to be). [Live original](https://tbb-wissenschaftsforum.blogspot.com/)
   broken (authentic), but without the dozens of slow round-trips to Google
   that made pages crawl.
 
+## Lost & found
+
+### Cinderellas Fotoalbum (GeoCities, ~2001–2002)
+
+`geocities-cindy-2002/` — a single-page found object: a photo album built
+with Yahoo! PageBuilder under the author's GeoCities account
+(`geocities.com/atakee`), written in German and speaking in its subject's
+voice — "this homepage was made by one of my many admirers :))".
+Rediscovered in 2026 during a Wayback Machine sweep of the author's old
+handles; the author has no memory of making it.
+[Archived capture](https://web.archive.org/web/20020110013051/http://geocities.com/atakee/cindy.html)
+
+**Provenance / restoration notes**
+
+- Recovered from the archive's only capture of the page (10 Jan 2002).
+- Restorations: the shared GeoCities template assets (the
+  `aboutme_country_bg2.gif` background and the `c.gif` PageBuilder spacer)
+  were never captured with the page and were recovered from the archive's
+  separate captures of `geocities.com/clipart/`; Yahoo's server-injected
+  tracking block — which the server itself labeled "PLEASE REMOVE" — was
+  stripped.
+- Permanently lost: the photo (`cindy_4.jpg`) and the album itself
+  (`page2.html`, "Mein Fotoalbum") were never archived. The empty photo
+  frame and the dead links are preserved as captured.
+
 ## Backups
 
 `backups/` — Google Takeout exports of both blogs (Atom post feeds, themes,
