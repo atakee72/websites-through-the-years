@@ -1,8 +1,9 @@
 # websites through the years
 
-My personal websites from the early web era (1999–2006), recovered from the
-[Wayback Machine](https://web.archive.org) and preserved as they were built —
-`<font>` tags, hit counter, guestbook link and all.
+My personal websites from 1999 to 2013 — three recovered from the
+[Wayback Machine](https://web.archive.org), two Blogger blogs rescued alive,
+and one page found in the rubble — preserved as they were built:
+`<font>` tags, hit counter, guestbook and all.
 
 ## Sites
 
