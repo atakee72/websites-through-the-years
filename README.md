@@ -159,6 +159,10 @@ posting address and the admin email) redacted before publishing.
   transcoding, the live Blogger rescue, and permalinks to the load-bearing
   commits. All historical code on this page is HTML-escaped display text.
 - A timeline on the landing page connects the exhibits (1998–2026).
+- `links.html` — the links page every homepage had, pointing outward:
+  Wayback captures of the sites the curator remembers visiting (Ankara &
+  Berlin, 1999–2006) and the famous classics, plus the handful that are
+  still alive at their original addresses.
 - The recovery crawlers are published as
   [website-rescue-kit](https://github.com/atakee72/website-rescue-kit).
 
