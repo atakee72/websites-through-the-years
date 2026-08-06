@@ -182,7 +182,7 @@ while read -r url; do
 done < "$LIST"
 ```
 
-Expected: every line starts with `200`. If a Wayback URL fails: retry once (archive.org drops connections when hammered), then try a neighboring year (e.g. `/2001/` instead of `/2000/`). If a live-fossil URL fails permanently: replace its href with a Wayback form of the same site and delete its `alivechip` span. Record any substitution in the task report.
+Expected: every line starts with `200`. If a Wayback URL fails: retry once (archive.org drops connections when hammered), then try a neighboring year (e.g. `/2001/` instead of `/2000/`). If a live-fossil URL fails: first try swapping the scheme (`http://` ↔ `https://`); only if both fail, replace its href with a Wayback form of the same site and delete its `alivechip` span. Record any substitution in the task report. (All six live fossils and the two riskiest Wayback URLs were spot-checked 200 on 2026-08-07 during plan audit.)
 
 - [ ] **Step 4: Browser check**
 
@@ -203,9 +203,11 @@ Expected: `[]` (the stylesheet is the only resource and it is same-host). Kill t
 Confirm the typographic characters survived (must all appear):
 
 ```bash
-grep -c '“' links.html   # expected: ≥ 3
-grep -c '’' links.html   # expected: 0 (page uses ' apostrophes only)
-grep -c '·' links.html   # expected: ≥ 4
+grep -c '“' links.html            # expected: 3 (three opening typographic quotes)
+grep -c '’' links.html            # expected: 0 (page uses ASCII ' apostrophes only)
+grep -c '·' links.html            # expected: ≥ 4
+grep -c 'Ekşi Sözlük' links.html  # expected: 1 (Turkish characters survived)
+grep -c 'Universität' links.html  # expected: 1 (German characters survived)
 ```
 
 ```bash
@@ -311,3 +313,4 @@ git commit -m "Docs: links page in README curation layer and CLAUDE.md shell lis
 
 - User vets the personal-section memories and the link selection (drafted notes are flagged in the page itself: “Memories drafted by the curator's assistant; corrections by the curator himself.”).
 - Push only on the user's explicit go-ahead, then verify Pages build.
+- After push: save `links.html` to the Wayback Machine (`curl -L https://web.archive.org/save/https://atakee72.github.io/websites-through-the-years/links.html`) — and retry the two pending cindy SPN saves while at it (SPN was down 2026-07-13).
