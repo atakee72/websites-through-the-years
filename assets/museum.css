@@ -115,3 +115,17 @@ pre code { background: none; padding: 0; color: inherit; }
 }
 @keyframes gb-conn { to { width: 100%; } }
 #dialup .skip { color: #4a7; font-size: 12px; }
+
+/* links page */
+.linklist { list-style: none; margin: 0 0 .75rem; }
+.linklist li { margin-bottom: .9rem; color: var(--ink); }
+.linklist .lyear {
+  font: bold 12px 'Courier New', monospace;
+  color: var(--amber); margin-right: .35rem;
+}
+.linklist .alivechip {
+  font: bold 10px Verdana, sans-serif; color: var(--bg);
+  background: var(--green); padding: 0 .35rem; border-radius: 2px;
+  margin-left: .35rem; vertical-align: middle; white-space: nowrap;
+}
+.linklist .lnote { color: var(--muted); }
