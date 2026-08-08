@@ -203,3 +203,6 @@ original bytes are preserved in git history.
 
 The whole museum is served with GitHub Pages:
 https://atakee72.github.io/websites-through-the-years/
+
+The domain root, [atakee72.github.io](https://atakee72.github.io/), is a small
+hub linking the author's [portfolio](https://ercan-atak.de) and this museum.
