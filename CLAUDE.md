@@ -28,7 +28,9 @@ live external links. Fonts, theme images and all assets live in their
 `blog-assets/`; dead Blogger-proxy images point at an intentionally absent
 local path (authentic broken look, no Google round-trips); all outbound
 links are `href="#"` with the original URL in `data-original`. If pages
-are ever re-crawled, re-verify with: no `http` in src/href, and
+are ever re-crawled, re-verify with: no `http` AND no scheme-relative `//`
+in src/href/`url()` (grep both — `//host/…` evades the `http` grep; leaks
+of exactly that kind were found and sealed 2026-08-08), and
 `performance.getEntriesByType('resource')` shows only same-host requests.
 
 ## Rules
