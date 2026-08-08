@@ -18,6 +18,17 @@ body {
 }
 .wrap { max-width: 46rem; margin: 0 auto; }
 nav.crumbs { padding: 2rem 0 0; }
+nav.top {
+  display: flex; flex-wrap: wrap; gap: 1.25rem 1.75rem;
+  padding: 2rem 0 0;
+  font: bold 12px Verdana, sans-serif;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+nav.top a {
+  color: var(--green); text-decoration: none;
+  border-bottom: 1px dotted var(--green); padding-bottom: .15rem;
+}
+nav.top a:hover { color: var(--amber); border-color: var(--amber); }
 nav.crumbs a {
   color: var(--green); text-decoration: none;
   border-bottom: 1px dotted var(--green); font: 13px Verdana, sans-serif;
