@@ -170,3 +170,39 @@ pre code { background: none; padding: 0; color: inherit; }
 #faxout { display: none; }
 #faxout .dead { color: var(--amber); font-weight: bold; }
 .smallprint { color: var(--muted); font-style: italic; font-size: .9rem; }
+
+/* museum shop — 1999 Kaufhaus-Prospekt layer */
+.ticker {
+  overflow: hidden; white-space: nowrap;
+  background: #ffe94a; color: #c00;
+  font: bold 13px Verdana, sans-serif;
+  border-radius: 2px; margin-bottom: 1rem;
+}
+.ticker span {
+  display: inline-block; padding: .3rem 0 .3rem 100%;
+  animation: shop-marquee 16s linear infinite;
+}
+@keyframes shop-marquee { to { transform: translateX(-100%); } }
+.item { position: relative; border: 2px outset #4a5866; }
+.item .price {
+  display: inline-block; background: #ffe94a; color: #c00;
+  font: bold 14px Verdana, sans-serif; padding: .15rem .5rem;
+  border-radius: 2px; transform: rotate(-2deg);
+}
+.item .price .vat { color: #a33; font-weight: normal; font-size: 11px; }
+.sticker {
+  position: absolute; top: -.65rem; right: -.4rem;
+  font: bold 12px Verdana, sans-serif; padding: .2rem .55rem;
+  border-radius: 999px; transform: rotate(8deg);
+}
+.sticker.sale { background: #e33; color: #ffe94a; animation: shop-blink 1.2s steps(1) infinite; }
+.sticker.neu {
+  background: #ffe94a; color: #c00; transform: rotate(-7deg);
+  font-family: 'Comic Sans MS', 'Comic Sans', Verdana, sans-serif;
+}
+.comic { font-family: 'Comic Sans MS', 'Comic Sans', cursive; }
+@keyframes shop-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .ticker span { animation: none; padding-left: 0; }
+  .sticker.sale { animation: none; }
+}
