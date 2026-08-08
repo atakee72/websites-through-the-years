@@ -31,9 +31,20 @@
     padding: 0 1rem;
   }
   header {
-    max-width: 62rem; margin: 0 auto; padding: 4rem 0 2.5rem;
+    max-width: 62rem; margin: 0 auto; padding: 2.5rem 0 2.5rem;
     border-bottom: 1px solid #2c3640;
   }
+  nav.top {
+    display: flex; flex-wrap: wrap; gap: 1.25rem 1.75rem;
+    font: bold 12px Verdana, sans-serif;
+    letter-spacing: .08em; text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+  nav.top a {
+    color: var(--green); text-decoration: none;
+    border-bottom: 1px dotted var(--green); padding-bottom: .15rem;
+  }
+  nav.top a:hover { color: var(--amber); border-color: var(--amber); }
   h1 {
     font-size: clamp(1.8rem, 5vw, 3rem);
     font-weight: normal; letter-spacing: .02em;
@@ -175,27 +186,23 @@
   }
   .badges { display: inline-flex; flex-wrap: wrap; gap: .75rem; }
   .badges img { width: 88px; height: 31px; display: block; }
-  .gb-call { margin-top: 1.25rem; font: bold 13px Verdana, sans-serif; }
-  .gb-call .new {
-    color: var(--bg); background: var(--green);
-    padding: .1rem .5rem; border-radius: 2px; margin-right: .5rem;
-    animation: blink 1.2s steps(1) infinite;
-  }
-  .gb-call a { color: var(--amber); }
-  .blink { animation: blink 1.2s steps(1) infinite; color: var(--green); }
-  @keyframes blink { 50% { opacity: 0; } }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>websites through the years<span class="blink">▌</span></h1>
+  <nav class="top">
+    <a href="guestbook.html">Sign the guestbook</a>
+    <a href="links.html">The links page</a>
+    <a href="restoration-lab.html">The restoration lab</a>
+    <a href="#curators-note">Curator's note</a>
+  </nav>
+  <h1>websites through the years</h1>
   <p class="tagline">Five websites I built between <b>1999</b> and <b>2013</b> — three lost when
   their hosts died and recovered from the <b>Wayback Machine</b>, two rescued from Blogger
   while still alive. A personal museum of the early web: <b>&lt;font&gt;</b> tags, hit counters,
   image maps and all — imperfections deliberately included; the
   <a href="#curators-note">curator's note</a> below tells you what to expect inside.</p>
-  <p class="gb-call"><span class="new">NEW!</span> <a href="guestbook.html">Sign the guestbook by clicking here!</a></p>
 </header>
 
 <main>
