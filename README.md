@@ -163,6 +163,9 @@ posting address and the admin email) redacted before publishing.
   Wayback captures of the sites the curator remembers visiting (Warwick,
   Ankara & Berlin, 1998–2007) and the famous classics, plus the handful
   that are still alive at their original addresses.
+- `shop.html` — the museum's gift shop: fully stocked since 1999, never
+  open. All prices in Deutsche Mark, orders by fax only; the fax was
+  unplugged in 2003. Nothing is for sale — the shop is itself an exhibit.
 - The recovery crawlers are published as
   [website-rescue-kit](https://github.com/atakee72/website-rescue-kit).
 

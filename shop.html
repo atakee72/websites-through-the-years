@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The museum shop · websites through the years</title>
+<meta name="description" content="The museum's gift shop — fully stocked since 1999, never open. All prices in Deutsche Mark; orders by fax only.">
+<link rel="stylesheet" href="assets/museum.css">
+</head>
+<body>
+
+<div class="wrap">
+
+<nav class="top">
+  <a href="index.html">← The museum</a>
+  <a href="guestbook.html">Sign the guestbook</a>
+  <a href="links.html">The links page</a>
+  <a href="restoration-lab.html">The restoration lab</a>
+</nav>
+
+<header class="plaquehead">
+  <span class="year">est. 1999 · never opened</span>
+  <h1>The museum shop</h1>
+  <p class="host">alle Preise in DM · Bestellung per Fax</p>
+</header>
+
+<section>
+  <h2>Exit through the gift shop</h2>
+  <p>Every proper museum exits through one, and this museum is nothing if not
+  proper. The shop has been fully stocked since 1999 and open since never.
+  All prices are in Deutsche Mark, a currency last accepted in 2002 —
+  which has done wonders for our returns policy.</p>
+</section>
+
+<section>
+  <h2>The catalogue</h2>
+  <div class="catalog">
+    <div class="item">
+      <h3>The visitor-counter T-shirt</h3>
+      <p>“You are visitor № 018735” across the chest. Every shirt
+      individually numbered; no two visitors alike.</p>
+      <span class="price">DM 29,99 <span class="vat">inkl. MwSt.</span></span>
+    </div>
+    <div class="item">
+      <h3>The complete homepage on 3.5″ floppy</h3>
+      <p>1.44 MB — the whole site fits twice. Rainbow lettering included
+      at no extra charge.</p>
+      <span class="price">DM 9,99 <span class="vat">inkl. MwSt.</span></span>
+    </div>
+    <div class="item">
+      <h3>The 56k handshake — cassette single</h3>
+      <p>The full connection tone, both movements. B-side: busy signal
+      (12 min.).</p>
+      <span class="price">DM 14,99 <span class="vat">inkl. MwSt.</span></span>
+    </div>
+    <div class="item">
+      <h3>88×31 badge sticker sheet</h3>
+      <p>Best viewed on any surface. Includes one blank badge for the
+      site you never finished.</p>
+      <span class="price">DM 4,99 <span class="vat">inkl. MwSt.</span></span>
+    </div>
+    <div class="item">
+      <h3>UNDER CONSTRUCTION poster, A1</h3>
+      <p>Museum-grade print of the classic animated GIF, permanently
+      mid-frame. Hangs unfinished since 1999.</p>
+      <span class="price">DM 19,99 <span class="vat">inkl. MwSt.</span></span>
+    </div>
+    <div class="item">
+      <h3>ICQ doorbell</h3>
+      <p>Plays <i>uh-oh!</i> when someone is at the door. Batteries not
+      included since 2001.</p>
+      <span class="price">DM 24,99 <span class="vat">inkl. MwSt.</span></span>
+    </div>
+    <div class="item">
+      <h3>Cinderella's photo frame — replica</h3>
+      <p>Faithful copy of the museum's most famous empty frame. Photo not
+      included. The photo was never included.</p>
+      <span class="price">DM 12,99 <span class="vat">inkl. MwSt.</span></span>
+    </div>
+    <div class="item">
+      <h3>Baklava, one tray</h3>
+      <p>Family recipe from the 1999 homepage, printed on dot-matrix,
+      perforated edges attached. Baking is the visitor's responsibility.</p>
+      <span class="price">DM 2,99 <span class="vat">inkl. MwSt.</span></span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Bestellung</h2>
+  <form class="order" id="order">
+    <label for="o-name">Name</label>
+    <input id="o-name" type="text" autocomplete="off">
+    <label for="o-item">Artikel</label>
+    <select id="o-item">
+      <option>The visitor-counter T-shirt — DM 29,99</option>
+      <option>The complete homepage on 3.5″ floppy — DM 9,99</option>
+      <option>The 56k handshake — cassette single — DM 14,99</option>
+      <option>88×31 badge sticker sheet — DM 4,99</option>
+      <option>UNDER CONSTRUCTION poster, A1 — DM 19,99</option>
+      <option>ICQ doorbell — DM 24,99</option>
+      <option>Cinderella's photo frame — replica — DM 12,99</option>
+      <option>Baklava, one tray — DM 2,99</option>
+    </select>
+    <button class="enter" type="submit">Bestellen per Fax →</button>
+  </form>
+  <div id="faxout">
+    <p>Ihre Bestellung wurde per Fax übermittelt…</p>
+    <p class="dead">Kein Anschluss unter dieser Nummer.</p>
+    <p>The shop's fax machine was unplugged in 2003; no order has arrived
+    since. Lieferzeit thereafter: 6 – 8 Wochen.</p>
+  </div>
+  <noscript><p class="smallprint">JavaScript is required in order to not
+  order.</p></noscript>
+</section>
+
+<section>
+  <p class="smallprint">Nothing in this shop exists, nothing can be ordered,
+  and no Deutsche Mark are accepted — here or anywhere else since 2002.
+  The gift shop is itself an exhibit. Kein Gewerbe.</p>
+</section>
+
+<p class="doorway"><a class="enter" href="index.html">Back to the museum →</a></p>
+
+<footer><a href="index.html">websites through the years</a> — a personal museum of the early web</footer>
+
+</div>
+
+<script>
+(function () {
+  // the order form goes nowhere: no action, no request, no data leaves the page
+  var form = document.getElementById('order');
+  var out = document.getElementById('faxout');
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    form.style.display = 'none';
+    out.style.display = 'block';
+  });
+})();
+</script>
+
+</body>
+</html>
