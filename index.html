@@ -186,6 +186,14 @@
   }
   .badges { display: inline-flex; flex-wrap: wrap; gap: .75rem; }
   .badges img { width: 88px; height: 31px; display: block; }
+  .gb-call { margin-top: 1.25rem; font: bold 13px Verdana, sans-serif; }
+  .gb-call .new {
+    color: var(--bg); background: var(--green);
+    padding: .1rem .5rem; border-radius: 2px; margin-right: .5rem;
+    animation: blink 1.2s steps(1) infinite;
+  }
+  .gb-call a { color: var(--amber); }
+  @keyframes blink { 50% { opacity: 0; } }
 </style>
 </head>
 <body>
@@ -203,6 +211,7 @@
   while still alive. A personal museum of the early web: <b>&lt;font&gt;</b> tags, hit counters,
   image maps and all — imperfections deliberately included; the
   <a href="#curators-note">curator's note</a> below tells you what to expect inside.</p>
+  <p class="gb-call"><span class="new">NEW!</span> <a href="guestbook.html">Sign the guestbook by clicking here!</a></p>
 </header>
 
 <main>
