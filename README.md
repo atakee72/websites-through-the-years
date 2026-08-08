@@ -111,6 +111,12 @@ came to be). [Live original](https://tbb-wissenschaftsforum.blogspot.com/)
   archive tree, labels, report-abuse) was re-wired with a small local script —
   its original Blogger JS was stripped with the rest. Sections render fully
   expanded; the now-purposeless "show more" pills are hidden.
+- Two later touch-ups (2026-08-08, user-requested): the @t@kee's-blog theme's
+  "home" nav link — which originally pointed at gmail.com, of all places
+  (preserved in `data-original`) — was re-pointed at the exhibit's own
+  index so visitors can navigate back; and one scheme-relative live link
+  (`//www.blogger.com/home`, in a 2010 test post) that had slipped past the
+  original sealing was disabled like all other outbound links.
 - Some embedded images had already been lost by Blogger's own image proxy
   while the blogs were live (the proxy 404s even on the originals). Their
   references now point at an intentionally absent local path — still shown as
