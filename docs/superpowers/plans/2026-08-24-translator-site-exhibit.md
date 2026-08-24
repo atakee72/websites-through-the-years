@@ -57,6 +57,18 @@ fetch_nearest() {  # fetch_nearest <url> <outfile> <anchor-ts>
 **Interfaces:**
 - Produces: a locally browsable `ercan-atak-2015/index.html` whose relative links reach the other captured pages; later tasks link to `ercan-atak-2015/index.html`.
 
+- [ ] **Step 0: Test-crawl first — learn the kit's actual behavior**
+
+The steps below assume things the kit's README doesn't promise: that `/` is saved as `index.html`, that `%20` URLs become space-filenames on disk, whether links get rewritten at all. Verify before the full run:
+
+```bash
+cd /home/atakee/projects/eski-web-sayfalarim
+python3 ~/projects/website-rescue-kit/rescue-wayback.py 20151220181045 "http://www.ercan-atak.de/" /tmp/tx-test 5   # 4th arg caps fetches
+find /tmp/tx-test -type f | head -20
+```
+
+Read the saved front page's link forms, note the root filename and name-decoding behavior, skim the script's source if anything is unclear (`~/projects/website-rescue-kit/rescue-wayback.py`), then adapt Steps 2–4's filenames/paths to what the kit actually produces. Delete `/tmp/tx-test`.
+
 - [ ] **Step 1: Crawl from the anchor**
 
 ```bash
@@ -94,7 +106,7 @@ Check how internal links are written: `grep -ohE 'href="[^"]*"' ercan-atak-2015/
 sed -i 's|href="https\?://\(www\.\)\?ercan-atak\.de/|href="|g' ercan-atak-2015/*.html
 ```
 
-Do the same for `src=` if needed. Keep a note of the exact sed commands used — they go into README provenance in Task 6. External links (other domains) stay untouched.
+Do the same for `src=`, `<link href=…>` (stylesheets/canonical), and CSS `url(…)` inside `onewebstatic/*.css` if they carry the absolute domain — check with `grep -oE '(url\(|href=|src=)["'"'"']?https?://(www\.)?ercan-atak\.de[^")'"'"' ]*' -r .`. Keep a note of the exact sed commands used — they go into README provenance in Task 6. External links (other domains) stay untouched.
 
 - [ ] **Step 5: Verify hermetics of the era + WP gate + charset**
 
@@ -148,6 +160,17 @@ v2's page set is whatever its front page links to — it may differ from v1's (n
 
 **Judgment call to document:** if a URL genuinely serves both eras, its capture nearest THIS anchor belongs here; nearest the 2015 anchor belongs in Task 1's folder. List any such calls for the provenance notes.
 
+- [ ] **Step 2b: Version-bleed check — diff the two exhibits**
+
+"Nearest capture to the 2019 anchor" can silently fetch a 2016 file when no 2019-era capture exists — v1-era design inside the v2 exhibit. Compare:
+
+```bash
+cd /home/atakee/projects/eski-web-sayfalarim
+for f in ercan-atak-2019/*.html; do b=$(basename "$f"); [ -f "ercan-atak-2015/$b" ] && { cmp -s "$f" "ercan-atak-2015/$b" && echo "IDENTICAL: $b" || echo "differs: $b"; }; done
+```
+
+For every IDENTICAL (or visibly v1-era) page in the v2 folder, record its actual capture timestamp (from the crawler's log/output). Do NOT silently keep or delete — these go on a short list for the curator's preview round (options there: keep with a provenance note, or drop the page from v2 and let its link fall dead). The v2 front page itself must NOT be identical to v1's — if it is, the crawl anchored wrong; stop and re-check the anchor fetch.
+
 - [ ] **Step 3: Local-browsability surgery + charset, same rules as Task 1 Steps 4–5**
 
 Same sed pattern (domain-absolute → relative), same WP/wayback/charset gates, same record-keeping.
@@ -172,7 +195,7 @@ git add ercan-atak-2019 && git commit -m "Recover ercan-atak.de v2 (2019) from t
 
 - [ ] **Step 1: Capture both landing pages at desktop width**
 
-Serve repo on 8765. playwright-cli session `tx3`, viewport 1280×900: screenshot `http://localhost:8765/ercan-atak-2015/index.html` and `http://localhost:8765/ercan-atak-2019/index.html`. Screenshots land in `.playwright-cli/` — move them:
+Serve repo on 8765. playwright-cli session `tx3`, viewport 1280×900: screenshot `http://localhost:8765/ercan-atak-2015/index.html` and `http://localhost:8765/ercan-atak-2019/index.html`. Known gotcha: opening a new page resets the viewport — re-apply the resize after each `open` before shooting. Screenshots land in `.playwright-cli/` — move them:
 
 ```bash
 mv .playwright-cli/<shot1>.png assets/ercan-atak-2015.png
@@ -227,22 +250,22 @@ git commit -m "Era screenshots for the translator-site exhibit"
 
 <section>
   <h2>The story</h2>
-  <p>The blogs in this museum fall silent in 2013. Here is why: the webmaster had
-  become a translator and interpreter, and in 2015 the office got what every
-  business got in 2015 — a website, built in an afternoon on One.com's site
-  builder. Version one had a face photo, a services page, customer reviews, and
-  a few links that led nowhere in particular. By 2019, version two had grown up:
-  content completed, Impressum and all.</p>
+  <p>The blogs in this museum fall silent in 2013. Here is why: I had become a
+  translator and interpreter, and in 2015 my office got what every business got
+  in 2015 — a website, built on One.com's site builder. Version one had my face
+  photo, a services page, customer reviews, and a few links that led nowhere in
+  particular. By 2019, version two had grown up: content completed, Impressum
+  and all.</p>
   <p>Then came a third life this museum deliberately does not exhibit: late in
-  2019 a WordPress template moved in — Divi, WooCommerce, the works — which the
-  translator, in his own words, couldn't use properly for missing developer
-  knowledge. Its test posts and demo shop pages still haunt the archive. That
-  sentence — <i>missing developer knowledge</i> — is the seed of everything in
-  the museum's next wing. The untamed template stood watch until the site ended,
+  2019 I moved the site onto a WordPress template — Divi, WooCommerce, the
+  works — which I couldn't use properly, for missing developer knowledge. Its
+  test posts and demo shop pages still haunt the archive. That phrase —
+  <i>missing developer knowledge</i> — is the seed of everything in the
+  museum's next wing. The untamed template stood watch until the site ended,
   silently, in 2023.</p>
-  <p>The domain found its way back to its owner and today hosts his developer
-  portfolio. And one thing never stopped: the translating. Of everything in this
-  museum, this is the only exhibit whose business is still open — it just
+  <p>The domain found its way back to me and today hosts my developer
+  portfolio. And one thing never stopped: the translating. Of everything in
+  this museum, this is the only exhibit whose business is still open — it just
   doesn't have a website anymore.</p>
 </section>
 
@@ -317,11 +340,10 @@ git add plaques/translator.html && git commit -m "Curator's plaque for the trans
     <div class="meta">
       <span class="year">2015 – 2019</span>
       <h2><a href="plaques/translator.html">ercan-atak.de · the translator years</a></h2>
-      <p>Why the blogs fell silent: the webmaster had become a translator and
-      interpreter, and the office got a website — built on One.com's site
-      builder, twice. Version one (2015) with its face photo and dummy links;
-      version two (2019), all grown up. Same domain, today: the developer
-      portfolio.</p>
+      <p>Why the blogs fell silent: I had become a translator and interpreter,
+      and my office got a website — built on One.com's site builder, twice.
+      Version one (2015) with my face photo and a few dummy links; version two
+      (2019), all grown up. Same domain, today: my developer portfolio.</p>
       <div class="chips">
         <span class="chip">One.com Web Editor</span>
         <span class="chip">two versions</span>
