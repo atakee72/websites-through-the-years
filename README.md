@@ -1,6 +1,6 @@
 # websites through the years
 
-My personal websites from 1999 to 2013 — three recovered from the
+My personal websites from 1999 to 2019 — four recovered from the
 [Wayback Machine](https://web.archive.org), two Blogger blogs rescued alive,
 and one page found in the rubble — preserved as they were built:
 `<font>` tags, hit counter, guestbook and all.
@@ -128,6 +128,69 @@ came to be). [Live original](https://tbb-wissenschaftsforum.blogspot.com/)
   broken (authentic), but without the dozens of slow round-trips to Google
   that made pages crawl.
 
+### 6. ercan-atak.de — the translator years (~2015–2019)
+
+`ercan-atak-2015/` and `ercan-atak-2019/` — the author's translator and
+interpreter website in its two One.com Web Editor incarnations: version one
+(2015; face photo, services, customer reviews, a few dummy links that never
+led anywhere) and version two (2019; content completed, Impressum and all).
+One plaque, two doors. The site's third life — a WordPress/Divi template the
+author couldn't tame, whose test posts haunt the archive until the domain went
+dark in 2023 — is deliberately not recovered.
+[v1 capture](https://web.archive.org/web/20151220181045/http://www.ercan-atak.de/) ·
+[v2 capture](https://web.archive.org/web/20191024230042/https://www.ercan-atak.de/)
+
+**Provenance / restoration notes**
+
+- Both versions were crawled from the Wayback Machine with the recovery kit,
+  rooted at the bare domain (`http://ercan-atak.de/`, not the `www.` anchor
+  URL literally) — the site's own internal links are host-bare and
+  scheme-relative, and the crawler treats `www.` and bare as different hosts.
+  v1 is anchored to its nearest capture around 20 Dec 2015, v2 around
+  24 Oct 2019; gaps the crawler missed or stalled on were closed with a
+  CDX-nearest-timestamp helper.
+- **Despite the `ercan-atak-2019/` folder name, its recovered content is not
+  a 2019 redesign.** Direct Wayback CDX queries (across every scheme/`www.`
+  host variant) show the front page and all eight subpages plus the blog
+  page share one underlying snapshot: the front page kept getting
+  re-crawled by Wayback for years (letting it land a near-anchor Dec 2019
+  capture), while every subpage's last-ever capture is 25–26 Oct 2016 — no
+  2017, 2018 or 2019 capture of them exists anywhere in the archive. A
+  byte-diff confirms the front page's content (hero, nav, an Airbnb listing
+  widget, Google Fonts links) was already present in the 2016 captures. So
+  the whole v2 exhibit is effectively frozen at ~2016 content; the
+  ~3-year timestamp spread reflects Wayback's capture cadence, not a design
+  change. The real content difference from v1 (Dec 2015) — mainly the
+  Airbnb widget — dates from a genuine site update sometime in 2016.
+- Both versions' internal links (scheme-relative `//ercan-atak.de/...` and a
+  handful of absolute `http(s)://[www.]ercan-atak.de/...` forms, plus CSS
+  `url()` references) were rewritten to relative paths for local
+  browsability. v1's rewrite left a self-inflicted doubled-path bug in its
+  CSS (`url()` values resolving to `onewebstatic/onewebstatic/...`, since
+  the CSS files themselves live inside `onewebstatic/`); caught via a
+  playwright console 404 and fixed with a follow-up sed. v2's surgery
+  applied that same fix proactively, so it never hit the bug.
+- The href-rewrite sed for v1 also touched a couple of `data-href=`
+  attributes on dead share widgets, as a harmless substring-match side
+  effect (both were already non-functional, and emptying them matches how
+  the page treats other dead widgets elsewhere); v2's markup had no such
+  attributes, so nothing was touched there.
+- v2's `Kundenrezensionen.html` references a customer photo the crawler
+  saved under an invented, hash-suffixed `.html` filename (its own
+  query-string-hashing convention for `onewebmedia/taxi.png?etag=...`) even
+  though the bytes are a valid PNG. Renamed to `onewebmedia/taxi.png` (bytes
+  untouched) and the one `<img>` reference repointed, so it renders instead
+  of serving with the wrong content type.
+- v1 permanently lost 26 assets — a mix of stylesheets, JS widgets and a
+  handful of review/portrait images (e.g. `onewebstatic/f2c24eaaca.css`,
+  `onewebstatic/9573d5b448-caglar.jpeg`) — confirmed by repeated CDX lookups
+  to have no Wayback capture anywhere, not a fetch or rate-limit artifact.
+  Their references are left broken in the HTML/CSS, the authentic look for
+  a lost asset. v2 had zero permanent losses: every one of its 43
+  referenced assets was recovered.
+- No WordPress-era content was recovered (verified: no `wp-content`
+  references in either folder).
+
 ## Lost & found
 
 ### Cinderellas Fotoalbum (GeoCities, ~2001–2002)
@@ -198,7 +261,7 @@ left off.
 ## Landing page
 
 `index.html` — a hand-written, dependency-free page (inline CSS, no build step)
-presenting the five sites in IE-window frames with era screenshots
+presenting the six sites in IE-window frames with era screenshots
 (`assets/`), a timeline connecting the eras, and links to each exhibit's curator
 plaque. It includes a **curator's note** explaining what visitors will
 encounter: fixed-width non-responsive layouts, permanently lost images, dead
