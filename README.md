@@ -204,7 +204,9 @@ dark in 2023 — is deliberately not recovered.
   Lichtenberg quote block was positioned by the site builder so that it
   overlapped the closing paragraphs — already so in the Wayback Machine's
   own rendering of the original. Its `top` offset was shifted 140px down
-  so quote and attribution sit below the contact strip. Nothing else moved.
+  so quote and attribution sit below the contact strip, and the Airbnb
+  listing's column was nudged down likewise so quote, attribution and ad
+  no longer collide. Nothing else moved.
 - The author's portrait on v1 (index and *zur person*) is displayed with
   drag and text-selection disabled, and those two pages suppress the
   right-click menu entirely (2026, at the author's request) — a
