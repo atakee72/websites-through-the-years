@@ -193,6 +193,13 @@ dark in 2023 — is deliberately not recovered.
   referenced assets was recovered.
 - No WordPress-era content was recovered (verified: no `wp-content`
   references in either folder).
+- Curator's redaction (2026, at the author's request): both Impressum
+  pages carried the office's tax number, VAT-ID, bank details (BLZ,
+  account number, IBAN, BIC), phone numbers and the street address (v1) /
+  PO box (v2). These values are masked with █ blocks — layout untouched,
+  the redaction visible as such. The originals remain in the Wayback
+  captures the plaque links to; the museum simply declines to republish
+  them.
 - Both exhibits made live external requests at crawl time that a later
   review caught and closed. Google Fonts stylesheets (Quantico, Averia
   Serif Libre, Varela Round, Rokkitt, and — front pages only — Fasthand)
