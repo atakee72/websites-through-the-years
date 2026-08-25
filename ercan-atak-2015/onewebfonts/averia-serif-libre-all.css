@@ -1,0 +1,48 @@
+/* latin */
+@font-face {
+  font-family: 'Averia Serif Libre';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Averia Serif Libre Light'), local('AveriaSerifLibre-Light'), url(averia-serif-libre-all-yvITAdr5D1nlsdFs.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Averia Serif Libre';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Averia Serif Libre Regular'), local('AveriaSerifLibre-Regular'), url(averia-serif-libre-all-fdtF30xa_Erw0zAz.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Averia Serif Libre';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Averia Serif Libre Bold'), local('AveriaSerifLibre-Bold'), url(averia-serif-libre-all-yvITAdr5D1nlsdFs.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Averia Serif Libre';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Averia Serif Libre Light Italic'), local('AveriaSerifLibre-LightItalic'), url(averia-serif-libre-all-YOLFXyye4sZt6AZk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Averia Serif Libre';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Averia Serif Libre Italic'), local('AveriaSerifLibre-Italic'), url(averia-serif-libre-all-o9qhvK9iT5iDWfyh.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Averia Serif Libre';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Averia Serif Libre Bold Italic'), local('AveriaSerifLibre-BoldItalic'), url(averia-serif-libre-all-YOLFXyye4sZt6AZk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}

@@ -170,17 +170,20 @@ dark in 2023 — is deliberately not recovered.
   the CSS files themselves live inside `onewebstatic/`); caught via a
   playwright console 404 and fixed with a follow-up sed. v2's surgery
   applied that same fix proactively, so it never hit the bug.
-- The href-rewrite sed for v1 also touched a couple of `data-href=`
-  attributes on dead share widgets, as a harmless substring-match side
-  effect (both were already non-functional, and emptying them matches how
-  the page treats other dead widgets elsewhere); v2's markup had no such
-  attributes, so nothing was touched there.
-- v2's `Kundenrezensionen.html` references a customer photo the crawler
-  saved under an invented, hash-suffixed `.html` filename (its own
-  query-string-hashing convention for `onewebmedia/taxi.png?etag=...`) even
-  though the bytes are a valid PNG. Renamed to `onewebmedia/taxi.png` (bytes
-  untouched) and the one `<img>` reference repointed, so it renders instead
-  of serving with the wrong content type.
+- The href-rewrite sed for v1 also touched one `data-href=""` attribute
+  on the dead Facebook share-button widget, as a harmless substring-match
+  side effect (it was already non-functional, and emptying it matches how
+  the page treats other dead widgets elsewhere); the adjacent emptied
+  attribute is a plain `href=""` on a `g:plus` element, not another
+  `data-href`. v2's markup had no such attributes, so nothing was touched
+  there.
+- v2's `Kundenrezensionen.html` references a customer's logo (the taxi.eu
+  app) the crawler saved under an invented, hash-suffixed `.html` filename
+  (its own query-string-hashing convention for
+  `onewebmedia/taxi.png?etag=...`) even though the bytes are a valid PNG.
+  Renamed to `onewebmedia/taxi.png` (bytes untouched) and the one `<img>`
+  reference repointed, so it renders instead of serving with the wrong
+  content type.
 - v1 permanently lost 26 assets — a mix of stylesheets, JS widgets and a
   handful of review/portrait images (e.g. `onewebstatic/f2c24eaaca.css`,
   `onewebstatic/9573d5b448-caglar.jpeg`) — confirmed by repeated CDX lookups
@@ -190,6 +193,31 @@ dark in 2023 — is deliberately not recovered.
   referenced assets was recovered.
 - No WordPress-era content was recovered (verified: no `wp-content`
   references in either folder).
+- Both exhibits made live external requests at crawl time that a later
+  review caught and closed. Google Fonts stylesheets (Quantico, Averia
+  Serif Libre, Varela Round, Rokkitt, and — front pages only — Fasthand)
+  were genuinely localized: each distinct `fonts.googleapis.com` CSS URL
+  was fetched from its nearest Wayback capture into `onewebfonts/`, along
+  with every `fonts.gstatic.com` woff2/ttf file the CSS referenced;
+  v2's one Airbnb listing photo (`a2.muscache.com`) was recovered the same
+  way into `onewebmedia/`. Zero font or image losses in either folder —
+  every referenced file was found on a retry after transient fetch
+  failures. Separately, dead or now-unrelated third-party service
+  scripts — the Zopim live-chat bootstrap, Facebook/Google+/Twitter/
+  LinkedIn social-button SDKs, v2's Airbnb embed SDK, and v1's
+  phrasen.com phrase-of-the-day and 24timezones.com clock widgets — were
+  neutralized rather than resurrected: their `<script src>` now points at
+  an intentionally absent `onewebstatic/lost-external-service.js` (the
+  absence is the point, matching the blog exhibits' dead-Blogger-proxy
+  convention), with the real URL preserved in `data-original`; the
+  inline Zopim bootstrap keeps its code byte-identical apart from that
+  one URL swap, flagged with a preceding HTML comment. One inert leftover:
+  v1's 24timezones clock widget also embeds its SWF URL as a plain string
+  inside inline JavaScript (`new SWFObject("http://24timezones.com/...")`),
+  which isn't a `src=`/`href=`/`url()` attribute and so isn't a live
+  request — the `SWFObject` constructor it calls is defined only by the
+  now-neutralized `swfobject.js`, so this code throws and never runs.
+  Left as-is, same authentic-breakage spirit as the rest of the widget.
 
 ## Lost & found
 

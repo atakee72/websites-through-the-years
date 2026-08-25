@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Rokkitt';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Rokkitt'), url(rokkitt-latin-latin-ext-sr63xTucDSbOV6kD.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rokkitt';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Rokkitt Bold'), local('Rokkitt-Bold'), url(rokkitt-latin-latin-ext-Mef17w3J4CtS0lw-bold.ttf) format('truetype');
+}
