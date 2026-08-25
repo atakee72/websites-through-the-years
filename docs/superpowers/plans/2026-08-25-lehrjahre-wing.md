@@ -21,7 +21,7 @@
 - Commit messages: simple, no Claude signature/footer. **Push only on user go-ahead** — the plan ends at a user preview gate.
 - CSS class names in museum.css use the `lj-` prefix (`.catalog`/`.item` are taken by the shop).
 - Capture ports: gonewiththetailwind 4002, finance-logger 4010, dogsnfilms 4003, admin-dashboard 4004, mahalle-v1 4013, mahalle-v2 4014, movie-db 4001, portefeuille 4015. Museum preview: 8765.
-- Workspace (git-ignored via `.superpowers/sdd/.gitignore`): `.superpowers/sdd/lehrjahre/` — inventory shots live here; tools go in `.superpowers/sdd/lehrjahre/tools/`. Scratch clones go under the session scratchpad, NOT the repo.
+- Workspace (git-ignored via `.superpowers/sdd/.gitignore`): `.superpowers/sdd/lehrjahre/` — inventory shots live here; tools go in `.superpowers/sdd/lehrjahre/tools/`. Scratch clones go under the session scratchpad, NOT the repo. Every task's shell steps assume `SCRATCH=/tmp/claude-1000/-home-atakee-projects-eski-web-sayfalarim/48efd0d1-7db7-47bf-b550-98f7a8711c2b/scratchpad` — export it (with that literal value) at the start of each step block that uses it.
 
 ---
 
@@ -33,7 +33,7 @@
 - Create: venv at `.superpowers/sdd/lehrjahre/tools/venv/`
 
 **Interfaces:**
-- Produces: `venv/bin/python capture_face.py --base URL --out DIR --routes R... [--follow-prefix P]... [--dead-pattern REGEX]... [--settle-ms N] [--keep-scripts] [--backlink REL --exhibit-title T] [--special 'ROUTE|CLICK_SELECTOR|OUTFILE']...` — captures each route to `DIR/<route>.html` (`/`→`index.html`, `/a/b`→`a/b.html`), assets under `DIR/assets/`. Also `seal_check.sh DIR` → exits 0 printing `SEALED: DIR` or 1 listing leaks. All later face tasks consume exactly these.
+- Produces: `venv/bin/python capture_face.py --base URL --out DIR --routes R... [--follow-prefix P]... [--dead-pattern REGEX]... [--settle-ms N] [--keep-scripts] [--backlink REL --exhibit-title T] [--special 'ROUTE|CLICK_SELECTOR|OUTFILE']...` — captures each route to `DIR/<route>.html` (`/`→`index.html`, `/a/b`→`a/b.html`), assets under `DIR/assets/`. `--backlink` is relative to the face's ROOT folder (the tool prepends `../` per page depth) — faces at `lehrjahre/<slug>/` therefore always pass `../../lehrjahre.html`. Also `seal_check.sh DIR` → exits 0 printing `SEALED: DIR` or 1 listing leaks. All later face tasks consume exactly these.
 
 - [ ] **Step 1: Create the venv**
 
@@ -191,8 +191,16 @@ class Capture:
                        "dns-prefetch"):
                 l.decompose()
         for b in soup.find_all("base"): b.decompose()
+        for ns in soup.find_all("noscript"): ns.decompose()  # next/image emits external <img> fallbacks here
         for f in soup.find_all("iframe"):
             f.replace_with(Comment(f" iframe removed by curator; original src: {f.get('src','?')} "))
+        for form in soup.find_all("form"):
+            if form.get("action"):
+                form["data-original-action"] = form["action"]
+            form["action"] = "#"
+        for m in soup.find_all("meta", content=True):
+            if m["content"].startswith(("http://", "https://", "//")):
+                m["data-original"] = m["content"]; m["content"] = ""
 
         # asset-bearing attributes
         for tag, attr in [(t, a) for a in ("src", "poster")
@@ -331,9 +339,10 @@ if __name__ == "__main__":
 #!/bin/bash
 # usage: seal_check.sh <face-dir> — exit 0 = sealed, 1 = leaks listed
 d="$1"; fail=0
-grep -rEn 'src="https?:|href="https?:|src="//|href="//' "$d" --include='*.html' && fail=1
+grep -rEn 'src="https?:|href="https?:|src="//|href="//|action="https?:|action="//' "$d" --include='*.html' && fail=1
 grep -rEn "url\(['\"]?(https?:)?//" "$d" && fail=1
 grep -rln 'srcset=' "$d" && fail=1
+grep -rln '<noscript' "$d" --include='*.html' && fail=1
 if [ $fail -eq 0 ]; then echo "SEALED: $d"; else echo "LEAKS in $d"; exit 1; fi
 ```
 `chmod +x seal_check.sh`.
@@ -349,20 +358,25 @@ In the scratchpad, create `fixture/index.html`:
 <style>body { background-image: url(https://example.invalid/bg.png); }</style>
 </head><body>
 <img src="local.png"><img src="https://example.invalid/dead.jpg" srcset="x 1x">
-<a href="/page2">page two</a> <a href="https://example.com/out">out</a>
+<a href="/page2.html">page two</a> <a href="https://example.com/out">out</a>
+<form action="https://example.com/submit"><input name="q"></form>
+<noscript><img src="https://example.invalid/noscript.jpg"></noscript>
 <script>console.log("inline")</script>
 </body></html>
 ```
-plus `fixture/page2.html` (`<html><body><a href="/">home</a></body></html>`) and any small PNG as `fixture/local.png`. Serve: `python3 -m http.server 4999 -d fixture &`. Run:
+plus `fixture/page2.html` (`<html><body><a href="/">home</a></body></html>`) and a 1-px PNG:
+`.superpowers/sdd/lehrjahre/tools/venv/bin/python -c "from PIL import Image; Image.new('RGB',(1,1)).save('fixture/local.png')"`.
+Serve: `python3 -m http.server 4999 -d fixture &`. Run:
 
 ```bash
-venv/bin/python capture_face.py --base http://localhost:4999 --out /tmp/claude-1000/-home-atakee-projects-eski-web-sayfalarim/*/scratchpad/face-test \
+venv/bin/python capture_face.py --base http://localhost:4999 \
+  --out "$SCRATCH/face-test" \
   --routes / --follow-prefix /page2 --backlink ../../lehrjahre.html --exhibit-title "fixture"
 ```
 
 - [ ] **Step 5: Verify the fixture capture**
 
-Assert all of: `face-test/index.html` and `face-test/page2.html` exist (crawl worked); no `<script>` in either; Google Fonts CSS + its woff2 are in `face-test/assets/` and the `<link>` points there; the two dead example.invalid refs point at `assets/lost-external-image.*` with `data-original`; the internal link reads `page2.html`, the external one `href="#" data-original=...`; the curator bar is first in `<body>`; `./seal_check.sh face-test` prints `SEALED`. Kill the fixture server. Fix the tool until all assertions hold.
+Assert all of: `face-test/index.html` and `face-test/page2.html` exist (crawl worked — `/page2.html` matched `--follow-prefix /page2`); no `<script>` and no `<noscript>` in either; Google Fonts CSS + its woff2 are in `face-test/assets/` and the `<link>` points there; the dead example.invalid img points at `assets/lost-external-image.*` with `data-original` and no `srcset`; the inline-style `url(https://…)` became a dead local ref; the form has `action="#"` + `data-original-action`; the internal link reads `page2.html`, the external one `href="#" data-original=...`; the curator bar is first in `<body>`; `./seal_check.sh face-test` prints `SEALED`. Kill the fixture server. Fix the tool until all assertions hold.
 
 - [ ] **Step 6: No commit** — the toolkit is git-ignored workspace. Report the fixture-test results as the task's evidence.
 
@@ -380,7 +394,7 @@ Assert all of: `face-test/index.html` and `face-test/page2.html` exist (crawl wo
 - [ ] **Step 1: GoneWithTheTailwind — clone & serve**
 
 ```bash
-S=/tmp/claude-1000/-home-atakee-projects-eski-web-sayfalarim/*/scratchpad; cd $S
+cd "$SCRATCH"
 gh repo clone atakee72/GoneWithTheTailwind---A-blogger-frontpage-with-Tailwind gwtt -- --depth 1
 python3 -m http.server 4002 -d gwtt &
 ```
@@ -394,7 +408,7 @@ cd /home/atakee/projects/eski-web-sayfalarim/.superpowers/sdd/lehrjahre/tools
 venv/bin/python capture_face.py --base http://localhost:4002 \
   --out /home/atakee/projects/eski-web-sayfalarim/lehrjahre/gonewiththetailwind \
   --routes / --keep-scripts --settle-ms 1500 \
-  --backlink lehrjahre.html --exhibit-title "GoneWithTheTailwind (2023)"
+  --backlink ../../lehrjahre.html --exhibit-title "GoneWithTheTailwind (2023)"
 ```
 Then kill the 4002 server. Verify: `./seal_check.sh ../../../../lehrjahre/gonewiththetailwind` → SEALED. Note: the pinned unpkg Tailwind v2 stylesheet and Google Fonts must appear localized in `assets/`; the never-committed `styles.css` 404 stays a same-host dead ref (authentic).
 
@@ -405,7 +419,7 @@ Serve repo root on 8765, open `http://localhost:8765/lehrjahre/gonewiththetailwi
 - [ ] **Step 4: Finance_Logger — copy `public/` as-is, then seal by hand**
 
 ```bash
-cd $S && gh repo clone atakee72/Finance_Logger flog -- --depth 1
+cd "$SCRATCH" && gh repo clone atakee72/Finance_Logger flog -- --depth 1
 cp -r flog/public /home/atakee/projects/eski-web-sayfalarim/lehrjahre/finance-logger
 ```
 This face keeps its own compiled local JS (the form works, hermetically — it makes no network calls). Manual seal edits on the copy (never the clone): in `styles.css`, replace the dead Discord background URL with `url(lost-discord-background.png)` (intentionally absent) and add a CSS comment above it: `/* original hotlink, long dead — kept as data: <the-original-cdn.discordapp.com-URL> */`. Grep the whole folder for `http` and `//` in src/href/url() — fix anything found the same way. Add the curator bar (same div as capture_face.py injects, with `href="../../lehrjahre.html"`, title `Finance_Logger (2023)`) as the first element of `<body>` in `index.html`.
@@ -434,7 +448,7 @@ git commit -m "Lehrjahre wing: first two faces, GoneWithTheTailwind and Finance_
 - [ ] **Step 1: Clone, install, run**
 
 ```bash
-cd $S && gh repo clone atakee72/dogsNfilms-catalog-app dnf -- --depth 1
+cd "$SCRATCH" && gh repo clone atakee72/dogsNfilms-catalog-app dnf -- --depth 1
 cd dnf && npm install && npx next dev -p 4003 &
 ```
 Wait until `curl -s -o /dev/null -w '%{http_code}' http://localhost:4003/` prints 200.
@@ -447,7 +461,7 @@ venv/bin/python capture_face.py --base http://localhost:4003 \
   --routes / /films-catalog /dogs-catalog \
   --follow-prefix /films-catalog/ --follow-prefix /dogs-catalog/ \
   --dead-pattern 'shelterbuddy' --settle-ms 2000 \
-  --backlink lehrjahre.html --exhibit-title "dogsNfilms catalog (2023)"
+  --backlink ../../lehrjahre.html --exhibit-title "dogsNfilms catalog (2023)"
 ```
 Expected: ~61 pages (1 home + 2 catalogs + 10 films + ~49 dogs — the exact dog count is whatever the crawl finds; log it). Film posters and carousel images localized into `assets/`; every dog photo → `lost-external-image.*` + `data-original` (they go through `/_next/image?url=...shelterbuddy...`, which the dead-pattern matches on the full URL). Kill the dev server.
 
@@ -474,7 +488,7 @@ git commit -m "Lehrjahre wing: dogsNfilms face — films fed, dog photos authent
 - [ ] **Step 1: Clone, install, run**
 
 ```bash
-cd $S && gh repo clone atakee72/admin-dashboard-with-next.js-and-sass adash -- --depth 1
+cd "$SCRATCH" && gh repo clone atakee72/admin-dashboard-with-next.js-and-sass adash -- --depth 1
 cd adash && npm install && npx next dev -p 4004 &
 ```
 First compile per route is slow (~15–25 s): after the server is up, warm each route with `curl --max-time 60` before capturing.
@@ -486,7 +500,7 @@ venv/bin/python capture_face.py --base http://localhost:4004 \
   --out /home/atakee/projects/eski-web-sayfalarim/lehrjahre/admin-dashboard \
   --routes /home /list /single /login /new_user /new_product / \
   --settle-ms 2500 \
-  --backlink lehrjahre.html --exhibit-title "admin dashboard (2023)"
+  --backlink ../../lehrjahre.html --exhibit-title "admin dashboard (2023)"
 ```
 Pexels avatars, the `/single` hero photo, the icon-library placeholder and the Inter font (next/font serves it same-origin under `/_next/`) all localize. Kill server.
 
@@ -513,7 +527,7 @@ git commit -m "Lehrjahre wing: admin-dashboard face"
 - [ ] **Step 1: Clone, install client, run client only**
 
 ```bash
-cd $S && gh repo clone atakee72/Fullstack-Community-WebApp mh1 -- --depth 1
+cd "$SCRATCH" && gh repo clone atakee72/Fullstack-Community-WebApp mh1 -- --depth 1
 cd mh1/client && npm install && PORT=4013 BROWSER=none npm start &
 ```
 No backend, no Mongo — the empty-forum state is the authentic capture (spec §7).
@@ -524,11 +538,11 @@ No backend, no Mongo — the empty-forum state is the authentic capture (spec §
 venv/bin/python capture_face.py --base http://localhost:4013 \
   --out /home/atakee/projects/eski-web-sayfalarim/lehrjahre/mahalle-v1 \
   --routes / /login /register /landingPage \
-  --settle-ms 12000 \
+  --settle-ms 3000 \
   --special '/|text=Start a debate|index-modal.html' \
-  --backlink lehrjahre.html --exhibit-title "MaHalle v1 (2023)"
+  --backlink ../../lehrjahre.html --exhibit-title "MaHalle v1 (2023)"
 ```
-(`--settle-ms 12000` lets the `localhost:5000` API call fail and the page settle in its caught-error empty state. If the click selector fails, inspect the button's actual text/selector via playwright-cli and adjust — the modal capture is a spec requirement, not optional.) Kill server.
+(`--settle-ms 3000` is plenty — the absent `localhost:5000` backend fails instantly with `ERR_CONNECTION_REFUSED` and the page settles in its caught-error empty state. If the click selector fails, inspect the button's actual text/selector via playwright-cli and adjust — the modal capture is a spec requirement, not optional.) Kill server.
 
 - [ ] **Step 3: Link the modal capture in-page**
 
@@ -557,7 +571,7 @@ git commit -m "Lehrjahre wing: MaHalle v1 face, debate modal included"
 - [ ] **Step 1: Clone, install, dummy env, run**
 
 ```bash
-cd $S && gh repo clone atakee72/Community-Web-Forum-App-with-Next.js mh2 -- --depth 1
+cd "$SCRATCH" && gh repo clone atakee72/Community-Web-Forum-App-with-Next.js mh2 -- --depth 1
 cd mh2
 printf 'MONGODB_URI=mongodb://localhost:59999/none\nNEXTAUTH_SECRET=museum-capture-dummy\nNEXTAUTH_URL=http://localhost:4014\n' > .env.local
 npm install && npx next dev -p 4014 &
@@ -571,7 +585,7 @@ venv/bin/python capture_face.py --base http://localhost:4014 \
   --out /home/atakee/projects/eski-web-sayfalarim/lehrjahre/mahalle-v2 \
   --routes / /register /dashboard /addTopic /userProfile /blog /shop /kalendar \
   --settle-ms 12000 \
-  --backlink lehrjahre.html --exhibit-title "maHalle v2 (2023–2024)"
+  --backlink ../../lehrjahre.html --exhibit-title "maHalle v2 (2023–2024)"
 ```
 `/dashboard` needs its ~10 s Mongoose buffering timeout to elapse before "No topics to display." appears — hence 12 s settle (applies to all routes; slow but correct). Kill server.
 
@@ -597,7 +611,7 @@ git commit -m "Lehrjahre wing: maHalle v2 face — one-word stub pages and all"
 - [ ] **Step 1: Clone, patch Firebase config in the scratch clone only**
 
 ```bash
-cd $S && gh repo clone atakee72/movie-db mdb -- --depth 1
+cd "$SCRATCH" && gh repo clone atakee72/movie-db mdb -- --depth 1
 cd mdb && cat src/config/firebaseConfig.js
 ```
 Read the file; keep its exact export names and structure, replacing ONLY the config values with well-formed dummies:
@@ -629,7 +643,7 @@ Probe which routes render (`/`, `/login`, `/register`, `/about`; protected ones 
 venv/bin/python capture_face.py --base http://localhost:4001 \
   --out /home/atakee/projects/eski-web-sayfalarim/lehrjahre/movie-db \
   --routes / /login /register /about --settle-ms 4000 \
-  --backlink lehrjahre.html --exhibit-title "movie-db (2023) — revived with a dummy key"
+  --backlink ../../lehrjahre.html --exhibit-title "movie-db (2023) — revived with a dummy key"
 ```
 Kill server.
 
@@ -660,7 +674,7 @@ Ask: "Does your original Sanity project for the old portfolio still exist? If ye
 - [ ] **Step 2: Clone + env (fed branch) or patch (shell branch)**
 
 ```bash
-cd $S && gh repo clone atakee72/Developer-Portefeuille-of-Ercan-Atak pfl -- --depth 1
+cd "$SCRATCH" && gh repo clone atakee72/Developer-Portefeuille-of-Ercan-Atak pfl -- --depth 1
 cd pfl
 ```
 **Fed branch:** `printf 'NEXT_PUBLIC_SANITY_PROJECT_ID=<id>\nNEXT_PUBLIC_SANITY_DATASET=<dataset>\n' > .env.local` (scratch clone only).
@@ -685,7 +699,7 @@ Fed branch routes: `/` plus 1–2 blog `/[slug]` routes — discover slugs from 
 venv/bin/python capture_face.py --base http://localhost:4015 \
   --out /home/atakee/projects/eski-web-sayfalarim/lehrjahre/portefeuille \
   --routes <as above> --settle-ms 4000 \
-  --backlink lehrjahre.html --exhibit-title "Developer-Portefeuille (2023–2024)"
+  --backlink ../../lehrjahre.html --exhibit-title "Developer-Portefeuille (2023–2024)"
 ```
 Do NOT capture `/studio` (CMS admin, not visitor content). Kill server.
 
