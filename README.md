@@ -200,6 +200,9 @@ dark in 2023 — is deliberately not recovered.
   the redaction visible as such. The originals remain in the Wayback
   captures the plaque links to; the museum simply declines to republish
   them.
+- The author's portrait on v1 (index and *zur person*) is displayed with
+  right-click, drag and text-selection disabled (2026, at the author's
+  request) — a deterrent, not a lock; the page's look is unchanged.
 - Both exhibits made live external requests at crawl time that a later
   review caught and closed. Google Fonts stylesheets (Quantico, Averia
   Serif Libre, Varela Round, Rokkitt, and — front pages only — Fasthand)
