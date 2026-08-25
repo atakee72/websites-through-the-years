@@ -200,6 +200,11 @@ dark in 2023 — is deliberately not recovered.
   the redaction visible as such. The originals remain in the Wayback
   captures the plaque links to; the museum simply declines to republish
   them.
+- Layout repair on v2's front page (2026, at the author's request): the
+  Lichtenberg quote block was positioned by the site builder so that it
+  overlapped the closing paragraphs — already so in the Wayback Machine's
+  own rendering of the original. Its `top` offset was shifted 140px down
+  so quote and attribution sit below the contact strip. Nothing else moved.
 - The author's portrait on v1 (index and *zur person*) is displayed with
   drag and text-selection disabled, and those two pages suppress the
   right-click menu entirely (2026, at the author's request) — a
