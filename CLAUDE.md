@@ -64,6 +64,12 @@ of exactly that kind were found and sealed 2026-08-08), and
 - Crawler pattern: start from an anchor capture, follow internal links,
   Wayback serves nearest capture per URL. Make it resumable (skip files on
   disk, still parse them for links) and quote non-ASCII URLs.
+- rescue-wayback.py has NO read timeout: when archive.org drops the
+  connection it hangs forever on the dead socket (CLOSE-WAIT). Kill and
+  re-run (resumable), or finish per-file with `curl -s --max-time 45
+  --retry 2` against CDX-picked nearest captures (the translator-exhibit
+  recovery, 2026-08-24/25, did exactly that). Don't `pkill -f`/`pgrep -f`
+  a pattern that appears in your own command line — it matches itself.
 
 ## Possible future work
 
