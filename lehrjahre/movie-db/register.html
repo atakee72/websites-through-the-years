@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#000000" name="theme-color"/>
+<meta content="Web site created using create-react-app" name="description"/>
+<link href="assets/27a8569773-css2.css" rel="stylesheet"/>
+<title>Movie Database Project</title>
+<style>body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 5% 5%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.searchBar {
+  margin: 5px;
+  padding: 5px;
+  color: white;
+}
+
+.posterInternal {
+  width: auto;
+  height: 40vh;
+  object-fit: cover;
+  border-radius: 10px;
+  float: left;
+  padding: 0px;
+  margin: auto;
+  padding: 0 30px 0 20px;  
+}
+
+h3 {
+  padding-left: 20px;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9pbmRleC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTs7Y0FFWTtFQUNaLG1DQUFtQztFQUNuQyxrQ0FBa0M7RUFDbEMsYUFBYTtBQUNmOztBQUVBO0VBQ0U7YUFDVztBQUNiOztBQUVBO0VBQ0UsV0FBVztFQUNYLFlBQVk7RUFDWixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtFQUNaLGlCQUFpQjtFQUNqQixtQkFBbUI7RUFDbkIsV0FBVztFQUNYLFlBQVk7RUFDWixZQUFZO0VBQ1osc0JBQXNCO0FBQ3hCOztBQUVBO0VBQ0Usa0JBQWtCO0FBQ3BCIiwic291cmNlc0NvbnRlbnQiOlsiYm9keSB7XG4gIGZvbnQtZmFtaWx5OiAtYXBwbGUtc3lzdGVtLCBCbGlua01hY1N5c3RlbUZvbnQsICdTZWdvZSBVSScsICdSb2JvdG8nLCAnT3h5Z2VuJyxcbiAgICAnVWJ1bnR1JywgJ0NhbnRhcmVsbCcsICdGaXJhIFNhbnMnLCAnRHJvaWQgU2FucycsICdIZWx2ZXRpY2EgTmV1ZScsXG4gICAgc2Fucy1zZXJpZjtcbiAgLXdlYmtpdC1mb250LXNtb290aGluZzogYW50aWFsaWFzZWQ7XG4gIC1tb3otb3N4LWZvbnQtc21vb3RoaW5nOiBncmF5c2NhbGU7XG4gIG1hcmdpbjogNSUgNSU7XG59XG5cbmNvZGUge1xuICBmb250LWZhbWlseTogc291cmNlLWNvZGUtcHJvLCBNZW5sbywgTW9uYWNvLCBDb25zb2xhcywgJ0NvdXJpZXIgTmV3JyxcbiAgICBtb25vc3BhY2U7XG59XG5cbi5zZWFyY2hCYXIge1xuICBtYXJnaW46IDVweDtcbiAgcGFkZGluZzogNXB4O1xuICBjb2xvcjogd2hpdGU7XG59XG5cbi5wb3N0ZXJJbnRlcm5hbCB7XG4gIHdpZHRoOiBhdXRvO1xuICBoZWlnaHQ6IDQwdmg7XG4gIG9iamVjdC1maXQ6IGNvdmVyO1xuICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICBmbG9hdDogbGVmdDtcbiAgcGFkZGluZzogMHB4O1xuICBtYXJnaW46IGF1dG87XG4gIHBhZGRpbmc6IDAgMzBweCAwIDIwcHg7ICBcbn1cblxuaDMge1xuICBwYWRkaW5nLWxlZnQ6IDIwcHg7XG59Il0sInNvdXJjZVJvb3QiOiIifQ== */</style><style>@import url(assets/b660b67b6b-css2.css);</style><style>:root {
+  --primary: #bc4123;
+  /* --secondary: #2b3452; */
+}
+
+header {
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.popular-movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  column-gap: 1rem;
+  row-gap: 2rem;
+  /* display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-basis: 250px;
+  justify-content: space-around;
+  gap: 20px; */
+}
+
+.msgInpBtn {
+  display: flex;
+  justify-content: center;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+h2 {
+  font-size: 0.rem;
+}
+
+nav {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  max-width: 2000px;
+  margin-bottom: 10px;
+  margin-right: auto;
+}
+
+.SnF {
+  margin-bottom: 40px;
+}
+
+.logo {
+  font-size: 2.5rem;
+}
+
+/* .changeB {
+  position: relative;
+  left: 1150px;
+  top: 0px;
+} */
+
+/* .imgAsLink {
+  display: inline-block;
+  opacity: 0.9;
+} */
+
+.disabledBtn {
+  opacity: 0.5
+}
+
+.inlineP {
+  display: inline-block;
+  width: 75vh;
+  margin-top: 2px;
+}
+
+.warning {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9BcHAuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLDBCQUEwQjtBQUM1Qjs7QUFFQTtFQUNFLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLHFCQUFxQjtFQUNyQixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsMkRBQTJEO0VBQzNELGdCQUFnQjtFQUNoQixhQUFhO0VBQ2I7Ozs7O2NBS1k7QUFDZDs7QUFFQTtFQUNFLGFBQWE7RUFDYix1QkFBdUI7RUFDdkIsc0JBQXNCO0VBQ3RCLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixvQkFBb0I7RUFDcEIsbUJBQW1CO0VBQ25CLGlCQUFpQjtFQUNqQixtQkFBbUI7RUFDbkIsa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsaUJBQWlCO0FBQ25COztBQUVBOzs7O0dBSUc7O0FBRUg7OztHQUdHOztBQUVIO0VBQ0U7QUFDRjs7QUFFQTtFQUNFLHFCQUFxQjtFQUNyQixXQUFXO0VBQ1gsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLGFBQWE7RUFDYiwyQkFBMkI7RUFDM0IsdUJBQXVCO0VBQ3ZCLGdCQUFnQjtBQUNsQiIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgdXJsKCdodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2NzczI/ZmFtaWx5PVBvcHBpbnM6d2dodEA0MDA7NzAwJmRpc3BsYXk9c3dhcCcpO1xuXG46cm9vdCB7XG4gIC0tcHJpbWFyeTogI2JjNDEyMztcbiAgLyogLS1zZWNvbmRhcnk6ICMyYjM0NTI7ICovXG59XG5cbmhlYWRlciB7XG4gIG1hcmdpbi1ib3R0b206IDEwcHg7XG59XG5cbnVsIHtcbiAgbGlzdC1zdHlsZTogbm9uZTtcbn1cblxuYSB7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgY29sb3I6IHdoaXRlO1xufVxuXG4ucG9wdWxhci1tb3ZpZXMge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IHJlcGVhdChhdXRvLWZpdCwgbWlubWF4KDM1MHB4LCAxZnIpKTtcbiAgY29sdW1uLWdhcDogMXJlbTtcbiAgcm93LWdhcDogMnJlbTtcbiAgLyogZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgZmxleC13cmFwOiB3cmFwO1xuICBmbGV4LWJhc2lzOiAyNTBweDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1hcm91bmQ7XG4gIGdhcDogMjBweDsgKi9cbn1cblxuLm1zZ0lucEJ0biB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBmbGV4LWZsb3c6IGNvbHVtbiB3cmFwO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG5oMiB7XG4gIGZvbnQtc2l6ZTogMC5yZW07XG59XG5cbm5hdiB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogZW5kO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBtYXgtd2lkdGg6IDIwMDBweDtcbiAgbWFyZ2luLWJvdHRvbTogMTBweDtcbiAgbWFyZ2luLXJpZ2h0OiBhdXRvO1xufVxuXG4uU25GIHtcbiAgbWFyZ2luLWJvdHRvbTogNDBweDtcbn1cblxuLmxvZ28ge1xuICBmb250LXNpemU6IDIuNXJlbTtcbn1cblxuLyogLmNoYW5nZUIge1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIGxlZnQ6IDExNTBweDtcbiAgdG9wOiAwcHg7XG59ICovXG5cbi8qIC5pbWdBc0xpbmsge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIG9wYWNpdHk6IDAuOTtcbn0gKi9cblxuLmRpc2FibGVkQnRuIHtcbiAgb3BhY2l0eTogMC41XG59XG5cbi5pbmxpbmVQIHtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB3aWR0aDogNzV2aDtcbiAgbWFyZ2luLXRvcDogMnB4O1xufVxuXG4ud2FybmluZyB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogZmxleC1zdGFydDtcbiAgYWxpZ24taXRlbXM6IGZsZXgtc3RhcnQ7XG4gIG1hcmdpbi10b3A6IDEwcHg7XG59Il0sInNvdXJjZVJvb3QiOiIifQ== */</style><style data-styled="active" data-styled-version="5.3.6">.fMTnt{background-color:#bc4123;color:white;font-size:16px;margin:7px 7px;cursor:pointer;border:none;padding:10px;border-radius:4px;}.fMTnt:hover{background-color:#bc4123;}.fMTnt:hover span{border-bottom:3px solid #2b3452;}.jgjSaq{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-webkit-justify-context:center;-ms-flex-pack:center;justify-context:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background-color:#bc4123;position:absolut;right:0;left:0;bottom:0;top:100vh;text-align:center;width:100%;}.jgjSaq h3{color:white;}.jgjSaq h3:hover{color:#2b3452;}.dLqyFs{width:30vw;height:20vh;background-color:#2b3452;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;text-align:center;}body{margin:0px;padding:0px;background-color:#2b3452;margin:0;font-family:"Poppins";color:white;height:100;}main{padding:10px 10px;}header{padding:10px 10px;}nav h1{margin-right:auto;border-bottom:3px solid #bc4123;}.welcoming{color:#bc4123;display:inline-block;}.addedMovie{color:#bc4123;text-align:center;}.active{background-color:#bc4123;padding:0 10px 0 10px;border-radius:4px;margin:6px 6px;}a{border-radius:4px;}a:hover{color:#bc4123;}span{border-bottom:3px solid #bc4123;}.internalink{border-bottom:3px solid #bc4123;display:inline-block;}i{-webkit-letter-spacing:2px;-moz-letter-spacing:2px;-ms-letter-spacing:2px;letter-spacing:2px;border-bottom:1px dashed;}.imgAsLink{display:inline-block;opacity:0.80;}.imgAsLink:hover{opacity:1;}img.poster{width:100%;height:100%;object-fit:cover;border-radius:10px;background-color:none;}.cardContainer{box-shadow:0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);background-color:white;color:black;padding:5px;margin:20px auto 20px auto;max-width:75%;max-height:35vh;text-align:center;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-flex-flow:column wrap;-ms-flex-flow:column wrap;flex-flow:column wrap;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;}.animate{-webkit-animation-duration:0.5s;animation-duration:0.5s;-webkit-animation-name:animate-fade;animation-name:animate-fade;-webkit-animation-delay:0.5s;animation-delay:0.5s;-webkit-animation-fill-mode:backwards;animation-fill-mode:backwards;}@-webkit-keyframes animate-fade{0%{opacity:0;}100%{opacity:1;}}@keyframes animate-fade{0%{opacity:0;}100%{opacity:1;}}::-webkit-scrollbar{width:10px;}::-webkit-scrollbar-track{background:#2b3452;}::-webkit-scrollbar-thumb{background:#bc4123;}</style></head>
+<body><div class="curator-bar" style="background:#101418;color:#9aa4ae;font:13px/1.6 ui-monospace,monospace;padding:.45rem 1rem;border-bottom:1px solid #2c3640;"><a href="../../lehrjahre.html" style="color:#ffb454;text-decoration:none;">← The Lehrjahre wing</a> · movie-db (2023) — revived with a dummy key — frozen capture; nothing here is live.</div>
+
+<div id="root"><div class="App"><header><nav><h1 class="logo"><span class="aNormal"><a class="aNormal" href="index.html">Movies Database Project</a></span></h1><button class="sc-bcXHqe fMTnt material-symbols-outlined">sync_alt</button> <a class="" href="index.html"><button class="sc-bcXHqe fMTnt"><span>Home</span></button></a> <a class="" data-original="http://localhost:4001/movies" href="#"><button class="sc-bcXHqe fMTnt"><span>Movies</span></button></a> <a class="" href="login.html"><button class="sc-bcXHqe fMTnt"><span>Login</span></button></a> <a aria-current="page" class="active" href="register.html"><button class="sc-bcXHqe fMTnt"><span>Register</span></button></a> <a class="" href="about.html"><button class="sc-bcXHqe fMTnt"><span>About</span></button></a></nav></header><main><div><h1>Register</h1><div><div class="mb-3 form-floating" for="email"><input class="form-control" id="floatingInput" name="email" placeholder="name@example.com" style="height: 30px; border-radius: 4px; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; margin: 0px 10px 0px 5px; font-family: Verdana; width: 30vh;" type="email"/><label for="floatingInput">Email address</label></div><br/><div class="form-floating" for="password"><input class="form-control form-control-md" id="floatingPassword" name="password" placeholder="Enter at least 7 characters" style="height: 30px; border-radius: 4px; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; margin: 0px 10px 0px 5px; font-family: Verdana; width: 30vh;" type="password"/><label for="floatingPassword">Password</label></div><br/><div class="warning"><button class="sc-bcXHqe fMTnt disabledBtn" disabled="">Register</button><p class="inlineP"> To enable the register button please check your email or password. Your email must have an "@" and a "." And your password must have at least 7 characters. </p> <br/></div></div><br/><a href="login.html"><span>Already have an account? Please go to login &gt;&gt;&gt;</span></a></div></main><br/><br/><br/><footer class="sc-dkrFOg jgjSaq" color="white"><h3>Movies Database Project</h3><div class="sc-hLBbgP dLqyFs"><div>The Movie Database ( TMDb ) is a collaborative database about movies. The project was founded by Travis Bell in 2008 to collect movie posters. </div></div><ul><li>Prepared by atakee with React.js</li><li>using TMDB database</li><li> @copyright ? @copyright : " " 😆</li></ul></footer></div></div>
+</body></html>
