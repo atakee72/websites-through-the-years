@@ -250,7 +250,7 @@ the curator (unlike the recovered sites, which are untouchable):
 
 - Framework/hydration scripts stripped — a face is frozen DOM, not a running
   app. Exceptions: Finance_Logger keeps its own local, network-free JS (the
-  form still works); GoneWithTheTailwind keeps its 12-line menu toggle.
+  form still works); GoneWithTheTailwind keeps its few-line menu toggle.
 - All render assets (images, fonts, CSS — incl. Tailwind-CDN JIT output and
   Google Fonts) localized into each face's `assets/`. Zero external requests,
   zero live external links; originals kept in `data-original` (the blogs'
@@ -280,10 +280,10 @@ the curator (unlike the recovered sites, which are untouchable):
 - The old developer portfolio was captured fed by its original Sanity CMS
   (still alive in 2026). Its footer contact data (email, phone, address) is
   masked with █ blocks — the museum declines to republish it.
-- Webpack sourcemap comments (which base64-smuggle original source incl.
-  external font URLs) are stripped from the exhibits — one face needed a
-  post-capture repair for this, the rest were captured with the updated
-  tool.
+- Webpack build sourcemaps (comments that base64-embed the original source,
+  external font URLs included) are stripped from all exhibits — the later
+  faces at capture time by the updated tool, the earlier ones in a
+  post-capture sweep.
 - The repos themselves remain private and unmodified; all patches happened
   in throwaway clones.
 
