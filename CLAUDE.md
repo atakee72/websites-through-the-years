@@ -2,7 +2,10 @@
 
 A digital museum: six websites the user built between 1999 and 2019 —
 four recovered from the Wayback Machine, two Blogger blogs rescued alive —
-plus a one-page GeoCities found object, served on GitHub Pages.
+plus a one-page GeoCities found object, plus the Lehrjahre wing
+(`lehrjahre/` — bootcamp-era apps 2022–2023, captured as frozen HTML faces;
+new artifacts, but treat as sealed exhibits: don't modernize, don't unseal),
+served on GitHub Pages.
 Live: https://atakee72.github.io/websites-through-the-years/
 Repo: github.com/atakee72/websites-through-the-years (public)
 
@@ -10,12 +13,14 @@ Repo: github.com/atakee72/websites-through-the-years (public)
 
 The archived sites (`atakee-fortunecity-2004/`, `dtm-ab-2002/`,
 `tbmm-kpk-2006/`, `thoughtful-thoughts-2011/`, `atakees-blog-2013/`,
-`geocities-cindy-2002/`, `ercan-atak-2015/`, `ercan-atak-2019/`) are historical artifacts. Do NOT modernize, reformat, lint, or "fix" them
+`geocities-cindy-2002/`, `ercan-atak-2015/`, `ercan-atak-2019/`,
+`lehrjahre/*/`) are historical artifacts. Do NOT modernize, reformat, lint, or "fix" them
 unless the user explicitly asks. Broken images, dead links, `<font>` tags,
 IE-era markup are features, not bugs — the landing page's curator's note
 explains this to visitors. The modern, freely editable museum shell is:
 `index.html` (landing page), `plaques/` (curator plaques),
-`restoration-lab.html`, `guestbook.html`, `links.html`, `shop.html` (gag gift shop — nothing is ever for sale there), `.github/` (issue templates),
+`restoration-lab.html`, `guestbook.html`, `links.html`, `shop.html` (gag gift shop — nothing is ever for sale there), `lehrjahre.html` (the wing's hall
+page), `.github/` (issue templates),
 and `assets/` (screenshots, badges, `museum.css`) — all hand-written, no
 build step. Shell pages
 make zero external requests; external `<a href>` links are allowed. Code
@@ -32,6 +37,8 @@ are ever re-crawled, re-verify with: no `http` AND no scheme-relative `//`
 in src/href/`url()` (grep both — `//host/…` evades the `http` grep; leaks
 of exactly that kind were found and sealed 2026-08-08), and
 `performance.getEntriesByType('resource')` shows only same-host requests.
+The same seal applies to every `lehrjahre/<slug>/` face — re-verify with the
+same greps after any change.
 
 ## Rules
 

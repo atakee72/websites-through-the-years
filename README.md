@@ -237,6 +237,56 @@ dark in 2023 — is deliberately not recovered.
   now-neutralized `swfobject.js`, so this code throws and never runs.
   Left as-is, same authentic-breakage spirit as the rest of the widget.
 
+### 7. The Lehrjahre wing — bootcamp-era apps as frozen faces (2022–2023)
+
+Not recovered websites: none of these fifteen repos was ever public. They are
+the CODAC Berlin bootcamp years (2022–2023), exhibited as "HTML faces" —
+each app run locally from its private repo, every route's rendered DOM frozen
+with a playwright-driven capture tool, then sealed into `lehrjahre/<slug>/`.
+The hall page is `lehrjahre.html`.
+
+Provenance / restoration notes — these captures are new artifacts, shaped by
+the curator (unlike the recovered sites, which are untouchable):
+
+- Framework/hydration scripts stripped — a face is frozen DOM, not a running
+  app. Exceptions: Finance_Logger keeps its own local, network-free JS (the
+  form still works); GoneWithTheTailwind keeps its 12-line menu toggle.
+- All render assets (images, fonts, CSS — incl. Tailwind-CDN JIT output and
+  Google Fonts) localized into each face's `assets/`. Zero external requests,
+  zero live external links; originals kept in `data-original` (the blogs'
+  hermetic-seal treatment).
+- Authentically dead images stay dead: dogsNfilms' 49 shelter-CDN dog photos
+  and Finance_Logger's expired Discord background point at intentionally
+  absent paths.
+- Internal links rewritten to relative `.html` files so multi-page faces are
+  walkable; a curator bar at the top of each page links back to the wing.
+- dogsNfilms' "Back to previous / catalog / home" buttons are inert in the
+  freeze — the original app navigated them with JavaScript click-handlers
+  that a static capture cannot carry; one anchor on Abra's page arrived
+  pre-broken from the source data and was repaired by hand (provenance kept
+  in `data-original`).
+- MaHalle v1's "Start a debate" modal captured as a second page and wired
+  with plain links (curator addition).
+- admin-dashboard's user list second page is a museum addition — the live
+  app's "next page" button never worked (a missing pagination handler), so
+  the tenth user was unreachable even in 2023; the museum captured page two
+  separately and wired the buttons as links.
+- MaHalle v1's modal and admin-dashboard's pagination are the wing's two
+  "curator wiring" cases: frozen controls turned into plain links, visual
+  classes kept.
+- movie-db was revived at capture time with a dummy Firebase config in a
+  throwaway clone — it woke starving: its movie grid sits behind Firebase
+  auth, so no TMDb content appears anywhere in the capture.
+- The old developer portfolio was captured fed by its original Sanity CMS
+  (still alive in 2026). Its footer contact data (email, phone, address) is
+  masked with █ blocks — the museum declines to republish it.
+- Webpack sourcemap comments (which base64-smuggle original source incl.
+  external font URLs) are stripped from the exhibits — one face needed a
+  post-capture repair for this, the rest were captured with the updated
+  tool.
+- The repos themselves remain private and unmodified; all patches happened
+  in throwaway clones.
+
 ## Lost & found
 
 ### Cinderellas Fotoalbum (GeoCities, ~2001–2002)
