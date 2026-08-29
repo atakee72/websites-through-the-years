@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<script>document.documentElement.className='js';</script>
+
 <div class="wrap">
 
 <nav class="top">
@@ -37,7 +39,7 @@
   and they are shown exactly as they stopped: placeholder text shipped, buttons
   that do nothing, sections that render a single word. Eight of them are walkable
   — captured as frozen pages, every asset local, nothing live. The rest are
-  catalogue cards. Where a card quotes something in monospace, it is quoted
+  catalogue cards. Every card opens its plaque — click one. Where a card quotes something in monospace, it is quoted
   verbatim.</p>
 </section>
 
@@ -233,6 +235,11 @@
   </div>
 </section>
 
+<dialog class="lj-dialog" aria-label="Exhibit plaque">
+  <button class="lj-close" type="button" aria-label="Close plaque">×</button>
+  <div class="lj-plaque-slot"></div>
+</dialog>
+
 <section>
   <h2>How these were captured</h2>
   <p>Each walkable face is the rendered page as a browser saw it on localhost
@@ -250,5 +257,56 @@
 <footer><a href="index.html">websites through the years</a> — a personal museum of the early web</footer>
 
 </div>
+
+<script>
+(function () {
+  var dialog = document.querySelector('.lj-dialog');
+  var slot = dialog.querySelector('.lj-plaque-slot');
+  var opener = null; // control to refocus on close
+  var home = null;   // card the open plaque belongs to
+
+  function open(card, from) {
+    var plaque = card.querySelector('.lj-plaque');
+    if (!plaque) return;
+    home = card; opener = from;
+    var badge = card.querySelector('.lj-badge');
+    var h3 = card.querySelector('h3');
+    if (badge) slot.appendChild(badge.cloneNode(true));
+    if (h3) slot.appendChild(h3.cloneNode(true));
+    slot.appendChild(plaque); // moved, not cloned
+    var door = card.querySelector('.lj-door');
+    if (door) slot.appendChild(door.cloneNode(true));
+    dialog.showModal();
+  }
+
+  dialog.addEventListener('close', function () {
+    var plaque = slot.querySelector('.lj-plaque');
+    if (home && plaque) home.insertBefore(plaque, home.querySelector('.lj-plaque-btn'));
+    slot.textContent = '';
+    home = null;
+    if (opener) { opener.focus(); opener = null; }
+  });
+  dialog.addEventListener('click', function (e) {
+    if (e.target !== dialog) return;
+    var r = dialog.getBoundingClientRect(); // padding clicks also target the dialog —
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)
+      dialog.close(); // only true backdrop clicks close
+  });
+  dialog.querySelector('.lj-close').addEventListener('click', function () { dialog.close(); });
+
+  document.querySelectorAll('.lj-grid .lj-card').forEach(function (card) {
+    var btn = card.querySelector('.lj-plaque-btn');
+    if (btn) btn.addEventListener('click', function () { open(card, btn); });
+    var h3 = card.querySelector('h3');
+    if (h3) h3.addEventListener('click', function () { open(card, btn || h3); });
+    card.querySelectorAll('.lj-shot').forEach(function (shot) {
+      if (!shot.querySelector('a') && !shot.closest('.lj-plaque')) {
+        shot.addEventListener('click', function () { open(card, btn || h3); });
+      }
+    });
+  });
+})();
+</script>
+
 </body>
 </html>

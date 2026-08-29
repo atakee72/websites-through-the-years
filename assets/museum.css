@@ -208,7 +208,7 @@ pre code { background: none; padding: 0; color: inherit; }
 }
 
 /* lehrjahre */
-.lj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.2rem; margin-top: 1.2rem; }
+.lj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.2rem; margin-top: 1.2rem; }
 .lj-card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 1rem; display: flex; flex-direction: column; gap: .6rem; }
 .lj-card h3 { font-size: 1.02rem; font-weight: normal; }
 .lj-card h3 .lj-date { color: var(--muted); font-size: .8rem; margin-left: .4rem; white-space: nowrap; }
@@ -219,3 +219,20 @@ pre code { background: none; padding: 0; color: inherit; }
 .lj-charm { color: var(--muted); font-size: .85rem; font-style: italic; }
 .lj-door { margin-top: auto; }
 .lj-card.lj-epilogue { border-style: dashed; }
+.lj-hook { color: var(--muted); font-size: .88rem; }
+.lj-plaque { display: flex; flex-direction: column; gap: .6rem; }
+.js .lj-plaque { display: none; }
+.lj-plaque-btn { display: none; }
+.js .lj-plaque-btn { display: inline-block; align-self: flex-start; font: 11px/1.5 ui-monospace, "Cascadia Mono", Consolas, monospace; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: none; border: 1px solid var(--line); border-radius: 3px; padding: .15rem .5rem; cursor: pointer; }
+.js .lj-plaque-btn:hover { color: var(--amber); border-color: var(--amber); }
+.js .lj-grid .lj-card h3 { cursor: pointer; }
+.js .lj-grid .lj-card > .lj-shot:not(:has(a)) { cursor: pointer; }
+.lj-dialog { background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 1.2rem; width: min(680px, calc(100vw - 2rem)); max-height: calc(100vh - 4rem); overflow-y: auto; }
+.lj-dialog::backdrop { background: rgba(0, 0, 0, .6); }
+.lj-dialog h3 { font-size: 1.05rem; font-weight: normal; margin: 0; }
+.lj-dialog h3 .lj-date { color: var(--muted); font-size: .8rem; margin-left: .4rem; white-space: nowrap; }
+.lj-dialog .lj-plaque, .lj-dialog .lj-plaque-slot { display: flex; flex-direction: column; gap: .6rem; }
+.lj-dialog p { font-size: .92rem; }
+.lj-close { float: right; margin: 0 0 .4rem .6rem; font-size: 1.05rem; line-height: 1; background: none; border: 1px solid var(--line); border-radius: 3px; color: var(--muted); padding: .2rem .5rem; cursor: pointer; }
+.lj-close:hover { color: var(--amber); border-color: var(--amber); }
+body:has(.lj-dialog[open]) { overflow: hidden; }
