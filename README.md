@@ -286,6 +286,9 @@ the curator (unlike the recovered sites, which are untouchable):
   post-capture sweep.
 - The repos themselves remain private and unmodified; all patches happened
   in throwaway clones.
+- 2026-08-30: the hall's catalogue cards became compact tiles; each opens its
+  full plaque in a modal (inline JS in `lehrjahre.html`; with JS disabled the
+  plaques render inline as before). Shell change only — no face was touched.
 
 ## Lost & found
 
