@@ -82,7 +82,10 @@
     if (opener) { opener.focus(); opener = null; }
   });
   dialog.addEventListener('click', function (e) {
-    if (e.target === dialog) dialog.close(); // backdrop
+    if (e.target !== dialog) return;
+    var r = dialog.getBoundingClientRect(); // padding clicks also target the dialog —
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)
+      dialog.close(); // only true backdrop clicks close
   });
   dialog.querySelector('.lj-close').addEventListener('click', function () { dialog.close(); });
 
@@ -112,8 +115,10 @@
 .js .lj-plaque-btn:hover { color: var(--amber); border-color: var(--amber); }
 .js .lj-grid .lj-card h3 { cursor: pointer; }
 .js .lj-grid .lj-card > .lj-shot:not(:has(a)) { cursor: pointer; }
-.lj-dialog { background: var(--panel); color: inherit; border: 1px solid var(--line); border-radius: 6px; padding: 1.2rem; width: min(680px, calc(100vw - 2rem)); max-height: calc(100vh - 4rem); overflow-y: auto; }
+.lj-dialog { background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 1.2rem; width: min(680px, calc(100vw - 2rem)); max-height: calc(100vh - 4rem); overflow-y: auto; }
 .lj-dialog::backdrop { background: rgba(0, 0, 0, .6); }
+.lj-dialog h3 { font-size: 1.05rem; font-weight: normal; margin: 0; }
+.lj-dialog h3 .lj-date { color: var(--muted); font-size: .8rem; margin-left: .4rem; white-space: nowrap; }
 .lj-dialog .lj-plaque, .lj-dialog .lj-plaque-slot { display: flex; flex-direction: column; gap: .6rem; }
 .lj-dialog p { font-size: .92rem; }
 .lj-close { float: right; margin: 0 0 .4rem .6rem; font-size: 1.05rem; line-height: 1; background: none; border: 1px solid var(--line); border-radius: 3px; color: var(--muted); padding: .2rem .5rem; cursor: pointer; }
@@ -123,23 +128,27 @@ body:has(.lj-dialog[open]) { overflow: hidden; }
 
 (All four CSS variables — `--panel`, `--line`, `--amber`, `--muted` — already exist; they are used by the current `.lj-*` rules.)
 
-- [ ] **Step 6: Verify inert.** Serve (`python3 -m http.server 8765`, background) and run a quick check — no `.lj-plaque` exists yet, so the page must look and behave as before apart from the new intro sentence and slightly narrower tiles:
+- [ ] **Step 6: Verify inert.** Start a server if 8765 isn't already serving, keeping its PID (`curl -sf -o /dev/null http://localhost:8765/ || { python3 -m http.server 8765 & echo $! > $SCRATCH/server.pid; }` from repo root; at task end, kill only via `kill $(cat $SCRATCH/server.pid)` if you started it — NEVER `pkill -f`). Then run the check — no `.lj-plaque` exists yet, so the page must look and behave as before apart from the new intro sentence and slightly narrower tiles:
 
 ```bash
 .superpowers/sdd/lehrjahre/tools/venv/bin/python - <<'EOF'
 from playwright.sync_api import sync_playwright
 with sync_playwright() as p:
     b = p.chromium.launch(); pg = b.new_page()
-    errs = []
-    pg.on('console', lambda m: errs.append(m.text) if m.type == 'error' else None)
+    errs, crashes = [], []
+    # the hall has no favicon link: Chromium auto-requests /favicon.ico and logs a
+    # 404 whose TEXT lacks the word "favicon" — filter by the message's URL, not text
+    pg.on('console', lambda m: errs.append((m.text, (m.location or {}).get('url', ''))) if m.type == 'error' else None)
+    pg.on('pageerror', lambda e: crashes.append(str(e)))
     pg.goto('http://localhost:8765/lehrjahre.html', wait_until='networkidle')
     assert pg.locator('.lj-dialog').count() == 1
     assert pg.locator('dialog[open]').count() == 0
     assert 'Every card opens its plaque' in pg.inner_text('body')
     ext = pg.evaluate("performance.getEntriesByType('resource').map(r=>r.name).filter(n=>!n.startsWith(location.origin))")
     assert ext == [], ext
-    real = [e for e in errs if 'favicon' not in e]
+    real = [t for t, url in errs if 'favicon' not in t and 'favicon' not in url]
     assert real == [], real
+    assert crashes == [], crashes
     print('OK')
     b.close()
 EOF
@@ -289,8 +298,10 @@ with sync_playwright() as p:
 
     # --- JS on ---
     pg = b.new_page(viewport={'width': 1280, 'height': 900})
-    errs = []
-    pg.on('console', lambda m: errs.append(m.text) if m.type == 'error' else None)
+    errs, crashes = [], []
+    # favicon 404's console text lacks "favicon" — keep the URL to filter on
+    pg.on('console', lambda m: errs.append((m.text, (m.location or {}).get('url', ''))) if m.type == 'error' else None)
+    pg.on('pageerror', lambda e: crashes.append(str(e)))
     pg.goto(BASE, wait_until='networkidle')
 
     cards = pg.locator('.lj-grid .lj-card')
@@ -338,8 +349,9 @@ with sync_playwright() as p:
         "performance.getEntriesByType('resource').map(r=>r.name)"
         ".filter(n=>!n.startsWith(location.origin))")
     assert ext == [], ext
-    real = [e for e in errs if 'favicon' not in e]
+    real = [t for t, url in errs if 'favicon' not in t and 'favicon' not in url]
     assert real == [], real
+    assert crashes == [], crashes
 
     # screenshots for the user preview
     pg.screenshot(path='hall-desktop.png', full_page=True)
@@ -366,7 +378,7 @@ with sync_playwright() as p:
     b.close()
 ```
 
-- [ ] **Step 4: Run it** (server from Task 1 still on 8765; run from `$SCRATCH` so screenshots land there):
+- [ ] **Step 4: Run it.** Ensure 8765 is serving first — Task 1 ran in a different session, so start your own server if needed, keeping the PID (from repo root: `curl -sf -o /dev/null http://localhost:8765/ || { python3 -m http.server 8765 & echo $! > $SCRATCH/server.pid; }`; if you started it, kill it at task end only via `kill $(cat $SCRATCH/server.pid)` — NEVER `pkill -f`). Run from `$SCRATCH` so screenshots land there:
 
 ```bash
 cd $SCRATCH && /home/atakee/projects/eski-web-sayfalarim/.superpowers/sdd/lehrjahre/tools/venv/bin/python hall_check.py
@@ -401,5 +413,5 @@ git commit -m "Lehrjahre hall: compact tiles with plaque modals"
 
 ## After the tasks (controller, not a subagent)
 
-- Show the user the four screenshots and the tile hooks for correction; keep the 8765 server running for their live preview.
+- Show the user the four screenshots and the tile hooks for correction; start (or restart) a `python3 -m http.server 8765` for their live preview, tracking its PID for a clean kill later.
 - Push only on the user's explicit go-ahead. After push: check Pages build (`gh api repos/atakee72/websites-through-the-years/pages/builds/latest --jq .status` → `built`), live hall 200, then SPN re-save `https://atakee72.github.io/websites-through-the-years/lehrjahre.html`.
