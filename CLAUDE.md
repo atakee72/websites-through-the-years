@@ -77,6 +77,14 @@ same greps after any change.
   --retry 2` against CDX-picked nearest captures (the translator-exhibit
   recovery, 2026-08-24/25, did exactly that). Don't `pkill -f`/`pgrep -f`
   a pattern that appears in your own command line — it matches itself.
+- App-freezing toolkit (built for the Lehrjahre wing, 2026-08): git-ignored
+  `.superpowers/sdd/lehrjahre/tools/` — `capture_face.py` (playwright DOM
+  snapshot per route; strips scripts/noscript/form-actions/meta-URLs AND
+  webpack sourcemap comments, which base64-smuggle external URLs past the
+  seal greps; localizes assets; rewrites links; injects the curator bar —
+  pass `--backlink ../../lehrjahre.html`, z-index already max) plus
+  `seal_check.sh <face-dir>`. Run via `tools/venv/bin/python`. Use for any
+  future face capture; sweep `sourceMappingURL` after any hand-edit.
 
 ## Possible future work
 
