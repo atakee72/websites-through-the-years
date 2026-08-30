@@ -168,14 +168,16 @@ git commit -m "Lehrjahre: my-first-react-app captured as walkable face"
 .lj-plaque .specimen { border-left-color: var(--amber); }
 ```
 
-- [ ] **Step 2: Insert the new card.** In `lehrjahre.html`, the CA-Projects card (first card in `.lj-grid`) ends with:
+- [ ] **Step 2: Insert the new card.** In `lehrjahre.html`, find the END of the CA-Projects card. Its `<button>…</button>\n    </div>` tail is NOT unique (every card ends that way) — anchor on the card's unique charm line instead. The last four lines of the CA-Projects card are exactly:
 
 ```html
+        <p class="lj-charm">Nav links labelled "sdf" and "asdf" — placeholder text I never came back for.</p>
+      </div>
       <button class="lj-plaque-btn" type="button">Read the plaque →</button>
     </div>
 ```
 
-Immediately after that closing `</div>` (before the MaHalle v1 card), insert this card verbatim:
+Immediately after that final `</div>` (before the MaHalle v1 card), insert this card verbatim:
 
 ```html
     <div class="lj-card">
@@ -249,9 +251,12 @@ EOF
 
 Expected: `SPECIMENS VERBATIM OK`. If a mismatch: fix the card's specimen to match the source, never the reverse.
 
-- [ ] **Step 4: Count updates.**
-  - `lehrjahre.html` intro: change `Eight of them are walkable` → `Nine of them are walkable` (one word; the rest of the sentence untouched).
-  - `index.html`: change `<span class="chip">8 walkable faces</span>` → `<span class="chip">9 walkable faces</span>`.
+- [ ] **Step 4: Count updates — all THREE sites.**
+  - `lehrjahre.html` (intro, ~line 40): change `Eight of them are walkable` → `Nine of them are walkable` (one word; the rest of the sentence untouched).
+  - `index.html` (~line 387, landing era copy `…childish attempts to build something. Eight of them are walkable; all of…`): change `Eight of them are walkable` → `Nine of them are walkable` (one word).
+  - `index.html` (~line 392): change `<span class="chip">8 walkable faces</span>` → `<span class="chip">9 walkable faces</span>`.
+
+  Afterwards `grep -rn 'Eight of them\|8 walkable' index.html lehrjahre.html` must return nothing.
 
 - [ ] **Step 5: README bullet.** In `README.md`, `### 7. The Lehrjahre wing` section, immediately after the bullet ending `Shell change only — no face was touched.`, add:
 
@@ -340,9 +345,12 @@ with sync_playwright() as p:
     pm.click(NC + ' .lj-plaque-btn')
     pm.screenshot(path='hall2-plaque-mobile.png')
 
-    # landing chip
+    # landing: chip AND era copy both updated
     pg.goto('http://localhost:8765/index.html', wait_until='networkidle')
-    assert '9 walkable faces' in pg.inner_text('body')
+    landing = pg.inner_text('body')
+    assert '9 walkable faces' in landing
+    assert 'Nine of them are walkable' in landing
+    assert 'Eight of them are walkable' not in landing
 
     # JS off: 16 inline plaques, hidden buttons
     ctx = b.new_context(java_script_enabled=False)
