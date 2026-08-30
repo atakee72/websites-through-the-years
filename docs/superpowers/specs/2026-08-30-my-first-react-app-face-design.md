@@ -36,10 +36,11 @@ same treatment as the other eight faces:
 - Seal: `seal_check.sh lehrjahre/my-first-react-app` + the CLAUDE.md grep
   recipe + playwright same-host resource check. Zero external requests,
   zero live external links.
-- No PII concerns: page shows first names and the public handle @atakee
-  only. ("Abdurrezzak Atak" appears in MyComponent source but only the
-  rendered output ships in the face; the name already appears on the hall's
-  CA-Projects charm line — status quo.)
+- PII: the page shows first names and the public handle @atakee only. The
+  rendered face includes the line "It is not you! It is Abdurrezzak" (a
+  first name, consistent with the other first names on the page; the full
+  "Abdurrezzak Atak" exists only in the unshipped source). Surfaced to the
+  curator at preview for explicit approval.
 - Thumbnail: `assets/lehrjahre/my-first-react-app.png` (640px wide, from
   the fresh capture, like the other tile shots).
 
@@ -139,7 +140,7 @@ of churning every cycle.
   degrade still holds.
 - Byte checks: hook and charm lines verbatim; "Nine of them are walkable"
   and "9 walkable faces" present; App.js specimen matches `src/App.js`
-  lines 16–24 after escaping; NavBar specimen matches `src/components/NavBar.js`
+  lines 16–25 after escaping; NavBar specimen matches `src/components/NavBar.js`
   in full.
 - Desktop + mobile screenshots of the new tile, its open plaque (both
   specimens visible), and the face itself, for user preview.
