@@ -40,11 +40,14 @@
 
 ```bash
 $VPY .superpowers/sdd/lehrjahre/tools/capture_face.py \
-  --base http://localhost:4017 --out lehrjahre/rick-n-morty \
-  --routes '/' --settle 4000 --backlink ../../lehrjahre.html
+  --base http://localhost:4017 --routes / \
+  --out lehrjahre/rick-n-morty \
+  --backlink ../../lehrjahre.html \
+  --exhibit-title "rick-n-morty (Jan 2023)" \
+  --settle-ms 4000
 ```
 
-Then stop the dev server **by PID only** (find it with `ss -tlnp | grep 4017`; never `pkill -f`). Sanity: `grep -c 'flip-card' lehrjahre/rick-n-morty/index.html` → ≥ 40 (20 cards × front+inner classes), and `grep -c 'Rick Sanchez' lehrjahre/rick-n-morty/index.html` → ≥ 1. If the grid is empty (API didn't answer), re-run capture with `--settle 8000`.
+Then stop the dev server **by PID only** (find it with `ss -tlnp | grep 4017`; never `pkill -f`). Sanity (the captured DOM is one long line, so count occurrences, not lines): `grep -o 'flip-card-front' lehrjahre/rick-n-morty/index.html | wc -l` → 20, and `grep -o 'Rick Sanchez' lehrjahre/rick-n-morty/index.html | wc -l` → ≥ 1. If the grid is empty (API didn't answer in time), re-run capture with `--settle-ms 8000`.
 
 - [ ] **Step 3: Stock the pantry.** Write `$SCRATCH/stock_pantry.py`:
 
@@ -242,7 +245,7 @@ git commit -m "Lehrjahre: rick-n-morty captured as walkable face with baked pant
 **Interfaces:**
 - Consumes: Task 1's door URL `lehrjahre/rick-n-morty/index.html` and thumbnail `assets/lehrjahre/rick-n-morty.png`; the hall's cycle-1 card pattern (badge → h3+date → linked shot → hook → `.lj-plaque` → `.lj-plaque-btn` → `.lj-door`) and cycle-2's specimen classes (`.specimen-label`, `pre.specimen`).
 
-- [ ] **Step 1: Insert the new card** in `lehrjahre.html`, immediately after the my-first-react-app card's closing `</div>` (the card ending with the door `lehrjahre/my-first-react-app/index.html`, ~line 116) and before the MaHalle v1 card. Exact markup (specimen escaped from `$CLONE/src/App.js` lines 39–48, verbatim incl. trailing spaces):
+- [ ] **Step 1: Insert the new card** in `lehrjahre.html`. Unique anchor: the line `<p class="lj-door"><a class="go" href="lehrjahre/my-first-react-app/index.html">Enter the exhibit →</a></p>` occurs exactly once (~line 115); the new card goes after that card's closing `</div>` (the very next `</div>` line), before the MaHalle v1 card. Exact markup (specimen escaped from `$CLONE/src/App.js` lines 39–48, verbatim incl. trailing spaces):
 
 ```html
     <div class="lj-card">
@@ -303,12 +306,18 @@ Expected: `54247f8af37ca5004795f626b665dc57` (= `sed -n '39,48p' $CLONE/src/App.
 
   README line 297 ("Walkable count: nine.") is a dated provenance entry — leave it. Re-run `grep -rn -i "nine of them\|9 walkable" *.html` afterwards → no hits.
 
-- [ ] **Step 4: Pantry sentence.** In `lehrjahre.html`'s "How these were captured" section, after the sentence ending `Broken images are original breakage, not the museum's.` insert:
+- [ ] **Step 4: Pantry sentence.** In `lehrjahre.html`'s "How these were captured" section (~line 354), the target sentence wraps across two source lines (`…not the` / `museum's. Details in…`). Make exactly this replacement (old → new):
 
+Old:
 ```
-Where a face is marked pantry-fed, the museum stocked it at capture time —
-data fetched once, stored in the page, served by a few curator lines; the
-exhibit still makes no requests.
+  museum's. Details in the
+```
+
+New:
+```
+  museum's. Where a face is marked pantry-fed, the museum stocked it at
+  capture time — data fetched once, stored in the page, served by a few
+  curator lines; the exhibit still makes no requests. Details in the
 ```
 
 - [ ] **Step 5: README provenance.** In `README.md`, `### 7. The Lehrjahre wing`, after the Alexa-redaction bullet add:
