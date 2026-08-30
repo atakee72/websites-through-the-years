@@ -19,8 +19,10 @@ filtered list and `console.log`s it — the line that would update the
 screen is commented out in `App.js`:
 `// if (filteredCharacters.length != 0) { characters = filteredCharacters; }`.
 Typing visibly does nothing. Modal/Pagination components exist in source
-but were never reachably wired. Heavy `console.log('🚀 ~ …')` debug-emoji
-logging throughout. No keys, no PII.
+but were never reachably wired (Modal renders null unless opened, so none
+of it reached the captured DOM). Every log label in `App.js` ends in
+`:>>` (`'filteredCharacters :>> '`) — the era's console-log-wrap style.
+No keys, no PII.
 
 ## Design
 
@@ -36,8 +38,9 @@ sourcemaps swept, curator bar with `--backlink ../../lehrjahre.html`).
 **The pantry (museum addition, clearly marked):**
 
 - At capture time, fetch the API's character pages 1–3 once → a stash of
-  **60 characters** (name + image). Download all 60 avatars into the
-  face's local assets (~40 extra images beyond the captured 20).
+  **60 characters** (id, name, location, origin — the card backs show
+  location and origin — + image). Download all 60 avatars into the face's
+  local assets (~40 extra images beyond the captured 20).
 - Embed the stash as a JSON array in one inline `<script>` appended to
   `index.html`, headed by a comment identifying it as a curator addition
   and its stocking date, e.g.
@@ -84,9 +87,9 @@ at the end of the promotion series).
     been one keystroke from working since January 2023. In the frozen
     face even the console is silent now, so the search does exactly what
     it always appeared to do: nothing."
-  - Charm: "Every console.log in the source begins with a little rocket:
-    🚀 ~ — the debugging style of the era, launched hundreds of times,
-    landed nowhere."
+  - Charm: "Every log label in the source ends in :&gt;&gt; —
+    'filteredCharacters :&gt;&gt;' was the only place the search results
+    ever appeared."
 - Door: `Enter the exhibit →` → `lehrjahre/rick-n-morty/index.html`;
   tile shot links there too.
 - Specimen presentation reuses cycle 2's classes (`.specimen-label`,
