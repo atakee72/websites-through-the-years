@@ -289,6 +289,12 @@ the curator (unlike the recovered sites, which are untouchable):
 - 2026-08-30: the hall's catalogue cards became compact tiles; each opens its
   full plaque in a modal (inline JS in `lehrjahre.html`; with JS disabled the
   plaques render inline as before). Shell change only — no face was touched.
+- 2026-08-30: first promoted sub-exhibit — `lehrjahre/my-first-react-app/`
+  (from the private CA-Projects repo, Project-3), captured with the same
+  toolkit: scripts stripped, assets localized, curator bar added, no edits
+  to the app's output. Its hall plaque shows two HTML-escaped source
+  specimens (`App.js`, `NavBar.js`) so visitors can compare the JSX with
+  the rendered page. Walkable count: nine.
 
 ## Lost & found
 

@@ -236,3 +236,4 @@ pre code { background: none; padding: 0; color: inherit; }
 .lj-close { float: right; margin: 0 0 .4rem .6rem; font-size: 1.05rem; line-height: 1; background: none; border: 1px solid var(--line); border-radius: 3px; color: var(--muted); padding: .2rem .5rem; cursor: pointer; }
 .lj-close:hover { color: var(--amber); border-color: var(--amber); }
 body:has(.lj-dialog[open]) { overflow: hidden; }
+.lj-plaque .specimen { border-left-color: var(--amber); }

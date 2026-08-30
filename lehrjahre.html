@@ -37,7 +37,7 @@
   this wing is the first time any of them has been seen in public.</p>
   <p>They are amateur, naive, sometimes childish attempts to build something,
   and they are shown exactly as they stopped: placeholder text shipped, buttons
-  that do nothing, sections that render a single word. Eight of them are walkable
+  that do nothing, sections that render a single word. Nine of them are walkable
   — captured as frozen pages, every asset local, nothing live. The rest are
   catalogue cards. Every card opens its plaque — click one. Where a card quotes something in monospace, it is quoted
   verbatim.</p>
@@ -64,6 +64,55 @@
         <p class="lj-charm">Nav links labelled "sdf" and "asdf" — placeholder text I never came back for.</p>
       </div>
       <button class="lj-plaque-btn" type="button">Read the plaque →</button>
+    </div>
+
+    <div class="lj-card">
+      <span class="lj-badge">walkable</span>
+      <h3>my-first-react-app <span class="lj-date">Jan 2023</span></h3>
+      <div class="lj-shot"><a href="lehrjahre/my-first-react-app/index.html"><img src="assets/lehrjahre/my-first-react-app.png" alt="Hey, Ercan is learning React! — the rendered page" loading="lazy"></a></div>
+      <p class="lj-hook">Every block on this page is a hand-written React component.</p>
+      <div class="lj-plaque">
+        <p>My first React app, preserved mid-lesson. A NavBar whose five links
+        read sdf, asdf, sdf; a Contact view that renders the words "Contact
+        information"; a Footer that says "copyright @atakee" on green. None of
+        it is a page in the old sense — every block is a component, written by
+        hand, mounted one under the other so each had somewhere to stand.</p>
+        <div class="specimen-label">Specimen — App.js, the styling lesson</div>
+        <pre class="specimen"><code>&lt;div className="App"&gt;
+  &lt;Contacts /&gt;
+  &lt;h1 className='tomato'&gt;Hey, Ercan is learning React! :)))&lt;/h1&gt;
+  &lt;h2 className='blue'&gt;this should appear blue&lt;/h2&gt;
+  &lt;h3 className='blue' style={{color: "yellowgreen" }}&gt;inline style&lt;/h3&gt;
+  &lt;h4 className='blue' style={myStyle}&gt;style object&lt;/h4&gt;
+
+
+  &lt;MyComponent /&gt;
+&lt;/div&gt;</code></pre>
+        <p>One heading per styling technique — that was the entire lesson. In
+        the stylesheet, the class named tomato is, of course, red. And the
+        walkable page next door is exactly what this JSX became.</p>
+        <div class="specimen-label">Specimen — NavBar.js, one whole component</div>
+        <pre class="specimen"><code>import React from 'react'
+
+function NavBar() {
+  return (
+    &lt;div style={{color: "purple", fontWeight:"bold"}}&gt;NavBar
+        &lt;ul style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", backgroundColor:"lightblue"}}&gt;
+            &lt;li&gt;sdf&lt;/li&gt;
+            &lt;li&gt;sdf&lt;/li&gt;
+            &lt;li&gt;asdf&lt;/li&gt;
+            &lt;li&gt;sdf&lt;/li&gt;
+            &lt;li&gt;asdf&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default NavBar</code></pre>
+        <p class="lj-charm">The list of names in MyComponent is a constant called elephants. Two of the elephants are Monique.</p>
+      </div>
+      <button class="lj-plaque-btn" type="button">Read the plaque →</button>
+      <p class="lj-door"><a class="go" href="lehrjahre/my-first-react-app/index.html">Enter the exhibit →</a></p>
     </div>
 
     <div class="lj-card">
