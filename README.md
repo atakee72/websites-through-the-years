@@ -295,6 +295,10 @@ the curator (unlike the recovered sites, which are untouchable):
   to the app's output. Its hall plaque shows two HTML-escaped source
   specimens (`App.js`, `NavBar.js`) so visitors can compare the JSX with
   the rendered page. Walkable count: nine.
+- 2026-08-30: one curator redaction on that face, at the owner's request:
+  a classmate's first name in a greeting line replaced with "Alexa"
+  (marked with an HTML comment in place). The name does not appear in the
+  hall's source specimens.
 
 ## Lost & found
 
