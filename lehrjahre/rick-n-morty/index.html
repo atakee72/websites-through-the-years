@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="#000000" name="theme-color"/>
+<meta content="Web site created using create-react-app" name="description"/>
+<link href="assets/4766627a4f-bootstrap.min.css" rel="stylesheet"/>
+<title>React App</title>
+<style>body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+</style><style>.App {
+  text-align: center;
+}
+
+.flex-container {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 30px 30px;
+  padding: 0.5rem;
+  margin: 0 auto;
+}
+
+.image {
+  border: 2px solid black;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  border: 1px solid #f1f1f1;
+   perspective: 1000px; /*Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+  padding: 5px;
+}
+
+.App-header {
+  font-size: calc(10px + 2vmin);
+} 
+
+.App-link {
+  color: #61dafb;
+}
+
+
+
+</style><style>.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    inset: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    width: 500px;
+    background-color: #fff;
+
+}
+
+.modal-header, .modal-footer {
+    padding: 10px;
+}
+
+.modal-title {
+    margin: 0;
+}
+
+.modal-body {
+    padding: 10px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+</style></head>
+<body><div class="curator-bar" style="position:relative;z-index:2147483647;background:#101418;color:#9aa4ae;font:13px/1.6 ui-monospace,monospace;padding:.45rem 1rem;border-bottom:1px solid #2c3640;"><a href="../../lehrjahre.html" style="color:#ffb454;text-decoration:none;">← The Lehrjahre wing</a> · rick-n-morty (Jan 2023) — frozen capture; nothing here is live.</div>
+<div id="root"><div class="App flex-container"><header class="App-header"><p>Rick And Morty</p></header><input placeholder="Search here" type="text"/><div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="1" class="image" src="assets/93cd3a9990-1.jpeg"/></div><div class="flip-card-back"><h1>Rick Sanchez<br/></h1><p><b>Location:</b> <br/> Citadel of Ricks</p><p><b>Origin: </b><br/>Earth (C-137)</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="2" class="image" src="assets/c17a98098c-2.jpeg"/></div><div class="flip-card-back"><h1>Morty Smith<br/></h1><p><b>Location:</b> <br/> Citadel of Ricks</p><p><b>Origin: </b><br/>unknown</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="3" class="image" src="assets/14ed18a120-3.jpeg"/></div><div class="flip-card-back"><h1>Summer Smith<br/></h1><p><b>Location:</b> <br/> Earth (Replacement Dimension)</p><p><b>Origin: </b><br/>Earth (Replacement Dimension)</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="4" class="image" src="assets/911d4d0597-4.jpeg"/></div><div class="flip-card-back"><h1>Beth Smith<br/></h1><p><b>Location:</b> <br/> Earth (Replacement Dimension)</p><p><b>Origin: </b><br/>Earth (Replacement Dimension)</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="5" class="image" src="assets/0eddbfc324-5.jpeg"/></div><div class="flip-card-back"><h1>Jerry Smith<br/></h1><p><b>Location:</b> <br/> Earth (Replacement Dimension)</p><p><b>Origin: </b><br/>Earth (Replacement Dimension)</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="6" class="image" src="assets/4dac79822a-6.jpeg"/></div><div class="flip-card-back"><h1>Abadango Cluster Princess<br/></h1><p><b>Location:</b> <br/> Abadango</p><p><b>Origin: </b><br/>Abadango</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="7" class="image" src="assets/d78b4b88c4-7.jpeg"/></div><div class="flip-card-back"><h1>Abradolf Lincler<br/></h1><p><b>Location:</b> <br/> Testicle Monster Dimension</p><p><b>Origin: </b><br/>Earth (Replacement Dimension)</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="8" class="image" src="assets/c58bb83b75-8.jpeg"/></div><div class="flip-card-back"><h1>Adjudicator Rick<br/></h1><p><b>Location:</b> <br/> Citadel of Ricks</p><p><b>Origin: </b><br/>unknown</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="9" class="image" src="assets/a3d0066e8c-9.jpeg"/></div><div class="flip-card-back"><h1>Agency Director<br/></h1><p><b>Location:</b> <br/> Earth (Replacement Dimension)</p><p><b>Origin: </b><br/>Earth (Replacement Dimension)</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="10" class="image" src="assets/74546da38c-10.jpeg"/></div><div class="flip-card-back"><h1>Alan Rails<br/></h1><p><b>Location:</b> <br/> Worldender's lair</p><p><b>Origin: </b><br/>unknown</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="11" class="image" src="assets/81c4b5d3d6-11.jpeg"/></div><div class="flip-card-back"><h1>Albert Einstein<br/></h1><p><b>Location:</b> <br/> Earth (Replacement Dimension)</p><p><b>Origin: </b><br/>Earth (C-137)</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="12" class="image" src="assets/a2d2630cd9-12.jpeg"/></div><div class="flip-card-back"><h1>Alexander<br/></h1><p><b>Location:</b> <br/> Anatomy Park</p><p><b>Origin: </b><br/>Earth (C-137)</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="13" class="image" src="assets/3e58345224-13.jpeg"/></div><div class="flip-card-back"><h1>Alien Googah<br/></h1><p><b>Location:</b> <br/> Earth (Replacement Dimension)</p><p><b>Origin: </b><br/>unknown</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="14" class="image" src="assets/8afb7ff87c-14.jpeg"/></div><div class="flip-card-back"><h1>Alien Morty<br/></h1><p><b>Location:</b> <br/> Citadel of Ricks</p><p><b>Origin: </b><br/>unknown</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="15" class="image" src="assets/9552ed6c52-15.jpeg"/></div><div class="flip-card-back"><h1>Alien Rick<br/></h1><p><b>Location:</b> <br/> Citadel of Ricks</p><p><b>Origin: </b><br/>unknown</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="16" class="image" src="assets/3d7f27c072-16.jpeg"/></div><div class="flip-card-back"><h1>Amish Cyborg<br/></h1><p><b>Location:</b> <br/> Earth (Replacement Dimension)</p><p><b>Origin: </b><br/>unknown</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="17" class="image" src="assets/804e1ac225-17.jpeg"/></div><div class="flip-card-back"><h1>Annie<br/></h1><p><b>Location:</b> <br/> Anatomy Park</p><p><b>Origin: </b><br/>Earth (C-137)</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="18" class="image" src="assets/882dc788a2-18.jpeg"/></div><div class="flip-card-back"><h1>Antenna Morty<br/></h1><p><b>Location:</b> <br/> Citadel of Ricks</p><p><b>Origin: </b><br/>unknown</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="19" class="image" src="assets/d284c1ddfa-19.jpeg"/></div><div class="flip-card-back"><h1>Antenna Rick<br/></h1><p><b>Location:</b> <br/> unknown</p><p><b>Origin: </b><br/>unknown</p><button>LEARN MORE</button></div></div></div></div><div class="flex-container"><div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><img alt="20" class="image" src="assets/5c021e5de0-20.jpeg"/></div><div class="flip-card-back"><h1>Ants in my Eyes Johnson<br/></h1><p><b>Location:</b> <br/> Interdimensional Cable</p><p><b>Origin: </b><br/>unknown</p><button>LEARN MORE</button></div></div></div></div></div></div></div>
+<script>
+/* Museum pantry — a curator addition, stocked once at capture time
+   (2026-08-30, 60 characters) from the public Rick and Morty API.
+   The exhibit makes no network requests. The search stays broken. */
+(function () {
+  var PANTRY = [{"id": 1, "name": "Rick Sanchez", "location": "Citadel of Ricks", "origin": "Earth (C-137)", "img": "pantry/1.jpeg"}, {"id": 2, "name": "Morty Smith", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/2.jpeg"}, {"id": 3, "name": "Summer Smith", "location": "Earth (Replacement Dimension)", "origin": "Earth (Replacement Dimension)", "img": "pantry/3.jpeg"}, {"id": 4, "name": "Beth Smith", "location": "Earth (Replacement Dimension)", "origin": "Earth (Replacement Dimension)", "img": "pantry/4.jpeg"}, {"id": 5, "name": "Jerry Smith", "location": "Earth (Replacement Dimension)", "origin": "Earth (Replacement Dimension)", "img": "pantry/5.jpeg"}, {"id": 6, "name": "Abadango Cluster Princess", "location": "Abadango", "origin": "Abadango", "img": "pantry/6.jpeg"}, {"id": 7, "name": "Abradolf Lincler", "location": "Testicle Monster Dimension", "origin": "Earth (Replacement Dimension)", "img": "pantry/7.jpeg"}, {"id": 8, "name": "Adjudicator Rick", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/8.jpeg"}, {"id": 9, "name": "Agency Director", "location": "Earth (Replacement Dimension)", "origin": "Earth (Replacement Dimension)", "img": "pantry/9.jpeg"}, {"id": 10, "name": "Alan Rails", "location": "Worldender's lair", "origin": "unknown", "img": "pantry/10.jpeg"}, {"id": 11, "name": "Albert Einstein", "location": "Earth (Replacement Dimension)", "origin": "Earth (C-137)", "img": "pantry/11.jpeg"}, {"id": 12, "name": "Alexander", "location": "Anatomy Park", "origin": "Earth (C-137)", "img": "pantry/12.jpeg"}, {"id": 13, "name": "Alien Googah", "location": "Earth (Replacement Dimension)", "origin": "unknown", "img": "pantry/13.jpeg"}, {"id": 14, "name": "Alien Morty", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/14.jpeg"}, {"id": 15, "name": "Alien Rick", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/15.jpeg"}, {"id": 16, "name": "Amish Cyborg", "location": "Earth (Replacement Dimension)", "origin": "unknown", "img": "pantry/16.jpeg"}, {"id": 17, "name": "Annie", "location": "Anatomy Park", "origin": "Earth (C-137)", "img": "pantry/17.jpeg"}, {"id": 18, "name": "Antenna Morty", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/18.jpeg"}, {"id": 19, "name": "Antenna Rick", "location": "unknown", "origin": "unknown", "img": "pantry/19.jpeg"}, {"id": 20, "name": "Ants in my Eyes Johnson", "location": "Interdimensional Cable", "origin": "unknown", "img": "pantry/20.jpeg"}, {"id": 21, "name": "Aqua Morty", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/21.jpeg"}, {"id": 22, "name": "Aqua Rick", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/22.jpeg"}, {"id": 23, "name": "Arcade Alien", "location": "Immortality Field Resort", "origin": "unknown", "img": "pantry/23.jpeg"}, {"id": 24, "name": "Armagheadon", "location": "Signus 5 Expanse", "origin": "Signus 5 Expanse", "img": "pantry/24.jpeg"}, {"id": 25, "name": "Armothy", "location": "Post-Apocalyptic Earth", "origin": "Post-Apocalyptic Earth", "img": "pantry/25.jpeg"}, {"id": 26, "name": "Arthricia", "location": "Purge Planet", "origin": "Purge Planet", "img": "pantry/26.jpeg"}, {"id": 27, "name": "Artist Morty", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/27.jpeg"}, {"id": 28, "name": "Attila Starwar", "location": "Interdimensional Cable", "origin": "unknown", "img": "pantry/28.jpeg"}, {"id": 29, "name": "Baby Legs", "location": "Interdimensional Cable", "origin": "unknown", "img": "pantry/29.jpeg"}, {"id": 30, "name": "Baby Poopybutthole", "location": "unknown", "origin": "unknown", "img": "pantry/30.jpeg"}, {"id": 31, "name": "Baby Wizard", "location": "Earth (Replacement Dimension)", "origin": "unknown", "img": "pantry/31.jpeg"}, {"id": 32, "name": "Bearded Lady", "location": "Earth (Replacement Dimension)", "origin": "unknown", "img": "pantry/32.jpeg"}, {"id": 33, "name": "Beebo", "location": "Venzenulon 7", "origin": "Venzenulon 7", "img": "pantry/33.jpeg"}, {"id": 34, "name": "Benjamin", "location": "Interdimensional Cable", "origin": "unknown", "img": "pantry/34.jpeg"}, {"id": 35, "name": "Bepisian", "location": "Bepis 9", "origin": "Bepis 9", "img": "pantry/35.jpeg"}, {"id": 36, "name": "Beta-Seven", "location": "unknown", "origin": "unknown", "img": "pantry/36.jpeg"}, {"id": 37, "name": "Beth Sanchez", "location": "Earth (C-500A)", "origin": "Earth (C-500A)", "img": "pantry/37.jpeg"}, {"id": 38, "name": "Beth Smith", "location": "Earth (C-137)", "origin": "Earth (C-137)", "img": "pantry/38.jpeg"}, {"id": 39, "name": "Beth Smith", "location": "Earth (Evil Rick's Target Dimension)", "origin": "Earth (Evil Rick's Target Dimension)", "img": "pantry/39.jpeg"}, {"id": 40, "name": "Beth's Mytholog", "location": "Nuptia 4", "origin": "Nuptia 4", "img": "pantry/40.jpeg"}, {"id": 41, "name": "Big Boobed Waitress", "location": "Fantasy World", "origin": "Fantasy World", "img": "pantry/41.jpeg"}, {"id": 42, "name": "Big Head Morty", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/42.jpeg"}, {"id": 43, "name": "Big Morty", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/43.jpeg"}, {"id": 44, "name": "Body Guard Morty", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/44.jpeg"}, {"id": 45, "name": "Bill", "location": "Earth (C-137)", "origin": "Earth (C-137)", "img": "pantry/45.jpeg"}, {"id": 46, "name": "Bill", "location": "unknown", "origin": "Earth (Replacement Dimension)", "img": "pantry/46.jpeg"}, {"id": 47, "name": "Birdperson", "location": "Planet Squanch", "origin": "Bird World", "img": "pantry/47.jpeg"}, {"id": 48, "name": "Black Rick", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/48.jpeg"}, {"id": 49, "name": "Blamph", "location": "Interdimensional Cable", "origin": "unknown", "img": "pantry/49.jpeg"}, {"id": 50, "name": "Blim Blam", "location": "Earth (Replacement Dimension)", "origin": "unknown", "img": "pantry/50.jpeg"}, {"id": 51, "name": "Blue Diplomat", "location": "Interdimensional Cable", "origin": "unknown", "img": "pantry/51.jpeg"}, {"id": 52, "name": "Blue Footprint Guy", "location": "Post-Apocalyptic Earth", "origin": "Post-Apocalyptic Earth", "img": "pantry/52.jpeg"}, {"id": 53, "name": "Blue Shirt Morty", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/53.jpeg"}, {"id": 54, "name": "Bobby Moynihan", "location": "Interdimensional Cable", "origin": "unknown", "img": "pantry/54.jpeg"}, {"id": 55, "name": "Boobloosian", "location": "Nuptia 4", "origin": "unknown", "img": "pantry/55.jpeg"}, {"id": 56, "name": "Bootleg Portal Chemist Rick", "location": "Citadel of Ricks", "origin": "unknown", "img": "pantry/56.jpeg"}, {"id": 57, "name": "Borpocian", "location": "unknown", "origin": "unknown", "img": "pantry/57.jpeg"}, {"id": 58, "name": "Brad", "location": "Earth (Replacement Dimension)", "origin": "Earth (Replacement Dimension)", "img": "pantry/58.jpeg"}, {"id": 59, "name": "Brad Anderson", "location": "Earth (Replacement Dimension)", "origin": "Earth (Replacement Dimension)", "img": "pantry/59.jpeg"}, {"id": 60, "name": "Calypso", "location": "unknown", "origin": "unknown", "img": "pantry/60.jpeg"}];
+  var cards = document.querySelectorAll('.flip-card');
+  if (!cards.length || PANTRY.length < cards.length) return;
+  var stock = PANTRY.slice();
+  for (var i = stock.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = stock[i]; stock[i] = stock[j]; stock[j] = t;
+  }
+  cards.forEach(function (card, i) {
+    var c = stock[i];
+    var img = card.querySelector('.flip-card-front img');
+    if (img) { img.src = c.img; img.alt = c.id; }
+    var back = card.querySelector('.flip-card-back');
+    if (!back) return;
+    var h1 = back.querySelector('h1');
+    if (h1) { h1.textContent = c.name; h1.appendChild(document.createElement('br')); }
+    var ps = back.querySelectorAll('p');
+    if (ps[0] && ps[0].lastChild && ps[0].lastChild.nodeType === 3) { ps[0].lastChild.nodeValue = ' ' + c.location; }
+    if (ps[1] && ps[1].lastChild && ps[1].lastChild.nodeType === 3) { ps[1].lastChild.nodeValue = c.origin; }
+  });
+})();
+</script>
+</body></html>
