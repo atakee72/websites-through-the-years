@@ -299,6 +299,16 @@ the curator (unlike the recovered sites, which are untouchable):
   a classmate's first name in a greeting line replaced with "Alexa"
   (marked with an HTML comment in place). The name does not appear in the
   hall's source specimens.
+- 2026-08-30: second promoted sub-exhibit — `lehrjahre/rick-n-morty/`
+  (CA-Projects, Project-3), captured live and fed: the grid holds the
+  twenty characters the app really fetched. First pantry-fed face: sixty
+  characters (data + avatars) were fetched once at capture time from the
+  public Rick and Morty API into `pantry/`, and a curator-marked inline
+  script — the face's only script — serves a random twenty per visit. No
+  network requests ever leave the exhibit; with JS off the frozen page-1
+  grid shows. The broken search was left broken (the fix in `App.js` is
+  commented out in the original; the hall plaque exhibits it as a
+  specimen). Walkable count: ten.
 
 ## Lost & found
 

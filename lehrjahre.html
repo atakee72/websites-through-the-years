@@ -37,7 +37,7 @@
   this wing is the first time any of them has been seen in public.</p>
   <p>They are amateur, naive, sometimes childish attempts to build something,
   and they are shown exactly as they stopped: placeholder text shipped, buttons
-  that do nothing, sections that render a single word. Nine of them are walkable
+  that do nothing, sections that render a single word. Ten of them are walkable
   — captured as frozen pages, every asset local, nothing live. The rest are
   catalogue cards. Every card opens its plaque — click one. Where a card quotes something in monospace, it is quoted
   verbatim.</p>
@@ -113,6 +113,41 @@ export default NavBar</code></pre>
       </div>
       <button class="lj-plaque-btn" type="button">Read the plaque →</button>
       <p class="lj-door"><a class="go" href="lehrjahre/my-first-react-app/index.html">Enter the exhibit →</a></p>
+    </div>
+
+    <div class="lj-card">
+      <span class="lj-badge">walkable · pantry-fed</span>
+      <h3>rick-n-morty <span class="lj-date">Jan 2023</span></h3>
+      <div class="lj-shot"><a href="lehrjahre/rick-n-morty/index.html"><img src="assets/lehrjahre/rick-n-morty.png" alt="Rick and Morty character grid with a search box" loading="lazy"></a></div>
+      <p class="lj-hook">The search box searches — into the console, and no further.</p>
+      <div class="lj-plaque">
+        <p>My second React app fetched twenty Rick and Morty characters from
+        the public API every time it started. The museum could not freeze a
+        network, so it stocked a pantry instead: sixty characters fetched
+        once, on capture day, and stored inside the page. Each visit the
+        exhibit serves a different twenty. Nothing is requested; the pantry
+        never empties.</p>
+        <div class="specimen-label">Specimen — App.js, the broken search</div>
+        <pre class="specimen"><code>   const filterCharacters = ()=&gt; {
+    const filteredCharacters = characters.filter((character)=&gt; { 
+      return character.name.toUpperCase().includes(inputValue.toUpperCase())})
+      console.log('filteredCharacters :&gt;&gt; ', filteredCharacters);
+   }
+   filterCharacters();
+
+//    if (filteredCharacters.length != 0) {
+//     characters = filteredCharacters;
+//  }</code></pre>
+        <p>Typing in the search box computed the filtered list, logged it to
+        the console — and stopped. The two lines that would have put it on
+        screen sit commented out, directly underneath. They have been one
+        keystroke from working since January 2023. In the frozen face even
+        the console is silent, so the search now does exactly what it always
+        appeared to do: nothing.</p>
+        <p class="lj-charm">Every log label in the source ends in :&gt;&gt; — "filteredCharacters :&gt;&gt;" was the only place the search results ever appeared.</p>
+      </div>
+      <button class="lj-plaque-btn" type="button">Read the plaque →</button>
+      <p class="lj-door"><a class="go" href="lehrjahre/rick-n-morty/index.html">Enter the exhibit →</a></p>
     </div>
 
     <div class="lj-card">
@@ -355,7 +390,9 @@ export default NavBar</code></pre>
   in 2026, frozen: scripts removed, every image and font stored locally,
   outside links disabled with their originals kept in
   <code>data-original</code>. Broken images are original breakage, not the
-  museum's. Details in the <a href="restoration-lab.html">restoration lab</a>
+  museum's. Where a face is marked pantry-fed, the museum stocked it at
+  capture time — data fetched once, stored in the page, served by a few
+  curator lines; the exhibit still makes no requests. Details in the <a href="restoration-lab.html">restoration lab</a>
   and the repository's provenance notes.</p>
 </section>
 
