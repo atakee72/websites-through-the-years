@@ -138,7 +138,9 @@ series finale).
 - Only these paths change: three new `lehrjahre/<widget>/` folders,
   `assets/lehrjahre/sprint-widgets.png` + `sprint-widgets-2.png`,
   `lehrjahre.html` (card + count), `index.html` (two count sites),
-  `README.md`. Everything else byte-identical.
+  `assets/museum.css` (one rule: `.lj-door + .lj-door { margin-top: 0; }`
+  — stacked doors must not be spread apart by `.lj-door`'s
+  `margin-top: auto`), `README.md`. Everything else byte-identical.
 - Simple commits, no Claude signature/footer; user previews before push;
   after approved push: Pages `built`, live checks, SPN save hall + three
   doors.
