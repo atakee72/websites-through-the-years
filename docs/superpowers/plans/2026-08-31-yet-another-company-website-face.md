@@ -170,7 +170,8 @@ with sync_playwright() as p:
 
     # crescent moon: Material Symbols loaded locally and applied
     pg.goto(B + 'home.html', wait_until='networkidle')
-    assert pg.evaluate("document.fonts.check(\"20px 'Material Symbols Outlined'\")")
+    assert pg.evaluate(
+        "document.fonts.ready.then(() => document.fonts.check(\"20px 'Material Symbols Outlined'\"))")
     pg.screenshot(path='yacw-home.png')
 
     # the form flow works: book a table, confirmation reads it back
