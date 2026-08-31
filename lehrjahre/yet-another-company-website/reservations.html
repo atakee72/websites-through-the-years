@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="zxx">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./styles.css">
+        
+        
+        <link href="local-fonts/montserrat.css" rel="stylesheet">
+        <link rel="stylesheet" href="local-fonts/material-symbols.css" />
+        <title>Project Kick-Off /Reservations</title>
+    </head>
+
+    <body><div class="curator-bar" style="background:#101418;color:#9aa4ae;font:13px/1.6 ui-monospace,monospace;padding:.45rem 1rem;border-bottom:1px solid #2c3640;position:relative;z-index:2147483647;"><a href="../../lehrjahre.html" style="color:#ffb454;text-decoration:none;">← The Lehrjahre wing</a> · Yet Another Company Website (2022–2023) — frozen capture; nothing here is live.</div>
+        <header class="gridItem-1" style="background-image: url(./img/pexels-anjana-c-674010.jpg); height: 25%; display: flex; align-items: center; justify-content: space-around;">
+    
+            <div id="divLogo" style="transform: rotate(-30deg);">
+                <p><span class="material-symbols-outlined" style="height: 5%; width: 5%; font-size: 7em">brightness_3</span>
+                </p>
+            </div>
+            
+            <p style="text-align: center; font-size: 5rem;">Yet Another Company Website</p>
+        </header>
+        
+        <div class="gridContainer">
+            
+    
+            <nav class="gridItem-2">
+                <div class="nav">
+                    <ul style="font-weight: bold;">
+                        <div class="divNav">
+                            <li><a href="./home.html">Home</a></li>
+                            <li><p style="text-decoration: underline; color: white; margin: 0; padding: 0;">Reservations</p></li>
+                            <li><a href="./special.html"> Special</a></li>
+                            <li><a href="./contact.html"> Contact</a></li>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="gridItem-3">
+
+                <section>
+        
+                    <p style="column-count: 4; text-align: justify; border: 0.5px solid lightgray; padding: 1%; margin: 0 3% 0 3%;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum fugiat magnam sint recusa ndae explicabo asperiores tenetur nulla autem quis, eligendi vel consectetur sed iure deserunt architecto aspernatur delectus distinctio dolorem. Lorem ipsum dolopit quia officiis fugiat, modi officia doloremque, ipsum facere debitis cumque iusto. Suscipit animi quae est numquam enim dicta blanditiis. Suscipit animi quae est numquam enim dicta blanditiis. Suscipit animi quae est numquam enim dicta blanditiis.</p>
+        
+                </section>
+
+                <br>
+        
+                <section>
+        
+                    <p style="column-count: 1; text-align: justify; border: 0.5px solid lightgray; padding: 1%; margin: 0 3% 0 3%;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum fugiat magnam sint recusandae explicabo asperiores tenetur nulla autem quis, eligendi vel consectepora suscipit quia officiis fugiat, modi officia doloremque, ipsum facere debitis cumque iusto. Suscipit animi quae est numquam enim dicta blanditiis. Suscipit animi quae est numquam enim dicta blanditiis. Suscipit animi quae est numquam enim dicta blanditiis.</p>
+        
+                </section>
+
+                <br>
+
+                <section>
+
+                    <p><h2 style="text-align: center;">Please fill in and check appropriate options below and click to send the form:</h2></p>
+                    
+                    <br>
+
+                    <div style="padding: 30px;">
+                    
+                        <form action="confirmation-page.html" method="get" autocomplete="on" target="_self" style="text-align: center;">
+
+                            <fieldset style="padding: 1%; margin: 0 1% 0 1%; border: 0.5px solid lightgray;">
+                                <legend>Reservation form</legend>
+                                
+
+                                <div id="subSect1" style="padding-right: 10%;">
+                                    <label style="display: block;" for="fname">Firstname</label>
+                                    <input type="text" name="fname" id="sname" required> 
+                                    <br><br>
+                                    <label style="display: block;" for="sname">Surname</label>
+                                    <input type="text" name="sname" id="sname" required> 
+                                    <br> <br>
+                                    <label style="display: block;" for="bday">Birthdate</label>
+                                    <input type="date" name="bday" id="bday" required>
+                                    <br> <br>
+                                    <label style="display: block;" for="email">E-mail</label>
+                                    <input type="email" id="email" name="email" required> 
+                                    <br> <br>
+    
+                                    <p><h4>Sex</h4></p>
+
+                                    <input id="radio1" type="radio" name="sex" value="Female" required> 
+                                    <label for="radio1">Female</label>
+                                    <br> <br>
+                                    <input id="radio2" type="radio" name="sex" value="Male" checked> 
+                                    <label for="radio2">Male</label><br> <br>
+                                </div>
+                            
+                                <div id="subSect2">
+                                    <p><h4>I myself ...</h4></p>
+                        
+                                    <select name="travellerType" id="travellerType" size="5" multiple>
+                                        <option value="t0" selected><i>Please select ... (</i></option>
+                                        <option value="Frequent traveller">am a frequent traveller</option>
+                                        <option value="Occasional traveller">am an occasional traveller</option>
+                                        <option value="Rare traveller">would like to travel sometimes</option>
+                                        <option value="Not a keen traveller">am a house bird</option>
+                                        <option value="Hates travelling">do not like travelling</option>
+                                    </select><br>
+                                    <i>Ctrl+click to place multiple selections</i>
+        
+                                    <br><br><br>
+
+                                    <p><h4>Tell us something more about yourself</h4></p>
+
+                                    <textarea style="display: inline-block; " name="textArea" id="textArea" cols="65" rows="12" placeholder="Click and start writing ..."></textarea>
+                                    <br>
+                                    <input id="checkbox" type="checkbox" name="treatment" value="Does not want any special treatment" checked> 
+                                    <label for="checkbox1">I do <strong>NOT</strong> want any special treatment</label>
+                                    <br><br><br>
+
+                                    <input type="submit" value="Submit the form" style="color: white; text-decoration: none; background-color: gray; width:50%; height: 100px; border: 10px solid white; border-radius: 20px; box-shadow: 10px 10px gray;">
+
+                                </div>
+
+                            </fieldset>
+
+                        </form>
+
+                    </div>
+
+                </section>
+
+                <section style="border: 0.5px solid lightgray; padding: 1%; margin: 0 3% 0 3%;">
+                    <p><h4><i>Please also read our Terms and Conditions below.</i> </h4></p> 
+            
+                    <br>
+        
+                    <p id="TACtitle"><h3 style="text-align: center;">Terms and Conditions</h3></p>
+            
+                    <div>
+                        <ul>
+                            <ul>
+                                <li><strong>Level1</strong>
+                                    <ul>
+                                        <ul>
+                                            <li><strong>Level2</strong>
+                                                <ul>
+                                                    <li>a. Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias voluptates vel accusantium optio fugiat mollitia architecto excepturi consectetur commodi eveniet blanditiis, dolores est reiciendis expedita cupiditate.</li>
+                                                    <li>b. Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem adipisci asperiores architecto praesentium harum itaque cumque suscipit!</li>
+                                                </ul>
+                                                    <li><strong>At vero eos accusam et justo duo dolores et ea rebum.</li>
+                                                <ul>
+                                                    <li><strong>Stet clita kasd gubergren, ....</strong></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </ul>
+                    </div>
+        
+                    <div>
+                        <input type="checkbox" name="consent" id="consent" checked><label for="consent">I consent to ...</label>
+                    </div>
+            
+                    <br><br>
+        
+                    <div>
+                        <button style="color: white; background-color: gray; height: 100px; padding: 0; border: 20px solid white;">Register</button>
+                    </div>
+                </section>
+                
+            </main>
+                        
+        </div>
+
+        
+        <footer class="gridItem-4" style="background-color: gray; color: white;">
+    
+            <p>copyright @ atakee - Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+        </footer>
+
+    </body>
+</html>
