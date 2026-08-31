@@ -192,7 +192,7 @@ git commit -m "Lehrjahre: Daily Wisdom by Chuck Norris captured with 40-joke pan
 curl -sI --max-time 15 -o /dev/null -w '%{http_code}\n' "https://origin-east-01-drupal-fishwatch.woc.noaa.gov/sites/default/files/4_9.jpg" || echo DEAD
 ```
 
-`200` → images alive, capture WITHOUT `--dead-pattern` (tool localizes them; expect a big but bounded download). Anything else (000/4xx/5xx/DEAD) → images dead, add `--dead-pattern woc.noaa.gov` so they become intended dead references with `data-original`. Record which branch ran.
+`200` → images alive — CAUTION: the data holds 116 species / 619 NOAA image URLs; localizing them could bloat the repo by tens of MB. On this branch, capture WITHOUT `--dead-pattern`, then before committing measure `du -sh lehrjahre/fisheries/`; if it exceeds 30 MB, report DONE_WITH_CONCERNS and wait for a controller ruling instead of committing. Anything else (000/4xx/5xx/DEAD, the expected case) → images dead, add `--dead-pattern woc.noaa.gov` so they become intended dead references with `data-original`. Record which branch ran.
 
 - [ ] **Step 2: Serve + capture.**
 
@@ -307,7 +307,7 @@ $VPY .superpowers/sdd/lehrjahre/tools/capture_face.py \
   --settle-ms 8000
 ```
 
-Kill 4020 by PID.
+Kill 4020 by PID. If the probe was OK but the captured page renders empty or near-empty (the widget builds its URL with an empty `&q=` — the API may reject what the probe accepted), report it honestly with the page's console output; do not fake content.
 
 - [ ] **Step 4: Key-absence proof + seal.**
 
@@ -434,7 +434,19 @@ with:
 
 (Behavior for every existing single-door card is unchanged.)
 
-- [ ] **Step 3: Specimen fidelity.** Same md5 recipe as prior cycles, anchored on `ChuckNorris/main.js, createCard</div>`; expected `22c38800f32b4657646a67be06dd32b9` (= `sed -n '22,26p' "$P2/Extra with Ajax/ChuckNorris/main.js" | md5sum`).
+- [ ] **Step 3: Specimen fidelity.**
+
+```bash
+python3 - <<'EOF'
+import hashlib, html, pathlib, re
+page = pathlib.Path('lehrjahre.html').read_text(encoding='utf-8')
+m = re.search(r'ChuckNorris/main\.js, createCard</div>\s*<pre class="specimen"><code>(.*?)</code></pre>', page, re.S)
+src = html.unescape(m.group(1)) + '\n'
+print(hashlib.md5(src.encode()).hexdigest())
+EOF
+```
+
+Expected: `22c38800f32b4657646a67be06dd32b9` (= `sed -n '22,26p' "$P2/Extra with Ajax/ChuckNorris/main.js" | md5sum`). Mismatch → fix the specimen in lehrjahre.html, never the source.
 
 - [ ] **Step 4: Counts.** `Eleven of them are walkable` → `Twelve of them are walkable` (lehrjahre.html AND index.html); `<span class="chip">11 walkable faces</span>` → `12 walkable faces` (index.html). Then `grep -rn -i "eleven of them\|11 walkable" *.html` → no hits.
 
@@ -454,7 +466,71 @@ with:
 
 (If fisheries images were alive or news shipped empty, adjust the parenthetical facts to match — the README never states anything false.)
 
-- [ ] **Step 6: Hall test.** `$SCRATCH/hall_check19.py` — the cycle-4 hall test with: counts 19 (cards/plaques/buttons/hooks), `'Twelve of them are walkable'`, card locator `.lj-card:has(a[href="lehrjahre/chuck-norris/index.html"])`, dialog text asserts `'createCard' in dtext` and `'cardContainer.innerHTML' in dtext`, `.lj-dialog .specimen` count 1, **all three doors present in the open dialog** (`pg.locator('.lj-dialog .lj-door').count() == 3` — the wiring clones every `.lj-door`; verify, and if it clones only the first, that is a FINDING to fix in the hall wiring script, not to paper over), Escape-close returns plaque, door №2 navigates to `lehrjahre/fisheries/index.html`, zero external resources, JS-off degrade (19 inline plaques, buttons hidden), desktop/plaque/mobile screenshots `hall19-*.png`. Expected: `HALL OK`.
+- [ ] **Step 6: Hall test.** Write `$SCRATCH/hall_check19.py` and run with `$VPY` from `$SCRATCH`:
+
+```python
+from playwright.sync_api import sync_playwright
+
+BASE = 'http://localhost:8765/lehrjahre.html'
+CARD = '.lj-card:has(a[href="lehrjahre/chuck-norris/index.html"])'
+
+with sync_playwright() as p:
+    b = p.chromium.launch()
+    pg = b.new_page(viewport={'width': 1280, 'height': 900})
+    errs = []
+    pg.on('console', lambda m: errs.append(m.text) if m.type == 'error' else None)
+    pg.goto(BASE, wait_until='networkidle')
+
+    assert pg.locator('.lj-grid .lj-card').count() == 19
+    assert pg.locator('.lj-plaque').count() == 19
+    assert pg.locator('.lj-plaque-btn').count() == 19
+    assert pg.locator('.lj-hook').count() == 19
+    assert 'Twelve of them are walkable' in pg.inner_text('body')
+
+    card = pg.locator(CARD)
+    assert card.locator('.lj-door').count() == 3
+    card.locator('.lj-plaque-btn').click()
+    assert pg.locator('.lj-dialog[open]').count() == 1
+    dtext = pg.inner_text('.lj-dialog')
+    assert 'createCard' in dtext and 'cardContainer.innerHTML' in dtext
+    assert pg.locator('.lj-dialog .specimen').count() == 1
+    assert pg.locator('.lj-dialog .lj-door').count() == 3  # wiring clones ALL doors
+    pg.keyboard.press('Escape')
+    assert pg.locator('.lj-dialog[open]').count() == 0
+    assert card.locator('.lj-plaque').count() == 1
+
+    with pg.expect_navigation():
+        card.locator('.lj-door a').nth(1).click()  # door 2: fisheries
+    assert pg.url.endswith('lehrjahre/fisheries/index.html')
+    pg.goto(BASE, wait_until='networkidle')
+
+    ext = pg.evaluate("performance.getEntriesByType('resource').map(r=>r.name)"
+                      ".filter(n=>!n.startsWith(location.origin))")
+    assert ext == [], ext
+    real = [e for e in errs if 'favicon' not in e]
+    assert real == [], real
+
+    pg.screenshot(path='hall19-desktop.png', full_page=True)
+    pg.locator(CARD).locator('.lj-plaque-btn').click()
+    pg.screenshot(path='hall19-plaque.png')
+    pg.keyboard.press('Escape')
+    pm = b.new_page(viewport={'width': 390, 'height': 844})
+    pm.goto(BASE, wait_until='networkidle')
+    pm.screenshot(path='hall19-mobile.png', full_page=True)
+
+    ctx = b.new_context(java_script_enabled=False)
+    pn = ctx.new_page()
+    pn.goto(BASE)
+    assert pn.eval_on_selector_all('.lj-plaque',
+        "els => els.length === 19 && els.every(e => getComputedStyle(e).display !== 'none')")
+    assert pn.eval_on_selector_all('.lj-plaque-btn',
+        "els => els.every(e => getComputedStyle(e).display === 'none')")
+
+    print('HALL OK')
+    b.close()
+```
+
+Expected: `HALL OK` + three screenshots.
 
 - [ ] **Step 7: Scope + commit.**
 
