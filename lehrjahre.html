@@ -37,7 +37,7 @@
   this wing is the first time any of them has been seen in public.</p>
   <p>They are amateur, naive, sometimes childish attempts to build something,
   and they are shown exactly as they stopped: placeholder text shipped, buttons
-  that do nothing, sections that render a single word. Ten of them are walkable
+  that do nothing, sections that render a single word. Eleven of them are walkable
   — captured as frozen pages, every asset local, nothing live. The rest are
   catalogue cards. Every card opens its plaque — click one. Where a card quotes something in monospace, it is quoted
   verbatim.</p>
@@ -148,6 +148,43 @@ export default NavBar</code></pre>
       </div>
       <button class="lj-plaque-btn" type="button">Read the plaque →</button>
       <p class="lj-door"><a class="go" href="lehrjahre/rick-n-morty/index.html">Enter the exhibit →</a></p>
+    </div>
+
+    <div class="lj-card">
+      <span class="lj-badge">walkable · still works</span>
+      <h3>Yet Another Company Website <span class="lj-date">Nov 2022</span></h3>
+      <div class="lj-shot"><a href="lehrjahre/yet-another-company-website/home.html"><img src="assets/lehrjahre/yet-another-company-website.png" alt="Dark restaurant home page, crescent moon icon, header 'Yet Another Company Website'" loading="lazy"></a></div>
+      <p class="lj-hook">A restaurant whose header admits it: Yet Another Company Website.</p>
+      <div class="lj-plaque">
+        <p>The first thing I built at the bootcamp: a restaurant site that
+        never got a name — the header says "Yet Another Company Website", the
+        browser tab still says "Project Kick-Off". Lorem ipsum stands in for
+        every paragraph the restaurant never wrote. But the reservation form
+        works: book a table and the confirmation page reads your booking back
+        to you — the wing's only working two-page flow, alive since November
+        2022.</p>
+        <div class="specimen-label">Specimen — confirmation-page.js, the rockets</div>
+        <pre class="specimen"><code>let params = (new URL(document.location)).searchParams;
+console.log("🚀 ~ params:", params);
+
+let email = params.get("email");
+console.log("🚀 ~ email:", email);
+const emailPlace = document.querySelector(".email")
+emailPlace.innerHTML = email
+
+let fname = params.get("fname");
+console.log("🚀 ~ fname:", fname);
+const fnamePlace = document.querySelector(".fname")
+fnamePlace.innerHTML = fname</code></pre>
+        <p>Every log in that file launches a little rocket — the 🚀 ~ prefix a
+        VS Code extension stamped on the era. The museum kept the rockets and
+        defused one booby trap: the original pasted your booking into the page
+        as live HTML; the exhibit pastes it as text. Everything else is
+        untouched.</p>
+        <p class="lj-charm">The form's checkbox arrives pre-ticked: "I do NOT want any special treatment."</p>
+      </div>
+      <button class="lj-plaque-btn" type="button">Read the plaque →</button>
+      <p class="lj-door"><a class="go" href="lehrjahre/yet-another-company-website/home.html">Enter the exhibit →</a></p>
     </div>
 
     <div class="lj-card">

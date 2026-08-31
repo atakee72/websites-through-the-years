@@ -309,6 +309,17 @@ the curator (unlike the recovered sites, which are untouchable):
   grid shows. The broken search was left broken (the fix in `App.js` is
   commented out in the original; the hall plaque exhibits it as a
   specimen). Walkable count: ten.
+- 2026-08-31: third promoted sub-exhibit — `lehrjahre/yet-another-company-website/`
+  (CA-Projects, Project-1). Always plain HTML, so it was copied, not
+  captured, and its reservation→confirmation form flow still works. Museum
+  treatment: both Google-Fonts stylesheets (Montserrat, Material Symbols)
+  localized into `local-fonts/`; the contact page's Google-Maps embed
+  deadened with the original URL in `data-original`; and one marked
+  security patch in `confirmation-page.js` — the original wrote the
+  visitor's form values into the page with `innerHTML` (a reflected-XSS
+  vector on a public origin), the exhibit writes them with `textContent`.
+  The 🚀 console logs and everything else ship untouched. Walkable count:
+  eleven.
 
 ## Lost & found
 
