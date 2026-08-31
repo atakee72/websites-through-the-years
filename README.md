@@ -320,6 +320,18 @@ the curator (unlike the recovered sites, which are untouchable):
   vector on a public origin), the exhibit writes them with `textContent`.
   The 🚀 console logs and everything else ship untouched. Walkable count:
   eleven.
+- 2026-08-31: the sprint widgets — three small faces behind one card:
+  `lehrjahre/chuck-norris/` (40 jokes stocked at capture from the keyless
+  public API; a curator-marked pantry script — the face's only script —
+  serves one per visit with `textContent`), `lehrjahre/fisheries/`
+  (frozen render of the hardcoded NOAA species data; photo fate as found
+  at capture, dead links kept in `data-original`: a second frozen state,
+  `index-open.html`, shows the first species opened, its Show/Hide
+  buttons curator-wired as links), and `lehrjahre/news-tr/` (captured
+  the day NewsAPI had no headlines left for country=tr — an empty front
+  page, kept honestly; fetched with the owner's own API key at capture
+  only, never committed; the exhibit holds no key and makes no
+  requests). Walkable count: twelve.
 
 ## Lost & found
 

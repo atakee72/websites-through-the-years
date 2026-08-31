@@ -37,7 +37,7 @@
   this wing is the first time any of them has been seen in public.</p>
   <p>They are amateur, naive, sometimes childish attempts to build something,
   and they are shown exactly as they stopped: placeholder text shipped, buttons
-  that do nothing, sections that render a single word. Eleven of them are walkable
+  that do nothing, sections that render a single word. Twelve of them are walkable
   — captured as frozen pages, every asset local, nothing live. The rest are
   catalogue cards. Every card opens its plaque — click one. Where a card quotes something in monospace, it is quoted
   verbatim.</p>
@@ -185,6 +185,41 @@ fnamePlace.innerHTML = fname</code></pre>
       </div>
       <button class="lj-plaque-btn" type="button">Read the plaque →</button>
       <p class="lj-door"><a class="go" href="lehrjahre/yet-another-company-website/home.html">Enter the exhibit →</a></p>
+    </div>
+
+    <div class="lj-card">
+      <span class="lj-badge">walkable · three doors</span>
+      <h3>The sprint widgets <span class="lj-date">Dec 2022</span></h3>
+      <div class="lj-shot"><a href="lehrjahre/chuck-norris/index.html"><img src="assets/lehrjahre/sprint-widgets.png" alt="Daily Wisdom by Chuck Norris, one joke in a card" loading="lazy"></a></div>
+      <p class="lj-hook">Chuck Norris wisdom, a fisheries browser, Turkish news — one sprint, three doors.</p>
+      <div class="lj-plaque">
+        <p>Sprint exercises: each of these was an afternoon, a fetch call,
+        and a div to put the result in. The museum gives them three small
+        doors. Behind the first, Chuck Norris dispenses wisdom from a pantry
+        of forty jokes stocked on capture day — a different one each visit.
+        Behind the second, a browser of NOAA fish species whose photos sank
+        with the government image server that hosted them — names, biology
+        and habitat swim on. One fish stands open — its Show button is the
+        only one of the 116 that still works. Behind the third, the day
+        NewsAPI had no headlines left for Turkey — an empty front page,
+        kept honestly.</p>
+        <div class="lj-shot"><img src="assets/lehrjahre/sprint-widgets-2.png" alt="The fisheries browser, species cards" loading="lazy"></div>
+        <div class="specimen-label">Specimen — ChuckNorris/main.js, createCard</div>
+        <pre class="specimen"><code>function createCard(wisdom) {
+    const cardContainer = document.getElementById("card-container");
+    cardContainer.innerHTML = "";
+    cardContainer.innerHTML = wisdom.value;
+}</code></pre>
+        <p>Empty the container, then fill it — belt and braces, in two
+        consecutive lines. The pantry that serves the jokes now is curator
+        code and uses textContent; Chuck's original createCard is retired to
+        this plaque.</p>
+        <p class="lj-charm">Two of the three titles promise dailiness — "Daily Wisdom by Chuck Norris", "Daily News From Turkey" — from pages that never saw a second day.</p>
+      </div>
+      <button class="lj-plaque-btn" type="button">Read the plaque →</button>
+      <p class="lj-door"><a class="go" href="lehrjahre/chuck-norris/index.html">Daily Wisdom by Chuck Norris →</a></p>
+      <p class="lj-door"><a class="go" href="lehrjahre/fisheries/index.html">The fisheries browser →</a></p>
+      <p class="lj-door"><a class="go" href="lehrjahre/news-tr/index.html">Daily News From Turkey →</a></p>
     </div>
 
     <div class="lj-card">
@@ -457,8 +492,7 @@ fnamePlace.innerHTML = fname</code></pre>
     if (badge) slot.appendChild(badge.cloneNode(true));
     if (h3) slot.appendChild(h3.cloneNode(true));
     slot.appendChild(plaque); // moved, not cloned
-    var door = card.querySelector('.lj-door');
-    if (door) slot.appendChild(door.cloneNode(true));
+    card.querySelectorAll('.lj-door').forEach(function (d) { slot.appendChild(d.cloneNode(true)); });
     dialog.showModal();
   }
 
