@@ -322,8 +322,10 @@ the curator (unlike the recovered sites, which are untouchable):
   eleven.
 - 2026-08-31: the sprint widgets — three small faces behind one card:
   `lehrjahre/chuck-norris/` (40 jokes stocked at capture from the keyless
-  public API; a curator-marked pantry script — the face's only script —
-  serves one per visit with `textContent`), `lehrjahre/fisheries/`
+  public API, 34 shipped — the curator weeded the crude ones; the page's
+  own "Get another wisdom" button is answered by the pantry — a
+  curator-marked script, the face's only one, serving per visit with
+  `textContent`), `lehrjahre/fisheries/`
   (frozen render of the hardcoded NOAA species data; photo fate as found
   at capture, dead links kept in `data-original`: a second frozen state,
   `index-open.html`, shows the first species opened, its Show/Hide
