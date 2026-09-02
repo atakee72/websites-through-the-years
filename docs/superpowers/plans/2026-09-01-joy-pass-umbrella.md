@@ -132,6 +132,7 @@ with sync_playwright() as p:
         pg.click('a[href="movie-detail.html"]')
     assert pg.url.endswith('movie-detail.html')
     pg.wait_for_load_state('networkidle')
+    assert pg.locator('.curator-bar').count() == 1
     ext = pg.evaluate("performance.getEntriesByType('resource').map(r=>r.name)"
                       ".filter(n=>!n.startsWith(location.origin))")
     assert ext == [], ext
@@ -285,6 +286,15 @@ with sync_playwright() as p:
     pg.keyboard.press('Escape')
     pg.locator(UMB).locator('.lj-plaque-btn').click()
     pg.screenshot(path='hall-c6-umbrella.png')
+
+    # JS-off degrade unchanged: all 19 plaques inline, buttons hidden
+    ctx = b.new_context(java_script_enabled=False)
+    pn = ctx.new_page()
+    pn.goto(BASE)
+    assert pn.eval_on_selector_all('.lj-plaque',
+        "els => els.length === 19 && els.every(e => getComputedStyle(e).display !== 'none')")
+    assert pn.eval_on_selector_all('.lj-plaque-btn',
+        "els => els.every(e => getComputedStyle(e).display === 'none')")
 
     print('HALL OK')
     b.close()
