@@ -334,6 +334,15 @@ the curator (unlike the recovered sites, which are untouchable):
   page, kept honestly; fetched with the owner's own API key at capture
   only, never committed; the exhibit holds no key and makes no
   requests). Walkable count: twelve.
+- 2026-09-01: closing pass. movie-db was fed: a scratch-side copy (dummy
+  Firebase config + a curator bypass of the login gate, neither committed)
+  let the app fetch real TMDb data with the key from its own source, and
+  the museum captured `movies.html` (the grid, posters localized) and
+  `movie-detail.html`, wiring the face's dead "Movies" links to them. No
+  key ships in the exhibit. The seven other original faces were surveyed
+  and left untouched — their emptiness and breakage are the exhibits. The
+  CA-Projects umbrella plaque was rewritten to point at the five
+  sub-exhibits promoted out of it.
 
 ## Lost & found
 
