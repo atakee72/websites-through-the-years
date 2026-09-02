@@ -341,7 +341,7 @@ the curator (unlike the recovered sites, which are untouchable):
   `movie-detail.html`, wiring the face's dead "Movies" links to them. No
   key ships in the exhibit. The seven other original faces were surveyed
   and left untouched — their emptiness and breakage are the exhibits. The
-  CA-Projects umbrella plaque was rewritten to point at the five
+  CA-Projects umbrella plaque was rewritten to point at the six
   sub-exhibits promoted out of it.
 
 ## Lost & found
