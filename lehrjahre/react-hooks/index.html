@@ -55,4 +55,94 @@ code {
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+<script>
+/* Museum addition — the curator's clock, wired 2026-09-05.
+   Freezing this page stripped its scripts, which stopped every hook on a
+   page whose whole subject is hooks. These lines are allowed to do exactly
+   one thing: rewrite the text of a node the page had already rendered.
+   They build nothing, hold no data, and make no requests. useRef is absent
+   from the list because its input never did anything visible in 2023
+   either. */
+(function () {
+  var root = document.getElementById("root");
+  if (!root) return;
+
+  function section(label) {
+    var hs = root.getElementsByTagName("h1");
+    for (var i = 0; i < hs.length; i++) {
+      if (hs[i].textContent.trim() === label) return hs[i];
+    }
+    return null;
+  }
+
+  /* useEffect — picks up at the second the capture froze and keeps going */
+  var effect = section("useEffect");
+  if (effect && effect.nextElementSibling) {
+    var tick = effect.nextElementSibling;
+    var ticked = parseInt(tick.textContent, 10);
+    if (!isNaN(ticked)) {
+      window.setInterval(function () {
+        tick.textContent = String(++ticked);
+      }, 1000);
+    }
+  }
+
+  /* useReducer — Increment adds 10, Decrement takes 5, from the frozen 100 */
+  var reducer = section("useReducer");
+  if (reducer && reducer.nextElementSibling) {
+    var box = reducer.nextElementSibling;
+    var out = box.firstElementChild;
+    if (!out) return;
+    var counter = parseInt(out.textContent, 10);
+    var rbtns = box.getElementsByTagName("button");
+    for (var r = 0; r < rbtns.length; r++) {
+      (function (btn) {
+        var step = btn.textContent.trim() === "Increment" ? 10 : -5;
+        btn.onclick = function () {
+          counter += step;
+          out.textContent = String(counter);
+        };
+      })(rbtns[r]);
+    }
+  }
+
+  /* useState — the same JSON.stringify text the app used to print */
+  var state = section("useState");
+  if (state && state.nextElementSibling) {
+    var arr = [];
+    var sbtns = state.nextElementSibling.getElementsByTagName("button");
+    for (var s2 = 0; s2 < sbtns.length; s2++) {
+      (function (btn) {
+        var slot = btn.parentNode.lastChild;
+        if (!slot || slot.nodeType !== 3) return;   /* only ever a text node */
+        if (btn.textContent.trim() === "Add to array") {
+          btn.onclick = function () {
+            arr.push(arr.length + 1);
+            slot.nodeValue = JSON.stringify(arr);
+          };
+        } else {
+          btn.onclick = function () {
+            slot.nodeValue = JSON.stringify("Jack");
+          };
+        }
+      })(sbtns[s2]);
+    }
+  }
+
+  /* useContext — one-way, because the original had no way back */
+  var ctx = section("useContext");
+  if (ctx) {
+    var first = ctx.nextElementSibling;
+    var last = first && first.nextElementSibling;
+    var cbtn = last && last.nextElementSibling;
+    if (cbtn && cbtn.tagName === "BUTTON") {
+      cbtn.onclick = function () {
+        first.textContent = "First: Josie";
+        last.textContent = "Last: Paris";
+      };
+    }
+  }
+})();
+</script>
 </body></html>
