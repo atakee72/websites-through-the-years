@@ -343,6 +343,22 @@ the curator (unlike the recovered sites, which are untouchable):
   and left untouched — their emptiness and breakage are the exhibits. The
   CA-Projects umbrella plaque was rewritten to point at the six
   sub-exhibits promoted out of it.
+- 2026-09-05: `lehrjahre/react-hooks/` — the hooks cheat sheet, captured
+  from its private repo (`React-Hooks-with-TypeScript`, last commit April
+  2023) while it was fetching its ten placeholder users, so the users are
+  frozen as they arrived: fed, but with no pantry behind them, because the
+  API returns the same roster every time. Stripping the scripts stops every
+  hook on a page about hooks, so the face carries one curator-marked script
+  — its only one — under a single rule: it may rewrite the text of a node
+  the page already rendered, and nothing else. Under that rule the
+  `useEffect` counter resumes ticking from the second the capture froze,
+  and the `useReducer`, `useState` and `useContext` buttons answer again,
+  the context one-way as in the original. `useRef` needed nothing: its ref
+  was never used. No node is created, no data stored, no request made; with
+  JavaScript off the page is the still capture. The hall card's specimen is
+  the commented-out `<MapContainer>` block from
+  `src/components/CustomHookComponent.tsx`, dedented by its common indent
+  and otherwise verbatim. Walkable count: thirteen.
 
 ## Lost & found
 
