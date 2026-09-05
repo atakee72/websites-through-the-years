@@ -300,19 +300,39 @@ fnamePlace.innerHTML = fname</code></pre>
     </div>
 
     <div class="lj-card">
-      <span class="lj-badge quiet">catalogue only</span>
+      <span class="lj-badge">walkable · still ticking</span>
       <h3>React-Hooks-with-TypeScript <span class="lj-date">Apr 2023</span></h3>
-      <div class="lj-shot"><img src="assets/lehrjahre/react-hooks.png" alt="Hooks cheat sheet with fetched user cards" loading="lazy"></div>
-      <p class="lj-hook">One page, six hooks — my React cheat sheet.</p>
+      <div class="lj-shot"><a href="lehrjahre/react-hooks/index.html"><img src="assets/lehrjahre/react-hooks.png" alt="Hooks cheat sheet with fetched user cards" loading="lazy"></a></div>
+      <p class="lj-hook">Six hooks pinned to one page; one of them still beats.</p>
       <div class="lj-plaque">
         <p>One page, six hooks, one component each — my React cheat sheet. It
-        fetched eight fake users from a placeholder API and filtered for the one
+        fetched ten fake users from a placeholder API and filtered for the one
         named Antonette, to prove useMemo worked. A commented-out map component
         records the ambition that got shelved: the users' coordinates are printed
         as raw numbers instead.</p>
+        <div class="specimen-label">Specimen — CustomHookComponent.tsx, the map that never opened</div>
+        <pre class="specimen"><code>{/* &lt;MapContainer style={{ height: "400px" }}&gt;
+  &lt;TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" /&gt;
+  &lt;Marker
+    position={[
+      Number(user!.address.geo.lat),
+      Number(user!.address.geo.lng),
+    ]}
+  &gt;
+    &lt;Popup&gt;A pretty CSS3 popup.&lt;/Popup&gt;
+  &lt;/Marker&gt;
+&lt;/MapContainer&gt; */}</code></pre>
+        <p>Freezing a page about hooks stops every hook on it. So the curator
+        wrote a handful of lines, allowed to change only text the page had
+        already written: the useEffect counter picks up where the capture left
+        it and goes on ticking, once a second. The reducer still adds ten and
+        takes five, the array still grows, and the context still changes its
+        mind about whose name it holds — once, which is all it ever did.
+        Nothing is rebuilt; the numbers are simply allowed to move again.</p>
         <p class="lj-charm">A comment in the custom hook: '"Payload" instead of "User[]" to make it genuinely generic :-]'</p>
       </div>
       <button class="lj-plaque-btn" type="button">Read the plaque →</button>
+      <p class="lj-door"><a class="go" href="lehrjahre/react-hooks/index.html">Enter the exhibit →</a></p>
     </div>
 
     <div class="lj-card">
