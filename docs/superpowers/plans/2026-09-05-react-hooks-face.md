@@ -121,11 +121,15 @@ cd /home/atakee/projects/eski-web-sayfalarim
 grep -o '<p><strong>Id</strong>' lehrjahre/react-hooks/index.html | wc -l   # expect 10
 grep -o '<script' lehrjahre/react-hooks/index.html | wc -l                  # expect 0
 grep -o '<noscript' lehrjahre/react-hooks/index.html | wc -l                # expect 0
-grep -c 'jsonplaceholder' lehrjahre/react-hooks/index.html                  # expect 0
+grep -o 'jsonplaceholder' lehrjahre/react-hooks/index.html | wc -l          # expect 0
 grep -o '<h1>useEffect</h1><div>[0-9]*</div>' lehrjahre/react-hooks/index.html
-grep -o 'Antonette' lehrjahre/react-hooks/index.html | wc -l                # expect 1
+grep -o 'Antonette' lehrjahre/react-hooks/index.html | wc -l                # expect 2
 grep -o 'curator-bar' lehrjahre/react-hooks/index.html | wc -l              # expect 1
 ```
+
+Antonette is expected **twice**: once as the useMemo section's label
+("Antonette's email:") and once as user 2's Username field. Verified against a
+planning capture — one hit means the memo section did not render.
 
 If the useEffect grep prints nothing, the section did not render — stop and
 report; the whole of Task 2 depends on that exact shape.
@@ -336,6 +340,7 @@ script = '''
   if (reducer && reducer.nextElementSibling) {
     var box = reducer.nextElementSibling;
     var out = box.firstElementChild;
+    if (!out) return;
     var counter = parseInt(out.textContent, 10);
     var rbtns = box.getElementsByTagName("button");
     for (var r = 0; r < rbtns.length; r++) {
@@ -357,6 +362,7 @@ script = '''
     for (var s2 = 0; s2 < sbtns.length; s2++) {
       (function (btn) {
         var slot = btn.parentNode.lastChild;
+        if (!slot || slot.nodeType !== 3) return;   /* only ever a text node */
         if (btn.textContent.trim() === "Add to array") {
           btn.onclick = function () {
             arr.push(arr.length + 1);
@@ -573,6 +579,9 @@ with sync_playwright() as p:
     pg.on("request", lambda r: offsite.append(r.url) if "localhost:8765" not in r.url else None)
     pg.goto(URL, wait_until="networkidle")
 
+    # 19 = 18 plain cards + the epilogue card (class="lj-card lj-epilogue").
+    # Count the plaques BEFORE opening one: the hall's wiring MOVES a plaque
+    # into the dialog rather than cloning it, and moves it back on close.
     check("cards", pg.locator(".lj-card").count(), 19)
     check("plaques", pg.locator(".lj-plaque").count(), 19)
     check("plaque buttons", pg.locator(".lj-plaque-btn").count(), 19)
@@ -715,7 +724,21 @@ grep -rn "welve of them\|12 walkable" *.html                         # no hits
 grep -n "Walkable count: thirteen." README.md                        # 1 hit
 ```
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 5: Re-run the hall test after the copy edits**
+
+Task 3's test ran before these words changed. Re-run it so the last edit to
+`lehrjahre.html` is covered too:
+
+```bash
+cd /home/atakee/projects/eski-web-sayfalarim
+python3 -m http.server 8765 > /tmp/react-hooks-cycle7/http.log 2>&1 &
+.superpowers/sdd/lehrjahre/tools/venv/bin/python /tmp/react-hooks-cycle7/test_hall.py
+ss -lptn 'sport = :8765'   # then kill <pid>
+```
+
+Expected: `ALL CHECKS PASS`.
+
+- [ ] **Step 6: Commit**
 
 ```bash
 cd /home/atakee/projects/eski-web-sayfalarim
@@ -724,7 +747,7 @@ git add lehrjahre.html index.html README.md
 git commit -m "Walkable count thirteen; React-Hooks provenance"
 ```
 
-- [ ] **Step 6: Final sweep before handing back**
+- [ ] **Step 7: Final sweep before handing back**
 
 ```bash
 cd /home/atakee/projects/eski-web-sayfalarim
@@ -742,3 +765,39 @@ visible. Save them under `/tmp/react-hooks-cycle7/preview/` and list the
 paths in the final report. Kill the server afterwards.
 
 **Do not push.** The user pushes after previewing.
+
+
+---
+
+## Audit (2026-09-06)
+
+Checked against the real files, not against this plan's own prose:
+
+- **Specimen gate verified by running it.** The escaped block in Task 3 Step 2
+  round-trips through `html.unescape` + a 16-space re-indent to md5
+  `172e9bfb69d6de3691f7c30d81f20cbe`, and the restored text is a true
+  substring of `CustomHookComponent.tsx`. The gate will pass on correct work
+  and fail on mangled work.
+- **Task 3's `old` block matches `lehrjahre.html` byte-for-byte** (checked
+  programmatically). The replace will apply.
+- **Fixed: `Antonette` expected once, actually twice** — the useMemo label and
+  the Username field. The plan would have failed a correct capture.
+- **Fixed: `grep -c` used for the jsonplaceholder check**, against this plan's
+  own constraint (the captured DOM is one line). Now `grep -o … | wc -l`.
+- **Fixed: two unguarded assumptions in the curator script** — the useState
+  text slot is now confirmed to be a text node before it is written to, and
+  the reducer readout is guarded against a missing first child. Without those
+  a shape change would silently write into an element.
+- **Fixed: no test covered Task 4's copy edits.** The hall test now re-runs
+  after them.
+- **Noted, not changed:** the hall wiring MOVES a plaque into the dialog
+  instead of cloning it, so plaque counts must be taken before opening one —
+  the test already does, and now says so. `.lj-card` legitimately counts 19
+  because the epilogue card carries a second class.
+- **Checked and correct:** counts sites are exactly `lehrjahre.html:40`,
+  `index.html:387`, `index.html:392` and README's provenance bullet (a
+  repo-wide grep found nothing else); `.lj-date` is inline, so the heading
+  assertion reads "React-Hooks-with-TypeScript Apr 2023"; the captured face
+  contains no `<script>`, no `jsonplaceholder`, no `fetch`/`localStorage`
+  string that the Task 2 Step 5 sweep could trip over; the door-href card
+  selector matches exactly one card.
