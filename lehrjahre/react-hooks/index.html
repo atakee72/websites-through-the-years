@@ -80,10 +80,11 @@ code {
   var effect = section("useEffect");
   if (effect && effect.nextElementSibling) {
     var tick = effect.nextElementSibling;
+    var tickSlot = tick.firstChild;
     var ticked = parseInt(tick.textContent, 10);
-    if (!isNaN(ticked)) {
+    if (!isNaN(ticked) && tickSlot && tickSlot.nodeType === 3) {
       window.setInterval(function () {
-        tick.textContent = String(++ticked);
+        tickSlot.nodeValue = String(++ticked);
       }, 1000);
     }
   }
@@ -93,17 +94,20 @@ code {
   if (reducer && reducer.nextElementSibling) {
     var box = reducer.nextElementSibling;
     var out = box.firstElementChild;
-    if (!out) return;
-    var counter = parseInt(out.textContent, 10);
-    var rbtns = box.getElementsByTagName("button");
-    for (var r = 0; r < rbtns.length; r++) {
-      (function (btn) {
-        var step = btn.textContent.trim() === "Increment" ? 10 : -5;
-        btn.onclick = function () {
-          counter += step;
-          out.textContent = String(counter);
-        };
-      })(rbtns[r]);
+    if (out) {
+      var counter = parseInt(out.textContent, 10);
+      var rbtns = box.getElementsByTagName("button");
+      for (var r = 0; r < rbtns.length; r++) {
+        (function (btn) {
+          var slot = out.firstChild;
+          if (!slot || slot.nodeType !== 3) return;   /* only ever a text node */
+          var step = btn.textContent.trim() === "Increment" ? 10 : -5;
+          btn.onclick = function () {
+            counter += step;
+            slot.nodeValue = String(counter);
+          };
+        })(rbtns[r]);
+      }
     }
   }
 
@@ -136,10 +140,14 @@ code {
     var first = ctx.nextElementSibling;
     var last = first && first.nextElementSibling;
     var cbtn = last && last.nextElementSibling;
-    if (cbtn && cbtn.tagName === "BUTTON") {
+    var firstSlot = first && first.firstChild;
+    var lastSlot = last && last.firstChild;
+    if (cbtn && cbtn.tagName === "BUTTON" &&
+        firstSlot && firstSlot.nodeType === 3 &&
+        lastSlot && lastSlot.nodeType === 3) {
       cbtn.onclick = function () {
-        first.textContent = "First: Josie";
-        last.textContent = "Last: Paris";
+        firstSlot.nodeValue = "First: Josie";
+        lastSlot.nodeValue = "Last: Paris";
       };
     }
   }
