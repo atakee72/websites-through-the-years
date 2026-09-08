@@ -82,12 +82,19 @@ cd /home/atakee/projects/eski-web-sayfalarim
 for f in index answered schema; do
   echo "-- $f"
   grep -o '<script' lehrjahre/graphol/$f.html | wc -l          # expect 0
-  grep -o 'Mehmet Seven' lehrjahre/graphol/$f.html | wc -l     # index 0, answered/schema >=1
-  grep -o 'type Comment' lehrjahre/graphol/$f.html | wc -l     # index 0, answered 0, schema >=1
+  grep -o 'Mehmet Seven' lehrjahre/graphol/$f.html | wc -l     # index 0, answered/schema 1
+  grep -o 'user_id' lehrjahre/graphol/$f.html | wc -l          # index 0, answered 0, schema 1
   grep -o 'Execute Query (Ctrl-Enter)' lehrjahre/graphol/$f.html | wc -l   # expect 1 each
+  grep -o 'curator-bar' lehrjahre/graphol/$f.html | wc -l      # expect 1 each
 done
 grep -o 'localhost:4000' lehrjahre/graphol/index.html | wc -l  # >=1: the Playground's own URL bar, authentic
 ```
+
+Do NOT grep the schema state for `type Comment`: the drawer renders every token
+in its own `<span>`, so that literal never appears in the markup even though the
+rendered text reads correctly. `user_id` is a schema-only field name and is the
+reliable marker (the captured query never asks for it, so it cannot leak into
+the other two states).
 
 If `answered.html` has no "Mehmet Seven", the `Control+Enter` special did not fire — stop and report; Tasks 2 and 3 depend on it.
 
@@ -147,7 +154,11 @@ def walk(ctx, label):
     pg.locator('a[href="schema.html"]').click(); pg.wait_for_load_state()
     check(f"{label} schema lands", pg.url.split("/")[-1], "schema.html")
     check(f"{label} schema shown", "type Comment" in pg.inner_text("body"), True)
-    pg.locator('a[href="answered.html"]').last.click(); pg.wait_for_load_state()
+    # Both the Play button and the active Schema tab point at answered.html here,
+    # so select the tab explicitly — .last would pass even if only Play were wired.
+    tab = pg.locator('a[href="answered.html"]:not(:has(svg))')
+    check(f"{label} schema tab is the wired one", tab.count(), 1)
+    tab.click(); pg.wait_for_load_state()
     check(f"{label} drawer closes", pg.url.split("/")[-1], "answered.html")
     pg.close()
 
@@ -495,7 +506,11 @@ cd /home/atakee/projects/eski-web-sayfalarim
 grep -rn "hirteen of the cards\|fifteen faces\|Ten of them\|10 of 15" *.html
 ```
 
-Expected exactly four hits: `lehrjahre.html` (one line carrying both "Thirteen of the cards" and "fifteen faces"), `index.html` ("Ten of them" and the `10 of 15 walkable` chip). **The grep is the authority** — if it finds more, fix them all.
+Expected exactly four hits, on four separate lines: two in `lehrjahre.html`
+("Thirteen of the cards below are" and, two lines later, "they open fifteen
+faces" — the paragraph wraps), and two in `index.html` ("Ten of them" and the
+`10 of 15 walkable` chip). **The grep is the authority** — if it finds more, fix
+them all.
 
 - [ ] **Step 2: Move the counts**
 
@@ -594,3 +609,46 @@ ss -lptn 'sport = :4000'; ss -lptn 'sport = :8765'   # nothing listening
 Then serve on 8765 and capture, at 1280×900 and 390×844: (a) the hall scrolled to the GraphOL tile, (b) its plaque open with both specimens visible, (c) each of the three exhibit states. Save under `/tmp/graphol-cycle8/preview/` with self-describing names, list the paths in the final report, and kill the server.
 
 **Do not push.** The owner pushes after previewing.
+
+
+---
+
+## Audit (2026-09-09)
+
+Checked against the real files and three trial captures, not against this plan's prose:
+
+- **Fixed: the schema-state verification could never have passed.** Task 1 Step 4
+  grepped `schema.html` for `type Comment`, but the drawer renders each token in
+  its own `<span class="cm-atom">`, so the literal appears **zero** times.
+  Replaced with `user_id`, a schema-only field the captured query never asks for
+  (verified: schema 1, answered 0, index 0). The browser tests were never
+  affected — they read `inner_text`, not markup.
+- **Fixed: a test that would have passed on half-done work.** On `schema.html`
+  both the Play button and the active Schema tab point at `answered.html`, so
+  `.last.click()` proved nothing about the tab. The test now selects the tab
+  explicitly (`a[href="answered.html"]:not(:has(svg))`) and asserts there is
+  exactly one such anchor.
+- **Fixed: the count-site grep was described as two lines; it is four.** The
+  hall's sentence wraps, so "Thirteen of the cards below are" and "they open
+  fifteen faces" are two lines apart.
+- **Added:** a `curator-bar` presence check per state in Task 1.
+- **Verified the riskiest assumption — styled-components class hashes are
+  stable.** Task 2 keys on literals containing runtime-generated class names
+  (`sc-bwzfXH kJytub`, `sc-cJSrbW dcNxcw`, `sc-cJSrbW aBAlp`). Across three
+  separate capture runs in three separate browser sessions, each literal
+  appeared exactly once, unchanged — the CDN version is pinned at 1.7.42, so the
+  hashes are deterministic. And if that ever stops being true, the `assert
+  s.count(el) == 1` in Task 2 fails loudly rather than silently wiring nothing.
+- **Verified by running:** both specimen md5 gates already return their target
+  hashes on the exact escaped blocks written into Task 3, and both restored
+  texts are true substrings of their source files; Task 3's `old` block matches
+  `lehrjahre.html` byte-for-byte; all four count strings exist where Task 4
+  expects them; README's `### 7.` really does end with the 2026-09-05 bullet
+  ("Walkable count: thirteen."); `CLAUDE.md` contains the sentence Task 4
+  appends to; the hall currently has 15 doors, so the test's expected 16 is
+  right; the capture contains no `onclick=`/`javascript:` (so Task 2's
+  zero-expectation is sound) and `display:contents` will appear exactly 5 times
+  (1 + 2 + 2).
+- **Noted, not changed:** `index.html` keeps the Playground's own
+  `http://localhost:4000/` URL bar. That is authentic — this whole wing ran on
+  localhost — and it is inert text in a frozen page, not a link.
