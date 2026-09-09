@@ -70,7 +70,7 @@ consequence of the one before it:
    Query` with every field.
 
 Sealed the usual way: 20 assets localized, including the Playground's own
-CSS from jsdelivr and seven Google Fonts `woff2` files. The trial capture
+CSS from jsdelivr and the Google Fonts `woff2` files. The trial capture
 loads with **zero external requests** and `seal_check.sh` reports SEALED.
 
 **The curator's wiring (static anchors, no script).** The captured buttons

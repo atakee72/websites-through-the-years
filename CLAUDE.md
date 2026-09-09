@@ -83,9 +83,12 @@ same greps after any change.
   webpack sourcemap comments, which base64-smuggle external URLs past the
   seal greps; localizes assets; rewrites links; injects the curator bar —
   pass `--backlink ../../lehrjahre.html`, z-index already max;
-  `--materialize-css` writes CSSOM-only rules (styled-components and friends,
-  which leave `<style>` tags empty in a serialized snapshot) back into the DOM
-  before capture; `--special` accepts `key:<Key>` as well as a click selector,
+  `--materialize-css` copies CSSOM-only rules (styled-components and friends,
+  which leave `<style>` tags empty in a serialized snapshot) into one
+  museum-owned `<style>` element before capture — it must never write into the
+  app's own style node, which replaces the sheet the injector holds and silently
+  loses every rule added afterwards (that bug froze a panel at zero height, and
+  no grep could see it: check rendered heights, not markup); `--special` accepts `key:<Key>` as well as a click selector,
   for apps driven by a keystroke) plus
   `seal_check.sh <face-dir>`. Run via `tools/venv/bin/python`. Use for any
   future face capture; sweep `sourceMappingURL` after any hand-edit.

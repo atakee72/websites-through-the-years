@@ -364,21 +364,24 @@ the curator (unlike the recovered sites, which are untouchable):
   museum captured that, three times in one sequence: the editor holding the
   author's own `getAllUsers` query (read out of his `queryExamples.txt` and
   prefilled through the Playground's `?query=` parameter), then the same page
-  after Ctrl+Enter with the server's real answer in the right pane, then the
-  Schema drawer opened over it. Two toolkit additions made this possible and
-  are noted in CLAUDE.md: `--materialize-css`, because the Playground styles
-  itself with styled-components, which keeps its rules in the CSSOM and would
-  otherwise have frozen to an unstyled page; and `key:` specials, because
-  Ctrl+Enter is how a query is run. The exhibit carries **no script**: the
-  Play button and the Schema tab are wrapped in plain links between the three
-  frozen states, so it works with JavaScript off. The Schema tab on the first
-  page is deliberately inert — there is no capture of the drawer over an
-  unanswered pane, and the museum does not manufacture states. The Playground's
-  own stylesheet and its Google Fonts are localized; the exhibit requests
-  nothing. Hall specimens: the comments array from `src/data.ts`, and a slice
-  of `theirResponses.txt` — the answers he pasted into his notes, still in the
-  Turkish he later translated out of the code. Walkable count: fourteen; the
-  wing now opens sixteen faces.
+  after Ctrl+Enter with the server's real answer in the right pane — the server
+  was rebuilt and run locally in 2026 to give it, as movie-db was revived for
+  its own capture — then the Schema drawer opened over it. Two toolkit additions
+  made this possible and are noted in CLAUDE.md: `--materialize-css`, because
+  the Playground styles itself with styled-components, which keeps its rules in
+  the CSSOM and would otherwise have frozen to an unstyled page; and `key:`
+  specials, because Ctrl+Enter is how a query is run. The exhibit carries **no
+  script**: the Play button and the Schema tab are wrapped in plain links
+  between the three frozen states, so it works with JavaScript off. Two controls
+  are deliberately left inert, because the museum does not manufacture states:
+  the Schema tab on the first page, since there is no capture of the drawer over
+  an unanswered pane, and the Play button on the third, since re-running a query
+  with the drawer open would have left it open. The Playground's own stylesheet
+  and its Google Fonts are localized; the exhibit requests nothing. Hall
+  specimens: the comments array from `src/data.ts`, and a slice of
+  `theirResponses.txt` (dedented by its common indent, otherwise verbatim) — the
+  answers pasted into the owner's notes, still in the Turkish later translated
+  out of the code. Walkable count: fourteen; the wing now opens sixteen faces.
 
 ## Lost & found
 

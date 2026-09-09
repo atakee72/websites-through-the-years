@@ -39,7 +39,7 @@
   and they are shown exactly as they stopped: placeholder text shipped, buttons
   that do nothing, sections that render a single word. Fourteen of the cards below are
   walkable — captured as frozen pages, every asset local, nothing live;
-  between them they open sixteen faces, since one card holds three. The rest
+  between them they open sixteen faces, since the sprint-widgets card alone holds three. The rest
   are catalogue cards. Every card opens its plaque — click one. Where a card quotes something in monospace, it is quoted
   verbatim.</p>
 </section>
@@ -281,16 +281,17 @@ fnamePlace.innerHTML = fname</code></pre>
         Turkish-named users, three posts, four comments, all hardcoded; its only
         face was the query playground, and it is the whole exhibit: a server
         that never had a website.</p>
-        <p>The query waiting in the editor is his own, copied out of the notes
-        file he kept while learning. Press Play and the answer comes back — not
-        computed, but the one the server actually gave on capture day. The
-        Schema tab opens the shape he had built: users with posts, posts with
+        <p>The query waiting in the editor is my own, copied out of the notes
+        file I kept while learning. To photograph an answer the museum had to
+        start the server one more time, in 2026, and ask: press Play and what
+        comes back is not computed here, but what it replied that day. The
+        Schema tab opens the shape I had built: users with posts, posts with
         comments, everything pointing at everything else. Nothing here runs;
         three frozen pages simply link to each other, so the exhibit needs no
-        JavaScript at all. One thing did survive the freeze on its own: in the
-        corner a small light still pulses, labelled "Polling Schema" — an
-        animation that needs no script, keeping watch over a server that
-        stopped answering in 2023.</p>
+        JavaScript at all. One thing survived the freeze on its own: beside the
+        address bar a small light still pulses, labelled "Polling Schema" — an
+        animation that needs no script, keeping watch over a server that is no
+        longer listening.</p>
         <div class="specimen-label">Specimen — src/data.ts, the whole cast</div>
         <pre class="specimen"><code>const comments = [
   { id: "1", text: "This is Ahmet's comment", post_id: "1", user_id: "2" },
@@ -298,10 +299,10 @@ fnamePlace.innerHTML = fname</code></pre>
   { id: "3", text: "foo bar", post_id: "2", user_id: "2" },
   { id: "4", text: "foo bar baz", post_id: "3", user_id: "1" },
 ];</code></pre>
-        <p>Beside the code he kept a second file, <code>theirResponses.txt</code>,
-        where he pasted the answers the server gave him. It has fallen out of
-        step: the saved replies are still in Turkish, from before he translated
-        his own test data into English. The notes are older than the code, and
+        <p>Beside the code I kept a second file, <code>theirResponses.txt</code>,
+        where I pasted the answers the server gave me. It has fallen out of
+        step: the saved replies are still in Turkish, from before I translated
+        my own test data into English. The notes are older than the code, and
         neither was ever told about the other.</p>
         <div class="specimen-label">Specimen — theirResponses.txt, an answer to a question no longer asked</div>
         <pre class="specimen"><code>{
