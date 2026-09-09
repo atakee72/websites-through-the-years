@@ -272,17 +272,55 @@ fnamePlace.innerHTML = fname</code></pre>
     </div>
 
     <div class="lj-card">
-      <span class="lj-badge quiet">catalogue only</span>
+      <span class="lj-badge">walkable · answered</span>
       <h3>GraphOL-server-example <span class="lj-date">Mar 2023</span></h3>
-      <div class="lj-shot"><img src="assets/lehrjahre/graphol.png" alt="GraphQL Playground answering a users query" loading="lazy"></div>
-      <p class="lj-hook">My first GraphQL server; the typo in the name shipped.</p>
+      <div class="lj-shot"><a href="lehrjahre/graphol/index.html"><img src="assets/lehrjahre/graphol.png" alt="GraphQL Playground answering a users query" loading="lazy"></a></div>
+      <p class="lj-hook">A server with no website. Press Play and 2023 answers.</p>
       <div class="lj-plaque">
         <p>My first GraphQL server — the typo in the name shipped, and stuck. Two
         Turkish-named users, three posts, four comments, all hardcoded; its only
-        face was the query playground, photographed here mid-answer.</p>
+        face was the query playground, and it is the whole exhibit: a server
+        that never had a website.</p>
+        <p>The query waiting in the editor is his own, copied out of the notes
+        file he kept while learning. Press Play and the answer comes back — not
+        computed, but the one the server actually gave on capture day. The
+        Schema tab opens the shape he had built: users with posts, posts with
+        comments, everything pointing at everything else. Nothing here runs;
+        three frozen pages simply link to each other, so the exhibit needs no
+        JavaScript at all. One thing did survive the freeze on its own: in the
+        corner a small light still pulses, labelled "Polling Schema" — an
+        animation that needs no script, keeping watch over a server that
+        stopped answering in 2023.</p>
+        <div class="specimen-label">Specimen — src/data.ts, the whole cast</div>
+        <pre class="specimen"><code>const comments = [
+  { id: "1", text: "This is Ahmet's comment", post_id: "1", user_id: "2" },
+  { id: "2", text: "Mehmet's comment", post_id: "1", user_id: "1" },
+  { id: "3", text: "foo bar", post_id: "2", user_id: "2" },
+  { id: "4", text: "foo bar baz", post_id: "3", user_id: "1" },
+];</code></pre>
+        <p>Beside the code he kept a second file, <code>theirResponses.txt</code>,
+        where he pasted the answers the server gave him. It has fallen out of
+        step: the saved replies are still in Turkish, from before he translated
+        his own test data into English. The notes are older than the code, and
+        neither was ever told about the other.</p>
+        <div class="specimen-label">Specimen — theirResponses.txt, an answer to a question no longer asked</div>
+        <pre class="specimen"><code>{
+  "id": "1",
+  "text": "Bu Ahmet'in yorumudur",
+  "post_id": "1",
+  "user": {
+    "id": "2",
+    "fullName": "Ahmet Günal"
+  },
+  "post": {
+    "id": "1",
+    "title": "Mehmet'in gönderisi"
+  }
+},</code></pre>
         <p class="lj-charm">The fake data gives up halfway through: the last comments are "foo bar" and "foo bar baz".</p>
       </div>
       <button class="lj-plaque-btn" type="button">Read the plaque →</button>
+      <p class="lj-door"><a class="go" href="lehrjahre/graphol/index.html">Enter the exhibit →</a></p>
     </div>
 
     <div class="lj-card">
