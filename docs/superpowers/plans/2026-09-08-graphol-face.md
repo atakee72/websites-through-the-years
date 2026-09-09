@@ -87,6 +87,15 @@ for f in index answered schema; do
   grep -o 'Execute Query (Ctrl-Enter)' lehrjahre/graphol/$f.html | wc -l   # expect 1 each
   grep -o 'curator-bar' lehrjahre/graphol/$f.html | wc -l      # expect 1 each
 done
+# the styled-components CSS must have been written back into the page:
+python3 -c "
+import re, pathlib
+for f in ['index','answered','schema']:
+    s = pathlib.Path(f'lehrjahre/graphol/{f}.html').read_text()
+    big = max(len(x) for x in re.findall(r'<style[^>]*>(.*?)</style>', s, re.S))
+    print(f, 'largest style block:', big, 'OK' if big > 20000 else 'TOO SMALL — --materialize-css did not take')
+"
+
 grep -o 'localhost:4000' lehrjahre/graphol/index.html | wc -l  # >=1: the Playground's own URL bar, authentic
 ```
 
@@ -104,10 +113,13 @@ If `answered.html` has no "Mehmet Seven", the `Control+Enter` special did not fi
 cd /home/atakee/projects/eski-web-sayfalarim
 .superpowers/sdd/lehrjahre/tools/seal_check.sh lehrjahre/graphol
 grep -rn "sourceMappingURL" lehrjahre/graphol    # expect no output
-ls lehrjahre/graphol/assets | wc -l              # expect 20
+ls lehrjahre/graphol/assets | wc -l              # expect 20 (see note)
 ```
 
-Expected: `SEALED: lehrjahre/graphol`. The assets include the Playground's CDN stylesheet and seven Google Fonts `woff2` files, all now local.
+Expected: `SEALED: lehrjahre/graphol`. The assets include the Playground's CDN
+stylesheet and the Google Fonts `woff2` files, all now local. Three trial
+captures each produced exactly 20, but that count is font-subset dependent: if
+it comes out a little different, judge the **seal**, not the number.
 
 - [ ] **Step 6: Kill the server and commit**
 
@@ -145,12 +157,26 @@ def check(name, got, want):
         fails.append(f"{name}: got {got!r}, want {want!r}")
 
 def walk(ctx, label):
+    # Step 2 runs this before anything is wired, when the anchors do not exist
+    # yet: catch the lookup failure so the baseline prints its fails instead of
+    # dying with a traceback.
+    try:
+        _walk(ctx, label)
+    except Exception as e:
+        fails.append(f"{label}: {type(e).__name__} {str(e).splitlines()[0][:90]}")
+
+def _walk(ctx, label):
     pg = ctx.new_page(); pg.set_viewport_size({"width": 1280, "height": 800})
     pg.goto(B + "index.html"); pg.wait_for_load_state()
     check(f"{label} index has no answer", "Mehmet Seven" in pg.inner_text("body"), False)
     pg.locator('div[title="Execute Query (Ctrl-Enter)"]').click(); pg.wait_for_load_state()
     check(f"{label} play lands", pg.url.split("/")[-1], "answered.html")
     check(f"{label} answer shown", "Mehmet Seven" in pg.inner_text("body"), True)
+    # The Playground's CSS lives in the CSSOM; without --materialize-css the
+    # capture freezes as one unstyled column and the answer slides to the far
+    # left. Styled it sits in the right pane (x~866); unstyled, x~144.
+    box = pg.get_by_text("Mehmet Seven").first.bounding_box()
+    check(f"{label} answer is in the right pane", bool(box and box["x"] > 500), True)
     pg.locator('a[href="schema.html"]').click(); pg.wait_for_load_state()
     check(f"{label} schema lands", pg.url.split("/")[-1], "schema.html")
     check(f"{label} schema shown", "type Comment" in pg.inner_text("body"), True)
@@ -652,3 +678,32 @@ Checked against the real files and three trial captures, not against this plan's
 - **Noted, not changed:** `index.html` keeps the Playground's own
   `http://localhost:4000/` URL bar. That is authentic — this whole wing ran on
   localhost — and it is inert text in a frozen page, not a link.
+
+
+## Audit, second pass (2026-09-09)
+
+Attacking what the first pass did not touch, and re-testing what that pass
+itself introduced:
+
+- **Fixed: nothing in the plan could tell whether `--materialize-css` worked.**
+  This is the one failure that actually happened during planning — without the
+  flag the Playground freezes to an unstyled column — and every check in the
+  plan would still have passed. Task 1 now asserts the largest `<style>` block
+  exceeds 20,000 characters (measured: 28,058 with the flag, 11,638 without),
+  and Task 2's test now asserts the answer renders in the right-hand pane
+  (measured: x≈866 styled, x≈144 unstyled — a threshold of 500 separates them
+  cleanly).
+- **Fixed: the baseline "watch it fail" run would have crashed, not failed.**
+  Before wiring there is no `a[href="schema.html"]`, so the locator raises
+  `TimeoutError` and the script dies with a traceback instead of printing its
+  FAILS list — exactly the kind of thing that makes an implementer think the
+  harness is broken. The walk is now wrapped so a lookup failure is recorded as
+  a failing check.
+- **Fixed: the asset count was written as a hard expectation.** Google Fonts
+  serves unicode-range subsets, so 20 is not a law. Softened, with the seal
+  named as the thing that actually matters.
+- **Re-tested the selector the first audit introduced.** `a[href="answered.html"]:not(:has(svg))`
+  is not obviously supported by Playwright's CSS engine — I had written it
+  without running it. Verified against the wired trial: supported, and it
+  matches exactly one element (the Schema tab), with `:has(svg)` matching
+  exactly the other (the Play button).
