@@ -202,7 +202,10 @@ def _walk(ctx, label):
     pg = ctx.new_page(); pg.set_viewport_size({"width": 1280, "height": 800})
     pg.goto(B + "index.html"); pg.wait_for_load_state()
     check(f"{label} index has no answer", "Mehmet Seven" in pg.inner_text("body"), False)
-    pg.locator('div[title="Execute Query (Ctrl-Enter)"]').click(); pg.wait_for_load_state()
+    # force=True skips only Playwright's click-stability wait. The page has an
+    # infinite CSS animation (the Playground's "Polling Schema" dot), so that
+    # wait never settles — while a real mouse click works fine, JS on or off.
+    pg.locator('div[title="Execute Query (Ctrl-Enter)"]').click(force=True); pg.wait_for_load_state()
     check(f"{label} play lands", pg.url.split("/")[-1], "answered.html")
     check(f"{label} answer shown", "Mehmet Seven" in pg.inner_text("body"), True)
     # The Playground's CSS lives in the CSSOM; without --materialize-css the
@@ -210,7 +213,7 @@ def _walk(ctx, label):
     # left. Styled it sits in the right pane (x~866); unstyled, x~144.
     box = pg.get_by_text("Mehmet Seven").first.bounding_box()
     check(f"{label} answer is in the right pane", bool(box and box["x"] > 500), True)
-    pg.locator('a[href="schema.html"]').click(); pg.wait_for_load_state()
+    pg.locator('a[href="schema.html"]').click(force=True); pg.wait_for_load_state()
     check(f"{label} schema lands", pg.url.split("/")[-1], "schema.html")
     check(f"{label} schema shown", "type Comment" in pg.inner_text("body"), True)
     # the drawer is its own CodeMirror; it must have height, not just text
@@ -221,7 +224,7 @@ def _walk(ctx, label):
     # so select the tab explicitly — .last would pass even if only Play were wired.
     tab = pg.locator('a[href="answered.html"]:not(:has(svg))')
     check(f"{label} schema tab is the wired one", tab.count(), 1)
-    tab.click(); pg.wait_for_load_state()
+    tab.click(force=True); pg.wait_for_load_state()
     check(f"{label} drawer closes", pg.url.split("/")[-1], "answered.html")
     pg.close()
 
@@ -414,7 +417,10 @@ with:
         Schema tab opens the shape he had built: users with posts, posts with
         comments, everything pointing at everything else. Nothing here runs;
         three frozen pages simply link to each other, so the exhibit needs no
-        JavaScript at all.</p>
+        JavaScript at all. One thing did survive the freeze on its own: in the
+        corner a small light still pulses, labelled "Polling Schema" — an
+        animation that needs no script, keeping watch over a server that
+        stopped answering in 2023.</p>
         <div class="specimen-label">Specimen — src/data.ts, the whole cast</div>
         <pre class="specimen"><code>const comments = [
   { id: "1", text: "This is Ahmet's comment", post_id: "1", user_id: "2" },
