@@ -107,7 +107,40 @@ the other two states).
 
 If `answered.html` has no "Mehmet Seven", the `Control+Enter` special did not fire — stop and report; Tasks 2 and 3 depend on it.
 
-- [ ] **Step 5: Seal check**
+- [ ] **Step 5: Render check — every panel must actually have height**
+
+Greps prove text is present; they cannot see a panel collapsed to zero height.
+The schema drawer is a separate CodeMirror instance and is the one at risk.
+
+```bash
+cd /home/atakee/projects/eski-web-sayfalarim
+nohup python3 -m http.server 8765 > /tmp/graphol-cycle8/http.log 2>&1 &
+until curl -s -o /dev/null http://localhost:8765/; do sleep 1; done
+```
+
+```python
+from playwright.sync_api import sync_playwright
+with sync_playwright() as p:
+    b = p.chromium.launch(); pg = b.new_page(viewport={"width": 1440, "height": 900})
+    for f in ["index", "answered", "schema"]:
+        pg.goto(f"http://localhost:8765/lehrjahre/graphol/{f}.html", wait_until="networkidle")
+        pg.wait_for_timeout(1000)
+        h = pg.evaluate("() => Array.from(document.querySelectorAll('.CodeMirror'))"
+                        ".map(el => Math.round(el.getBoundingClientRect().height))")
+        print(f, h)
+    b.close()
+```
+
+Expected: `index` and `answered` → `[746, 0, 754]`; `schema` → `[746, 0, 754, 759]`.
+The editor and response panes must be ~750 tall, and **the schema state must have
+a fourth CodeMirror taller than 300** — that is the drawer. The lone `0` is the
+collapsed tracing panel, which is collapsed in the live app too. Kill the server
+by PID afterwards.
+
+If the fourth number is 0, the materialized CSS is incomplete — stop and report;
+do not proceed to Task 2 on a capture whose drawer is invisible.
+
+- [ ] **Step 6: Seal check**
 
 ```bash
 cd /home/atakee/projects/eski-web-sayfalarim
@@ -121,10 +154,10 @@ stylesheet and the Google Fonts `woff2` files, all now local. Three trial
 captures each produced exactly 20, but that count is font-subset dependent: if
 it comes out a little different, judge the **seal**, not the number.
 
-- [ ] **Step 6: Kill the server and commit**
+- [ ] **Step 7: Kill the servers and commit**
 
 ```bash
-ss -lptn 'sport = :4000'   # read the pid, then: kill <pid>
+ss -lptn 'sport = :4000'; ss -lptn 'sport = :8765'   # read the pid, then: kill <pid>
 cd /home/atakee/projects/eski-web-sayfalarim
 git add lehrjahre/graphol
 git diff --cached --name-only    # every path must start with lehrjahre/graphol/
@@ -180,6 +213,10 @@ def _walk(ctx, label):
     pg.locator('a[href="schema.html"]').click(); pg.wait_for_load_state()
     check(f"{label} schema lands", pg.url.split("/")[-1], "schema.html")
     check(f"{label} schema shown", "type Comment" in pg.inner_text("body"), True)
+    # the drawer is its own CodeMirror; it must have height, not just text
+    dh = pg.evaluate("() => { const c = document.querySelectorAll('.CodeMirror');"
+                     " return c.length ? Math.round(c[c.length-1].getBoundingClientRect().height) : 0; }")
+    check(f"{label} drawer has height", dh > 300, True)
     # Both the Play button and the active Schema tab point at answered.html here,
     # so select the tab explicitly — .last would pass even if only Play were wired.
     tab = pg.locator('a[href="answered.html"]:not(:has(svg))')
@@ -707,3 +744,25 @@ itself introduced:
   without running it. Verified against the wired trial: supported, and it
   matches exactly one element (the Schema tab), with `:has(svg)` matching
   exactly the other (the Play button).
+
+
+## Fix round 1 — the schema drawer froze at zero height (2026-09-09)
+
+Task 1's review rendered the pages instead of only grepping them and found the
+Schema drawer present in the markup but **0px tall**: the exhibit's third state
+showed an empty panel. Root cause was in the capture toolkit, not the
+implementer's work: `--materialize-css` wrote the recovered rules *into the
+app's own `<style>` node*, which replaces the sheet styled-components holds a
+reference to, and it then skipped that node on later passes because it now had
+text. Every rule the injector added afterwards — including the layout rules for
+the drawer, mounted only when it opens — was therefore lost from the second and
+third captures.
+
+The materializer now writes into a separate museum-owned `<style
+data-museum-css>` element, rebuilt from the full CSSOM on every pass and never
+read back into itself, leaving the app's own style nodes untouched. Re-captured
+and measured: the drawer renders at 759px, matching the live page exactly.
+
+Both the plan and its tests gained a render check (Task 1 Step 5, and a drawer
+assertion in Task 2's walk), because no grep can see a collapsed panel — the
+same blind spot that let this reach review.
